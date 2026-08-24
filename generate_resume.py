@@ -1,5 +1,7 @@
 import os
 import base64
+import subprocess
+import shutil
 
 os.makedirs('resume', exist_ok=True)
 
@@ -14,7 +16,6 @@ svg_phone = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke=
 svg_email = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>'
 svg_location = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>'
 svg_globe = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>'
-svg_linkedin = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>'
 svg_github = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>'
 
 svg_skills = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>'
@@ -28,10 +29,11 @@ svg_edu = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="c
 svg_proj = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.381h20M8.6 21v-3.722a2.28 2.28 0 0 1 2.28-2.278h2.24a2.28 2.28 0 0 1 2.28 2.278V21M2 8.5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10.5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zM9 6.5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2.5"></path></svg>'
 svg_briefcase = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>'
 svg_trophy = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.48-.63 6-3.66 6-7.32V4H4v5.34c0 3.66 2.52 6.69 6 7.32z"></path></svg>'
-svg_cert = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="m9 12 2 2 4-4"></path></svg>'
-svg_check = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
-svg_award = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>'
+svg_check = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8734A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+svg_award = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8734A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>'
 svg_brain = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-5.04z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-5.04z"></path></svg>'
+svg_sparkles = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>'
+svg_calendar = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>'
 
 # Interests SVGs
 svg_coding = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
@@ -44,8 +46,8 @@ html_content = f'''<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raj Kumar — Professional Resume</title>
-    <meta name="description" content="Raj Kumar - Full Stack Developer Resume (B.Sc Computer Science, Python, Flask, AI Systems)">
+    <title>Raj Kumar — Professional Full-Stack Developer Resume</title>
+    <meta name="description" content="Raj Kumar - Full Stack Developer Resume (B.Sc Computer Science, Python, Flask, JavaScript, SQLite, AI Systems)">
     
     <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,23 +56,38 @@ html_content = f'''<!DOCTYPE html>
 
     <style>
         :root {{
-            --navy-dark: #060B18;
-            --navy-mid: #0C1630;
-            --navy-light: #142244;
-            --crimson: #DC2626;
-            --crimson-light: #EF4444;
-            --crimson-glow: rgba(220, 38, 38, 0.25);
-            --text-dark: #0F172A;
-            --text-body: #334155;
-            --text-muted: #64748B;
-            --text-light: #F8FAFC;
-            --sidebar-text: #E2E8F0;
-            --sidebar-muted: #94A3B8;
+            /* Portfolio Color Scheme: Midnight Green, Deep Emerald, Radiant Copper & Warm Ivory */
+            --bg-midnight: #071C18;
+            --bg-deep-emerald: #0E3B32;
+            --bg-dark-forest: #102923;
+            --bg-surface: #0B241F;
+            --bg-surface-elevated: #133830;
+            
+            --copper-main: #B8734A;
+            --copper-light: #D49A70;
+            --copper-glow: rgba(184, 115, 74, 0.4);
+            --copper-subtle: rgba(184, 115, 74, 0.15);
+            --copper-deep: #7D4829;
+            
+            --ivory-warm: #F3EFE5;
+            --cream-soft: #E5DDCF;
+            --gray-muted: #9BA7A2;
+            --gray-dim: #5E6E69;
+            
+            --text-dark: #091C18;
+            --text-heading: #071C18;
+            --text-body: #243B35;
+            --text-muted: #5B726C;
+            --sidebar-text: #E5DDCF;
+            --sidebar-muted: #9BA7A2;
+            
             --bg-light: #FFFFFF;
-            --bg-alt: #F8FAFC;
-            --border-color: #E2E8F0;
-            --border-subtle: #F1F5F9;
-            --tag-bg: #F1F5F9;
+            --bg-card: #F9F7F2;
+            --bg-card-alt: #F3F7F5;
+            --border-color: #E2EAE6;
+            --border-subtle: #EEF4F1;
+            --tag-bg: #EEF4F1;
+            
             --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             --font-mono: 'JetBrains Mono', 'Courier New', monospace;
         }}
@@ -86,9 +103,9 @@ html_content = f'''<!DOCTYPE html>
 
         body {{
             font-family: var(--font-main);
-            background-color: #1e293b;
+            background-color: #0d1b17;
             color: var(--text-dark);
-            line-height: 1.45;
+            line-height: 1.42;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -103,16 +120,16 @@ html_content = f'''<!DOCTYPE html>
             justify-content: space-between;
             align-items: center;
             margin-bottom: 18px;
-            background: #0f172a;
+            background: #071C18;
             padding: 12px 24px;
             border-radius: 8px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
-            border: 1px solid #334155;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(184, 115, 74, 0.35);
         }}
 
         .toolbar-title {{
-            color: #f8fafc;
-            font-size: 14px;
+            color: var(--ivory-warm);
+            font-size: 13.5px;
             font-weight: 600;
             letter-spacing: 0.5px;
             display: flex;
@@ -121,7 +138,7 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .toolbar-title svg {{
-            color: var(--crimson-light);
+            color: var(--copper-light);
         }}
 
         .toolbar-actions {{
@@ -130,9 +147,9 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .toolbar-btn {{
-            background: #1e293b;
-            color: #ffffff;
-            border: 1px solid #475569;
+            background: #0E3B32;
+            color: var(--ivory-warm);
+            border: 1px solid rgba(184, 115, 74, 0.4);
             padding: 8px 18px;
             border-radius: 6px;
             font-size: 12px;
@@ -146,20 +163,22 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .toolbar-btn:hover {{
-            background: var(--crimson);
-            border-color: var(--crimson);
-            color: #ffffff;
+            background: var(--copper-main);
+            border-color: var(--copper-light);
+            color: #FFFFFF;
+            transform: translateY(-1px);
         }}
 
         .toolbar-btn-primary {{
-            background: var(--crimson);
-            border-color: var(--crimson);
-            box-shadow: 0 3px 12px rgba(220, 38, 38, 0.4);
+            background: var(--copper-main);
+            border-color: var(--copper-light);
+            color: #FFFFFF;
+            box-shadow: 0 3px 14px var(--copper-glow);
         }}
 
         .toolbar-btn-primary:hover {{
-            background: #b91c1c;
-            border-color: #b91c1c;
+            background: var(--copper-deep);
+            border-color: var(--copper-main);
         }}
 
         /* A4 Page Container */
@@ -171,22 +190,22 @@ html_content = f'''<!DOCTYPE html>
             background: var(--bg-light);
             display: flex;
             position: relative;
-            box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 55px rgba(0,0,0,0.6);
             overflow: hidden;
             border-radius: 0px;
         }}
 
         /* ================= SIDEBAR (LEFT) ================= */
         .sidebar {{
-            width: 76mm;
+            width: 77mm;
             height: 100%;
-            background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-mid) 50%, #050812 100%);
+            background: linear-gradient(180deg, #071C18 0%, #0B241F 45%, #071713 100%);
             color: var(--sidebar-text);
-            padding: 30px 22px 28px 22px;
+            padding: 26px 20px 24px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border-right: 3px solid var(--crimson);
+            border-right: 3px solid var(--copper-main);
             position: relative;
             z-index: 2;
         }}
@@ -198,16 +217,16 @@ html_content = f'''<!DOCTYPE html>
             align-items: center;
             text-align: center;
             position: relative;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }}
 
         .profile-frame {{
-            width: 136px;
-            height: 136px;
+            width: 132px;
+            height: 132px;
             border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--crimson) 0%, #ffffff 50%, var(--crimson) 100%);
-            box-shadow: 0 8px 28px rgba(220, 38, 38, 0.55);
+            padding: 3.5px;
+            background: linear-gradient(135deg, var(--copper-main) 0%, var(--ivory-warm) 50%, var(--copper-deep) 100%);
+            box-shadow: 0 8px 26px rgba(184, 115, 74, 0.45);
             position: relative;
         }}
 
@@ -218,57 +237,57 @@ html_content = f'''<!DOCTYPE html>
             object-fit: cover;
             object-position: center top;
             display: block;
-            background-color: var(--navy-mid);
+            background-color: var(--bg-deep-emerald);
         }}
 
         /* Sidebar Section Titles */
         .sidebar-heading {{
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 7px;
+            font-size: 11.5px;
             font-weight: 800;
-            letter-spacing: 1.6px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: #FFFFFF;
-            padding-bottom: 5px;
-            border-bottom: 1.8px solid rgba(220, 38, 38, 0.85);
-            margin-bottom: 11px;
+            color: var(--ivory-warm);
+            padding-bottom: 4.5px;
+            border-bottom: 1.8px solid var(--copper-main);
+            margin-bottom: 9px;
         }}
 
         .sidebar-heading svg {{
-            color: var(--crimson-light);
+            color: var(--copper-light);
         }}
 
         /* Contact Items */
         .contact-list {{
             display: flex;
             flex-direction: column;
-            gap: 10.5px;
+            gap: 9px;
         }}
 
         .contact-item {{
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 10.5px;
+            gap: 8.5px;
+            font-size: 10px;
             color: var(--sidebar-text);
             text-decoration: none;
             transition: color 0.15s ease;
         }}
 
         a.contact-item:hover {{
-            color: #FFFFFF;
+            color: var(--ivory-warm);
             text-decoration: underline;
         }}
 
         .contact-icon {{
-            width: 26px;
-            height: 26px;
+            width: 25px;
+            height: 25px;
             border-radius: 5px;
-            background: rgba(220, 38, 38, 0.25);
-            border: 1px solid rgba(220, 38, 38, 0.5);
-            color: #F87171;
+            background: rgba(184, 115, 74, 0.18);
+            border: 1px solid rgba(184, 115, 74, 0.45);
+            color: var(--copper-light);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -277,21 +296,21 @@ html_content = f'''<!DOCTYPE html>
 
         .contact-text {{
             word-break: break-all;
-            line-height: 1.3;
+            line-height: 1.28;
             font-weight: 400;
         }}
 
         /* Skills Groups */
         .skills-group-title {{
-            font-size: 10px;
+            font-size: 9.6px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            color: #F87171;
-            margin: 10px 0 6px 0;
+            color: var(--copper-light);
+            margin: 8px 0 5px 0;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5.5px;
         }}
 
         .skills-group-title:first-child {{
@@ -301,17 +320,17 @@ html_content = f'''<!DOCTYPE html>
         .skills-pills {{
             display: flex;
             flex-wrap: wrap;
-            gap: 5.5px;
+            gap: 4.5px;
         }}
 
         .skill-pill {{
             font-family: var(--font-mono);
-            font-size: 9.5px;
+            font-size: 9.2px;
             font-weight: 500;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #F1F5F9;
-            padding: 3.5px 8.5px;
+            background: rgba(14, 59, 50, 0.55);
+            border: 1px solid rgba(184, 115, 74, 0.35);
+            color: var(--ivory-warm);
+            padding: 3px 7.5px;
             border-radius: 4px;
             line-height: 1.25;
         }}
@@ -320,66 +339,66 @@ html_content = f'''<!DOCTYPE html>
         .lang-list {{
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6.5px;
         }}
 
         .lang-row {{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11px;
+            font-size: 10.6px;
         }}
 
         .lang-name {{
             font-weight: 600;
-            color: #FFFFFF;
+            color: var(--ivory-warm);
         }}
 
         .lang-level {{
-            font-size: 9.6px;
-            color: var(--sidebar-muted);
-            background: rgba(255,255,255,0.08);
-            padding: 2.5px 8px;
+            font-size: 9.2px;
+            color: var(--copper-light);
+            background: rgba(184, 115, 74, 0.12);
+            padding: 2px 7.5px;
             border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.12);
+            border: 1px solid rgba(184, 115, 74, 0.28);
         }}
 
         /* Interests */
         .interests-grid {{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            gap: 5px;
             text-align: center;
         }}
 
         .interest-card {{
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(14, 59, 50, 0.45);
+            border: 1px solid rgba(184, 115, 74, 0.28);
             border-radius: 5px;
-            padding: 9px 2px;
+            padding: 7.5px 2px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3.5px;
         }}
 
         .interest-card svg {{
-            color: #F87171;
+            color: var(--copper-light);
         }}
 
         .interest-card span {{
-            font-size: 8.5px;
+            font-size: 8.2px;
             font-weight: 600;
-            color: #E2E8F0;
+            color: var(--cream-soft);
             text-transform: uppercase;
         }}
 
         /* ================= MAIN CONTENT (RIGHT) ================= */
         .main-content {{
-            width: 134mm;
+            width: 133mm;
             height: 100%;
             background: #FFFFFF;
-            padding: 30px 24px 28px 24px;
+            padding: 26px 22px 24px 22px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -388,7 +407,7 @@ html_content = f'''<!DOCTYPE html>
         /* Header block */
         .header-block {{
             border-bottom: 2px solid var(--border-color);
-            padding-bottom: 14px;
+            padding-bottom: 12px;
         }}
 
         .name-wrapper {{
@@ -398,29 +417,29 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .name-raj {{
-            font-size: 38px;
+            font-size: 37px;
             font-weight: 900;
-            color: var(--navy-dark);
+            color: var(--text-heading);
             letter-spacing: 1.2px;
             line-height: 1;
         }}
 
         .name-kumar {{
-            font-size: 38px;
+            font-size: 37px;
             font-weight: 900;
-            color: var(--crimson);
+            color: var(--copper-main);
             letter-spacing: 1.2px;
             line-height: 1;
         }}
 
         .role-title {{
             font-family: var(--font-mono);
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--navy-mid);
+            letter-spacing: 2.8px;
+            color: var(--bg-deep-emerald);
             text-transform: uppercase;
-            margin-top: 6px;
+            margin-top: 5.5px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -430,14 +449,14 @@ html_content = f'''<!DOCTYPE html>
             content: "";
             flex: 1;
             height: 2px;
-            background: linear-gradient(90deg, var(--crimson) 0%, transparent 100%);
+            background: linear-gradient(90deg, var(--copper-main) 0%, transparent 100%);
         }}
 
         .summary-text {{
-            font-size: 10.8px;
+            font-size: 10.4px;
             color: var(--text-body);
-            line-height: 1.65;
-            margin-top: 9px;
+            line-height: 1.6;
+            margin-top: 8px;
             text-align: justify;
         }}
 
@@ -445,24 +464,24 @@ html_content = f'''<!DOCTYPE html>
         .section-block {{
             display: flex;
             flex-direction: column;
-            gap: 9px;
+            gap: 8px;
         }}
 
         .section-header {{
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 13.5px;
+            gap: 7.5px;
+            font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            color: var(--navy-dark);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 4.5px;
+            color: var(--text-heading);
+            border-bottom: 1.8px solid var(--border-color);
+            padding-bottom: 4px;
         }}
 
         .section-header svg {{
-            color: var(--crimson);
+            color: var(--copper-main);
         }}
 
         /* Education Card */
@@ -470,50 +489,54 @@ html_content = f'''<!DOCTYPE html>
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-alt);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-left: 5px solid var(--crimson);
+            border-left: 4.5px solid var(--copper-main);
             border-radius: 6px;
-            padding: 13px 20px;
+            padding: 11px 18px;
         }}
 
         .edu-details {{
             display: flex;
             flex-direction: column;
-            gap: 3.5px;
+            gap: 3px;
         }}
 
         .edu-degree {{
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--navy-dark);
+            color: var(--text-heading);
         }}
 
         .edu-institution {{
-            font-size: 11.5px;
+            font-size: 11.2px;
             font-style: italic;
             color: var(--text-muted);
         }}
 
         .edu-meta {{
             font-family: var(--font-mono);
-            font-size: 10.2px;
-            color: var(--crimson);
+            font-size: 9.8px;
+            color: var(--copper-deep);
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 2px;
+            gap: 5.5px;
+            margin-top: 1.5px;
+        }}
+
+        .edu-meta svg {{
+            color: var(--copper-main);
         }}
 
         .score-box {{
             text-align: right;
-            padding-left: 20px;
+            padding-left: 18px;
             border-left: 1.5px solid var(--border-color);
         }}
 
         .score-label {{
-            font-size: 9.5px;
+            font-size: 9.2px;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -521,9 +544,9 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .score-val {{
-            font-size: 23px;
+            font-size: 22px;
             font-weight: 800;
-            color: var(--crimson);
+            color: var(--copper-main);
             line-height: 1.1;
         }}
 
@@ -531,18 +554,18 @@ html_content = f'''<!DOCTYPE html>
         .projects-wrapper {{
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8.5px;
         }}
 
         .project-item {{
             background: #FFFFFF;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 11px 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            padding: 10px 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
-            gap: 4.5px;
+            gap: 4px;
         }}
 
         .project-top {{
@@ -552,43 +575,43 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .project-title {{
-            font-size: 12.5px;
+            font-size: 12.2px;
             font-weight: 700;
-            color: var(--crimson);
+            color: var(--copper-main);
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 6.5px;
         }}
 
         .project-desc {{
-            font-size: 10.6px;
+            font-size: 10.3px;
             color: var(--text-body);
-            line-height: 1.55;
+            line-height: 1.52;
         }}
 
         .tech-tags {{
             display: flex;
             flex-wrap: wrap;
-            gap: 5.5px;
-            margin-top: 3.5px;
+            gap: 5px;
+            margin-top: 2.5px;
         }}
 
         .tech-tag {{
             font-family: var(--font-mono);
-            font-size: 9.5px;
+            font-size: 9.2px;
             font-weight: 600;
             background: var(--tag-bg);
-            border: 1px solid #CBD5E1;
-            color: var(--navy-dark);
-            padding: 2.5px 8px;
+            border: 1px solid #C8DDD6;
+            color: var(--bg-deep-emerald);
+            padding: 2px 7.5px;
             border-radius: 4px;
         }}
 
         .tech-tag.ai-tag {{
-            background: #EFF6FF;
-            border-color: #93C5FD;
-            color: #1E40AF;
+            background: #FDF6EE;
+            border-color: rgba(184, 115, 74, 0.45);
+            color: var(--copper-deep);
             display: inline-flex;
             align-items: center;
             gap: 4px;
@@ -598,30 +621,30 @@ html_content = f'''<!DOCTYPE html>
         .exp-container {{
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }}
 
         .exp-item {{
             position: relative;
-            padding-left: 16px;
+            padding-left: 15px;
             border-left: 2px solid var(--border-color);
             margin-left: 6px;
             display: flex;
             flex-direction: column;
-            gap: 3.5px;
+            gap: 3px;
         }}
 
         .exp-item::before {{
             content: "";
             position: absolute;
-            left: -6px;
-            top: 3.5px;
-            width: 10px;
-            height: 10px;
+            left: -5.5px;
+            top: 3px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: var(--crimson);
+            background: var(--copper-main);
             border: 2px solid #FFFFFF;
-            box-shadow: 0 0 0 1.5px var(--crimson);
+            box-shadow: 0 0 0 1.5px var(--copper-main);
         }}
 
         .exp-top {{
@@ -631,16 +654,16 @@ html_content = f'''<!DOCTYPE html>
         }}
 
         .exp-title {{
-            font-size: 12.2px;
+            font-size: 11.8px;
             font-weight: 700;
-            color: var(--navy-dark);
+            color: var(--text-heading);
         }}
 
         .exp-date {{
             font-family: var(--font-mono);
-            font-size: 10px;
+            font-size: 9.8px;
             font-weight: 600;
-            color: var(--crimson);
+            color: var(--copper-main);
         }}
 
         .exp-bullets {{
@@ -649,58 +672,58 @@ html_content = f'''<!DOCTYPE html>
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2.5px;
         }}
 
         .exp-bullet {{
-            font-size: 10.2px;
+            font-size: 9.9px;
             color: var(--text-body);
             display: flex;
             align-items: flex-start;
-            gap: 7px;
-            line-height: 1.5;
+            gap: 6px;
+            line-height: 1.48;
         }}
 
         .exp-bullet::before {{
             content: "•";
-            color: var(--crimson);
+            color: var(--copper-main);
             font-weight: 800;
             font-size: 13px;
             line-height: 1;
         }}
 
-        /* Two Column Layout for Achievements & Certifications */
+        /* Bottom Grid for Achievements & Core Strengths */
         .bottom-grid {{
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 11px;
         }}
 
         .bottom-card {{
-            background: var(--bg-alt);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 12px 14px;
+            padding: 10.5px 12px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5.5px;
         }}
 
         .bottom-heading {{
-            font-size: 11.2px;
+            font-size: 10.8px;
             font-weight: 700;
-            color: var(--navy-dark);
+            color: var(--text-heading);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5.5px;
             border-bottom: 1.5px solid var(--border-color);
-            padding-bottom: 4px;
+            padding-bottom: 3.5px;
         }}
 
         .bottom-heading svg {{
-            color: var(--crimson);
+            color: var(--copper-main);
         }}
 
         .bullet-list {{
@@ -709,21 +732,22 @@ html_content = f'''<!DOCTYPE html>
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 4.5px;
+            gap: 4px;
         }}
 
         .bullet-item {{
-            font-size: 9.8px;
+            font-size: 9.4px;
             color: var(--text-body);
-            line-height: 1.45;
+            line-height: 1.42;
             display: flex;
             align-items: flex-start;
-            gap: 6px;
+            gap: 5.5px;
         }}
 
         .bullet-item svg {{
             flex-shrink: 0;
-            margin-top: 2.5px;
+            margin-top: 2px;
+            color: var(--copper-main);
         }}
 
         /* Print media query */
@@ -804,17 +828,13 @@ html_content = f'''<!DOCTYPE html>
                         <span class="contact-icon">{svg_location}</span>
                         <span class="contact-text">Tamil Nadu, India</span>
                     </div>
-                    <a href="https://www.rajkumarportfolio.dev" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank" rel="noopener noreferrer" class="contact-item">
                         <span class="contact-icon">{svg_globe}</span>
-                        <span class="contact-text">rajkumarportfolio.dev</span>
+                        <span class="contact-text">vikneshvaren2007.github.io/portfolioclg/</span>
                     </a>
-                    <a href="https://linkedin.com/in/rajkumar2007" target="_blank" rel="noopener noreferrer" class="contact-item">
-                        <span class="contact-icon">{svg_linkedin}</span>
-                        <span class="contact-text">linkedin.com/in/rajkumar2007</span>
-                    </a>
-                    <a href="https://github.com/rajkumar2007" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <a href="https://github.com/vikneshvaren2007" target="_blank" rel="noopener noreferrer" class="contact-item">
                         <span class="contact-icon">{svg_github}</span>
-                        <span class="contact-text">github.com/rajkumar2007</span>
+                        <span class="contact-text">github.com/vikneshvaren2007</span>
                     </a>
                 </div>
             </div>
@@ -830,7 +850,7 @@ html_content = f'''<!DOCTYPE html>
                     <span class="skill-pill">HTML5</span>
                     <span class="skill-pill">CSS3</span>
                     <span class="skill-pill">JavaScript (ES6+)</span>
-                    <span class="skill-pill">Responsive Design</span>
+                    <span class="skill-pill">Responsive UI</span>
                     <span class="skill-pill">Bootstrap</span>
                     <span class="skill-pill">Swiper.js</span>
                 </div>
@@ -840,6 +860,7 @@ html_content = f'''<!DOCTYPE html>
                     <span class="skill-pill">Python</span>
                     <span class="skill-pill">Flask</span>
                     <span class="skill-pill">SQLite</span>
+                    <span class="skill-pill">REST APIs</span>
                 </div>
 
                 <div class="skills-group-title">{svg_tool} Tools &amp; Workflow</div>
@@ -923,7 +944,7 @@ html_content = f'''<!DOCTYPE html>
                     <div class="edu-details">
                         <div class="edu-degree">B.Sc Computer Science</div>
                         <div class="edu-institution">Manonmaniam University</div>
-                        <div class="edu-meta">{svg_cert} 2024 – 2027 | Pursuing</div>
+                        <div class="edu-meta">{svg_calendar} 2024 – 2027 | Pursuing</div>
                     </div>
                     <div class="score-box">
                         <div class="score-label">Current Percentage</div>
@@ -1010,17 +1031,17 @@ html_content = f'''<!DOCTYPE html>
                 </div>
             </div>
 
-            <!-- Two-column grid for Achievements & Certifications -->
+            <!-- Two-column grid for Key Achievements & Core Strengths -->
             <div class="bottom-grid">
                 <!-- Achievements -->
                 <div class="bottom-card">
                     <div class="bottom-heading">
-                        {svg_trophy} Achievements
+                        {svg_trophy} Key Achievements
                     </div>
                     <ul class="bullet-list">
                         <li class="bullet-item">
                             {svg_check}
-                            <span>Built &amp; deployed multiple full-stack web projects.</span>
+                            <span>Built &amp; deployed multiple full-stack web applications.</span>
                         </li>
                         <li class="bullet-item">
                             {svg_check}
@@ -1028,28 +1049,28 @@ html_content = f'''<!DOCTYPE html>
                         </li>
                         <li class="bullet-item">
                             {svg_check}
-                            <span>Continuously improving skills in Web Development and AI.</span>
+                            <span>Integrated AI assistant (Ollama) for intelligent user queries.</span>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Certifications -->
+                <!-- Core Strengths -->
                 <div class="bottom-card">
                     <div class="bottom-heading">
-                        {svg_cert} Certifications
+                        {svg_sparkles} Core Strengths
                     </div>
                     <ul class="bullet-list">
                         <li class="bullet-item">
-                            {svg_award}
-                            <span>Python for Everybody – Coursera</span>
+                            {svg_check}
+                            <span>Clean, maintainable code architecture &amp; responsive UI/UX.</span>
                         </li>
                         <li class="bullet-item">
-                            {svg_award}
-                            <span>Responsive Web Design – freeCodeCamp</span>
+                            {svg_check}
+                            <span>Full-stack REST API development &amp; database design.</span>
                         </li>
                         <li class="bullet-item">
-                            {svg_award}
-                            <span>Flask Web Development – Udemy (In Progress)</span>
+                            {svg_check}
+                            <span>Fast learner, self-driven, and passionate problem solver.</span>
                         </li>
                     </ul>
                 </div>
@@ -1062,7 +1083,55 @@ html_content = f'''<!DOCTYPE html>
 </html>
 '''
 
+# 1. Write HTML
 with open('resume/resume.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
+print('[OK] resume/resume.html successfully generated!')
 
-print('resume/resume.html successfully updated and balanced!')
+# 2. Look for Chrome or Edge to export PDF and screenshot
+browser_candidates = [
+    r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+    r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+    r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"
+]
+
+browser_exe = None
+for b in browser_candidates:
+    if os.path.exists(b):
+        browser_exe = b
+        break
+
+if browser_exe:
+    abs_html = os.path.abspath('resume/resume.html').replace('\\', '/')
+    abs_pdf = os.path.abspath('resume/Raj_Kumar_Resume.pdf')
+    abs_root_pdf = os.path.abspath('Raj_Kumar_Resume.pdf')
+    abs_preview = os.path.abspath('resume_preview.png')
+
+    # Generate PDF
+    pdf_cmd = [
+        browser_exe,
+        '--headless',
+        '--disable-gpu',
+        '--no-pdf-header-footer',
+        f'--print-to-pdf={abs_pdf}',
+        f'file:///{abs_html}'
+    ]
+    subprocess.run(pdf_cmd, check=True)
+    if os.path.exists(abs_pdf):
+        shutil.copy(abs_pdf, abs_root_pdf)
+        print('[OK] resume/Raj_Kumar_Resume.pdf and Raj_Kumar_Resume.pdf successfully created!')
+
+    # Generate Preview Screenshot
+    img_cmd = [
+        browser_exe,
+        '--headless',
+        '--disable-gpu',
+        '--window-size=1200,1650',
+        f'--screenshot={abs_preview}',
+        f'file:///{abs_html}'
+    ]
+    subprocess.run(img_cmd, check=True)
+    print('[OK] resume_preview.png successfully generated!')
+else:
+    print('Notice: Chrome/Edge not located in standard paths for automated PDF generation.')
