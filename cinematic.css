@@ -78,80 +78,39 @@
     100% { transform: scale(1.18); opacity: 1; }
 }
 
-/* Grand Content Container */
-.loader-container {
-    width: 100%;
-    max-width: 1200px;
-    min-height: 90vh;
-    min-height: 90dvh;
-    padding: clamp(24px, 4vh, 48px) clamp(20px, 3.5vw, 44px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+/* COMPACT ULTRA-LUXURY LOADER CARD (CUSTOMIZABLE & LIGHTWEIGHT) */
+.loader-compact-card {
     position: relative;
     z-index: 10;
-    box-sizing: border-box;
-}
-
-/* Top Telemetry Header Bar */
-.loader-telemetry-hud {
-    width: 100%;
+    width: min(90vw, 420px);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    font-family: var(--font-mono);
-    font-size: clamp(11px, 1.1vw, 13px);
-    letter-spacing: 1.8px;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-    padding-bottom: 14px;
-    flex-wrap: wrap;
-    gap: 12px;
+    justify-content: center;
+    padding: 38px 34px 28px;
+    background: rgba(14, 14, 19, 0.82);
+    border: 1px solid rgba(212, 175, 55, 0.32);
+    border-radius: 24px;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.18);
+    backdrop-filter: blur(24px);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.hud-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(22, 22, 30, 0.85);
-    border: 1px solid rgba(212, 175, 55, 0.45);
-    padding: 6px 14px;
-    border-radius: 6px;
-    color: var(--text-pure);
-    font-size: clamp(10.5px, 1vw, 12px);
-    font-weight: 600;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+.loader-compact-card:hover {
+    transform: scale(1.02);
+    border-color: var(--gold-main);
 }
 
-.hud-pill i {
-    color: var(--gold-main);
-}
-
-.hud-pulse {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #D4AF37;
-    box-shadow: 0 0 14px #D4AF37;
-    animation: pulseGold 1.4s ease-in-out infinite alternate;
-}
-
-@keyframes pulseGold {
-    0% { transform: scale(0.8); opacity: 0.6; }
-    100% { transform: scale(1.35); opacity: 1; }
-}
-
-/* Central Majestic Quantum Gyroscope System */
 .loader-gyro-system {
     position: relative;
-    width: clamp(160px, 20vw, 240px);
-    height: clamp(160px, 20vw, 240px);
+    width: 96px;
+    height: 96px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 16px 0;
+    margin-bottom: 20px;
 }
 
 .gyro-ring {
@@ -162,30 +121,17 @@
 
 .gyro-ring-outer {
     inset: 0;
-    border: 1.5px dashed rgba(212, 175, 55, 0.5);
-    animation: gyroSpinCw 18s linear infinite;
-    box-shadow: 0 0 35px rgba(212, 175, 55, 0.15);
+    border: 1.5px dashed rgba(212, 175, 55, 0.55);
+    animation: gyroSpinCw 14s linear infinite;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
 }
 
 .gyro-ring-mid {
-    inset: 16px;
-    border: 1px solid rgba(243, 229, 171, 0.35);
+    inset: 8px;
+    border: 1px solid rgba(243, 229, 171, 0.3);
     border-top-color: var(--gold-main);
     border-bottom-color: var(--gold-main);
-    animation: gyroSpinCcw 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-}
-
-.gyro-ring-inner {
-    inset: 32px;
-    border: 1.5px dotted rgba(212, 175, 55, 0.7);
-    animation: gyroSpinCw 8s linear infinite;
-}
-
-.gyro-ring-radar {
-    inset: 8px;
-    background: conic-gradient(from 0deg, transparent 75%, rgba(212, 175, 55, 0.25) 100%);
-    border-radius: 50%;
-    animation: radarSweep 3.5s linear infinite;
+    animation: gyroSpinCcw 9s linear infinite;
 }
 
 @keyframes gyroSpinCw {
@@ -198,196 +144,55 @@
     to { transform: rotate(0deg); }
 }
 
-@keyframes radarSweep {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 .loader-hologram-monogram {
     z-index: 5;
     font-family: var(--font-serif);
-    font-size: clamp(42px, 5.5vw, 68px);
+    font-size: 38px;
     font-weight: 700;
-    letter-spacing: 2px;
     color: var(--gold-light);
-    text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4);
-    animation: hologramGlow 2.5s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
 }
 
-@keyframes hologramGlow {
-    0% { transform: scale(0.96); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
-    100% { transform: scale(1.04); filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.95)); }
-}
-
-/* Grand Title Wrap */
 .loader-title-wrap {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.loader-full-name {
+    font-family: var(--font-serif);
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    background: var(--gradient-gold-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+    margin-bottom: 6px;
 }
 
 .loader-role-subtitle {
     display: block;
     font-family: var(--font-mono);
-    font-size: clamp(12px, 1.3vw, 15px);
-    letter-spacing: 4px;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
     color: var(--gold-main);
-    margin-bottom: 8px;
     text-transform: uppercase;
     font-weight: 600;
 }
 
-.loader-full-name {
-    font-family: var(--font-serif);
-    font-size: clamp(34px, 4.8vw, 64px);
-    font-weight: 700;
-    letter-spacing: 4px;
-    background: var(--gradient-gold-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.1;
-    margin: 0;
-    filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.4));
-}
-
-/* Recruiter Highlights Strip */
-.loader-hr-pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(12px, 1.8vw, 24px);
+/* Minimalist Progress Track */
+.loader-progress-wrap {
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
-.hr-pillar-card {
-    background: rgba(18, 18, 24, 0.85);
-    border: 1px solid rgba(212, 175, 55, 0.28);
-    border-radius: 12px;
-    padding: clamp(12px, 1.5vh, 18px) clamp(12px, 1.2vw, 18px);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.hr-pillar-card:hover {
-    border-color: var(--gold-main);
-    transform: translateY(-2px);
-}
-
-.pillar-icon {
-    width: clamp(34px, 3.2vw, 44px);
-    height: clamp(34px, 3.2vw, 44px);
-    border-radius: 10px;
-    background: rgba(212, 175, 55, 0.12);
-    border: 1px solid rgba(212, 175, 55, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gold-main);
-    font-size: clamp(16px, 1.4vw, 20px);
-    flex-shrink: 0;
-}
-
-.pillar-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    overflow: hidden;
-}
-
-.pillar-title {
-    font-family: var(--font-sans);
-    font-size: clamp(12px, 1.1vw, 14px);
-    font-weight: 700;
-    color: var(--text-pure);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.pillar-desc {
-    font-family: var(--font-mono);
-    font-size: clamp(10.5px, 0.95vw, 12px);
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Status Feed & Percentage Readout */
-.loader-telemetry-matrix {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    font-family: var(--font-mono);
-    gap: 16px;
-}
-
-.terminal-status-feed {
-    font-size: clamp(11px, 1.1vw, 13px);
-    color: var(--gold-light);
-    letter-spacing: 1.5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.matrix-counter-group {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.frequency-equalizer {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    height: 16px;
-}
-
-.eq-bar {
-    width: 3px;
-    background: var(--gold-main);
-    border-radius: 2px;
-    animation: eqBounce 1.2s ease-in-out infinite alternate;
-}
-
-.eq-bar:nth-child(2) { animation-delay: 0.15s; height: 60%; }
-.eq-bar:nth-child(3) { animation-delay: 0.3s; height: 100%; }
-.eq-bar:nth-child(4) { animation-delay: 0.45s; height: 40%; }
-.eq-bar:nth-child(5) { animation-delay: 0.6s; height: 85%; }
-.eq-bar:nth-child(6) { animation-delay: 0.75s; height: 50%; }
-.eq-bar:nth-child(7) { animation-delay: 0.9s; height: 75%; }
-.eq-bar:nth-child(8) { animation-delay: 1.05s; height: 30%; }
-
-@keyframes eqBounce {
-    0% { height: 15%; opacity: 0.4; }
-    100% { height: 100%; opacity: 1; }
-}
-
-.digital-percentage-readout {
-    font-family: var(--font-mono);
-    font-size: clamp(15px, 1.6vw, 20px);
-    font-weight: 700;
-    color: var(--gold-bright);
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px var(--gold-glow);
-}
-
-/* High-Energy Laser Progress Track */
 .laser-progress-track {
     width: 100%;
-    height: 4px;
+    height: 3px;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 4px;
     overflow: hidden;
-    position: relative;
-    margin-bottom: 24px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px;
 }
 
 .laser-progress-fill {
@@ -395,21 +200,40 @@
     width: 0%;
     background: var(--gradient-gold);
     border-radius: 4px;
-    box-shadow: 0 0 18px var(--gold-glow-intense);
-    transition: width 0.15s linear;
-    position: relative;
+    box-shadow: 0 0 10px var(--gold-glow-intense);
+    transition: width 0.1s linear;
 }
 
-.laser-progress-fill::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: -2px;
-    bottom: -2px;
-    width: 12px;
-    background: #FFFFFF;
-    border-radius: 50%;
-    box-shadow: 0 0 14px #FFFFFF, 0 0 24px var(--gold-main);
+.loader-progress-subline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+}
+
+.terminal-status-feed {
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+}
+
+.digital-percentage-readout {
+    font-weight: 700;
+    color: var(--gold-light);
+}
+
+.loader-skip-hint {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.loader-compact-card:hover .loader-skip-hint {
+    opacity: 1;
+    color: var(--gold-main);
 }
 
 /* Bottom Controls */

@@ -48,95 +48,40 @@
     <div class="gold-progress-line" id="scrollProgress"></div>
 
     <!-- =====================================================
-         1. GRAND CINEMATIC OBSIDIAN & GOLD STARTUP LOADER
+         1. COMPACT ULTRA-LUXURY STARTUP LOADER (CUSTOMIZABLE)
     ===================================================== -->
     <div id="intro" class="cinematic-loader" aria-hidden="true">
         <div class="loader-bg-grid"></div>
         <div class="loader-vignette"></div>
         <div class="loader-ambient-aura"></div>
-        <div class="loader-container">
-            <!-- Telemetry Header HUD -->
-            <div class="loader-telemetry-hud">
-                <span class="hud-pill"><span class="hud-pulse"></span> PORTFOLIO MATRIX // RAJKUMAR</span>
-                <span class="hud-pill"><i class="fa-solid fa-code"></i> FULL-STACK WEB DEVELOPER</span>
-                <span class="hud-pill"><i class="fa-solid fa-bolt"></i> OPEN FOR ROLES</span>
-            </div>
-
-            <!-- Central Quantum Gyroscope System & Monogram -->
+        <div class="loader-compact-card">
+            <!-- Central Golden Monogram Halo -->
             <div class="loader-gyro-system">
                 <div class="gyro-ring gyro-ring-outer"></div>
                 <div class="gyro-ring gyro-ring-mid"></div>
-                <div class="gyro-ring gyro-ring-inner"></div>
-                <div class="gyro-ring gyro-ring-radar"></div>
                 <div class="loader-hologram-monogram">
-                    <span>R<span class="gold-dot">.</span></span>
+                    <span id="loaderMonogram">R<span class="gold-dot">.</span></span>
                 </div>
             </div>
 
-            <!-- Grand Title & Subtitle -->
+            <!-- Sleek Name & Role Subtitle -->
             <div class="loader-title-wrap">
-                <span class="loader-role-subtitle">WEB DEVELOPMENT &bull; AI SYSTEMS</span>
-                <h1 class="loader-full-name">RAJKUMAR</h1>
+                <h1 class="loader-full-name" id="loaderName">RAJKUMAR</h1>
+                <span class="loader-role-subtitle" id="loaderRole">WEB DEVELOPMENT &bull; AI SYSTEMS</span>
             </div>
 
-            <!-- Recruiter Highlights Strip -->
-            <div class="loader-hr-pillars">
-                <div class="hr-pillar-card">
-                    <div class="pillar-icon"><i class="fa-solid fa-layer-group"></i></div>
-                    <div class="pillar-info">
-                        <span class="pillar-title">Full-Stack Craft</span>
-                        <span class="pillar-desc">Python, Flask, JavaScript, SQLite</span>
-                    </div>
+            <!-- Minimalist Percentage & Laser Progress Bar -->
+            <div class="loader-progress-wrap">
+                <div class="laser-progress-track">
+                    <div class="laser-progress-fill" id="loaderProgressFill"></div>
                 </div>
-                <div class="hr-pillar-card">
-                    <div class="pillar-icon"><i class="fa-solid fa-brain"></i></div>
-                    <div class="pillar-info">
-                        <span class="pillar-title">AI &amp; Automation</span>
-                        <span class="pillar-desc">Gemini Flash AI Integration</span>
-                    </div>
-                </div>
-                <div class="hr-pillar-card">
-                    <div class="pillar-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <div class="pillar-info">
-                        <span class="pillar-title">B.Sc. Computer Science</span>
-                        <span class="pillar-desc">3rd Year &bull; Tamil Nadu, IN</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Live Status Feed & Precision Percentage Readout -->
-            <div class="loader-telemetry-matrix">
-                <div class="terminal-status-feed" id="loaderStatusFeed">
-                    <span class="hud-pulse"></span> INITIALIZING LUXURY WORKSPACE...
-                </div>
-                <div class="matrix-counter-group">
-                    <div class="frequency-equalizer">
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                        <span class="eq-bar"></span>
-                    </div>
+                <div class="loader-progress-subline">
+                    <span class="terminal-status-feed" id="loaderStatusFeed">INITIALIZING...</span>
                     <span class="digital-percentage-readout" id="loaderPercentText">00%</span>
                 </div>
             </div>
 
-            <!-- High-Energy Laser Progress Track -->
-            <div class="laser-progress-track">
-                <div class="laser-progress-fill" id="loaderProgressFill"></div>
-            </div>
-
-            <!-- Bottom HUD Status & Enter Button -->
-            <div class="loader-footer-controls">
-                <span>VERSION 2026.4 &bull; ULTRA-LUXURY EDITION</span>
-                <button class="cinematic-enter-btn" id="skipLoaderBtn" type="button">
-                    <span>EXPLORE PORTFOLIO</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
+            <div class="loader-skip-hint">Click anywhere to enter</div>
         </div>
     </div>
 
@@ -296,86 +241,140 @@
         </section>
 
         <!-- =====================================================
-             4. SECTION 01 — ABOUT ME
-        <!-- =====================================================
-             4. SECTION 01 — ABOUT ME (WITH NIGHT WALK PORTRAIT)
+             4. SECTION 01 — ABOUT ME (EXACT MATCH TO REFERENCE IMAGE)
         ===================================================== -->
-        <section id="about" class="editorial-section">
+        <section id="about" class="editorial-section about-cinematic-section">
             <div class="editorial-container">
-                <div class="sec-pill-tag">01. ABOUT ME</div>
+                <!-- Top Split: Left Content + Right Full Night Walk Portrait -->
+                <div class="about-hero-split">
+                    <!-- Left: Spine + Narrative + Quick Details + Download CV -->
+                    <div class="about-left-editorial">
+                        <div class="about-tag-spine-wrap">
+                            <span class="sec-pill-tag">01. ABOUT ME</span>
+                        </div>
 
-                <div class="about-grid-presentation">
-                    <!-- Left: Narrative & Craft Philosophy -->
-                    <div class="about-narrative-col">
-                        <h2 class="about-headline">
-                            Crafting Digital Experiences That Make an Impact
+                        <h2 class="about-headline-cinematic">
+                            I Build Digital Experiences<br>That Make an Impact
                         </h2>
 
-                        <p class="about-text-lead">
-                            I'm a passionate Web Developer with a strong focus on building beautiful, functional, and user-centered websites. I enjoy turning ideas into real-world digital solutions.
+                        <div class="about-gold-hairline"></div>
+
+                        <p class="about-bio-text">
+                            I'm a passionate Web Developer who loves turning ideas into clean, elegant &amp; high-performing websites. I focus on creating solutions that are not only functional but also visually engaging. Always learning, always building.
                         </p>
 
-                        <p class="about-text-sub">
-                            Currently pursuing 3rd year B.Sc. Computer Science in Tamil Nadu, India. With 2 years of hands-on experience, I specialize in full-stack web applications, Python &amp; Flask backend APIs, SQLite relational databases, and intelligent Gemini AI integrations.
-                        </p>
+                        <!-- 2-Column Info Grid with Gold Icons -->
+                        <div class="about-meta-grid-2col">
+                            <!-- Cell 1: Name -->
+                            <div class="meta-item-cell">
+                                <div class="meta-icon-gold"><i class="fa-regular fa-calendar"></i></div>
+                                <div class="meta-data-group">
+                                    <span class="meta-label">Name</span>
+                                    <span class="meta-val">Rajkumar</span>
+                                </div>
+                            </div>
 
-                        <div class="about-action-row">
-                            <a href="#contact" class="btn-about-outline">
-                                <span>More About Me</span>
-                                <i class="fa-solid fa-arrow-right"></i>
+                            <!-- Cell 2: Role -->
+                            <div class="meta-item-cell">
+                                <div class="meta-icon-gold"><i class="fa-solid fa-code"></i></div>
+                                <div class="meta-data-group">
+                                    <span class="meta-label">Role</span>
+                                    <span class="meta-val">Web Developer</span>
+                                </div>
+                            </div>
+
+                            <!-- Cell 3: Email -->
+                            <div class="meta-item-cell">
+                                <div class="meta-icon-gold"><i class="fa-regular fa-envelope"></i></div>
+                                <div class="meta-data-group">
+                                    <span class="meta-label">Email</span>
+                                    <span class="meta-val">rajkumarrk1207@gmail.com</span>
+                                </div>
+                            </div>
+
+                            <!-- Cell 4: Phone -->
+                            <div class="meta-item-cell">
+                                <div class="meta-icon-gold"><i class="fa-solid fa-phone"></i></div>
+                                <div class="meta-data-group">
+                                    <span class="meta-label">Phone</span>
+                                    <span class="meta-val">9445437069</span>
+                                </div>
+                            </div>
+
+                            <!-- Cell 5: Location -->
+                            <div class="meta-item-cell">
+                                <div class="meta-icon-gold"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="meta-data-group">
+                                    <span class="meta-label">Location</span>
+                                    <span class="meta-val">Tamil Nadu, India</span>
+                                </div>
+                            </div>
+
+                            <!-- Cell 6: Freelance -->
+                            <div class="meta-item-cell">
+                                <div class="meta-icon-gold"><i class="fa-solid fa-globe"></i></div>
+                                <div class="meta-data-group">
+                                    <span class="meta-label">Freelance</span>
+                                    <span class="meta-val">Available</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Button: Download CV -->
+                        <div class="about-cv-action-row">
+                            <a href="Raj_Kumar_Resume.pdf" download="Raj_Kumar_Resume.pdf" class="btn-download-cv-gold" target="_blank">
+                                <span>DOWNLOAD CV</span>
+                                <i class="fa-solid fa-download"></i>
                             </a>
                         </div>
-
-                        <!-- Handwritten Luxury Signature -->
-                        <div class="about-signature-strip">
-                            <div>
-                                <span class="signature-text">Rajkumar</span>
-                                <div class="signature-label">Full-Stack Web Developer &bull; Tamil Nadu, India</div>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Center: Elegant Night Walking Portrait Image -->
-                    <div class="about-portrait-stage">
-                        <div class="about-image-card">
-                            <img src="images/raj-night-walk.jpg" alt="Rajkumar — Full-Stack Developer" class="about-portrait-img">
-                            <div class="about-image-glare"></div>
-                            <div class="about-image-badge">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <span>TAMIL NADU, IN</span>
-                            </div>
+                    <!-- Right: Full Night Walk Portrait -->
+                    <div class="about-right-portrait-stage">
+                        <div class="about-portrait-cinematic-frame">
+                            <img src="images/raj-night-walk.jpg" alt="Rajkumar — Web Developer" class="about-full-photo">
+                            <div class="about-portrait-edge-gradient"></div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Right: 2x2 Glass Stat Metric Cards -->
-                    <div class="about-stats-2x2">
-                        <!-- Card 1: Experience (2 Years) -->
-                        <div class="stat-box-card" data-tilt>
-                            <div class="stat-box-icon"><i class="fa-solid fa-user-tie"></i></div>
-                            <span class="stat-box-number counter-number" data-target="2" data-suffix="+">2+</span>
-                            <span class="stat-box-title">Years Experience</span>
-                        </div>
+                <!-- Bottom Full-Width Strip: 4 Stat Metrics + "WHAT I DO" Column -->
+                <div class="about-bottom-bar-card">
+                    <!-- Stat 1: Experience -->
+                    <div class="bottom-stat-unit">
+                        <div class="stat-unit-icon"><i class="fa-regular fa-user"></i></div>
+                        <span class="stat-unit-num counter-number" data-target="2" data-suffix="+">2+</span>
+                        <span class="stat-unit-label">Years Experience</span>
+                    </div>
 
-                        <!-- Card 2: Projects Completed (2 Projects) -->
-                        <div class="stat-box-card" data-tilt>
-                            <div class="stat-box-icon"><i class="fa-solid fa-code"></i></div>
-                            <span class="stat-box-number counter-number" data-target="2" data-suffix="+">2+</span>
-                            <span class="stat-box-title">Projects Completed</span>
-                        </div>
+                    <!-- Stat 2: Projects Completed -->
+                    <div class="bottom-stat-unit">
+                        <div class="stat-unit-icon"><i class="fa-solid fa-code"></i></div>
+                        <span class="stat-unit-num counter-number" data-target="2" data-suffix="+">2+</span>
+                        <span class="stat-unit-label">Projects Completed</span>
+                    </div>
 
-                        <!-- Card 3: Technologies -->
-                        <div class="stat-box-card" data-tilt>
-                            <div class="stat-box-icon"><i class="fa-solid fa-mug-hot"></i></div>
-                            <span class="stat-box-number counter-number" data-target="5" data-suffix="+">5+</span>
-                            <span class="stat-box-title">Technologies</span>
-                        </div>
+                    <!-- Stat 3: Technologies -->
+                    <div class="bottom-stat-unit">
+                        <div class="stat-unit-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <span class="stat-unit-num counter-number" data-target="5" data-suffix="+">5+</span>
+                        <span class="stat-unit-label">Technologies</span>
+                    </div>
 
-                        <!-- Card 4: Satisfaction -->
-                        <div class="stat-box-card" data-tilt>
-                            <div class="stat-box-icon"><i class="fa-regular fa-face-smile"></i></div>
-                            <span class="stat-box-number counter-number" data-target="100" data-suffix="%">100%</span>
-                            <span class="stat-box-title">Client Satisfaction</span>
-                        </div>
+                    <!-- Stat 4: Satisfaction -->
+                    <div class="bottom-stat-unit">
+                        <div class="stat-unit-icon"><i class="fa-regular fa-face-smile"></i></div>
+                        <span class="stat-unit-num counter-number" data-target="100" data-suffix="%">100%</span>
+                        <span class="stat-unit-label">Client Satisfaction</span>
+                    </div>
+
+                    <!-- Segment 5: WHAT I DO Narrative Column -->
+                    <div class="bottom-what-i-do-unit">
+                        <span class="what-i-do-tag">WHAT I DO</span>
+                        <h3 class="what-i-do-title">I turn ideas into digital solutions.</h3>
+                        <p class="what-i-do-desc">
+                            From concept to deployment, I build modern, responsive websites that help businesses grow and stand out in the digital world.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -176,28 +176,66 @@
 }
 
 [data-theme="light"] .about-headline,
-.theme-light .about-headline {
+.theme-light .about-headline,
+[data-theme="light"] .about-headline-cinematic,
+.theme-light .about-headline-cinematic {
     color: #121216;
 }
 
 [data-theme="light"] .about-text-lead,
-.theme-light .about-text-lead {
+.theme-light .about-text-lead,
+[data-theme="light"] .about-bio-text,
+.theme-light .about-bio-text {
     color: #24242C;
 }
 
-[data-theme="light"] .about-text-sub,
-.theme-light .about-text-sub {
+[data-theme="light"] .meta-label,
+.theme-light .meta-label {
+    color: #575762;
+}
+
+[data-theme="light"] .meta-val,
+.theme-light .meta-val {
+    color: #121216;
+}
+
+[data-theme="light"] .meta-icon-gold,
+.theme-light .meta-icon-gold {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #B8860B;
+}
+
+[data-theme="light"] .about-bottom-bar-card,
+.theme-light .about-bottom-bar-card {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: var(--stat-card-shadow);
+}
+
+[data-theme="light"] .stat-unit-num,
+.theme-light .stat-unit-num {
+    color: #121216;
+}
+
+[data-theme="light"] .stat-unit-label,
+.theme-light .stat-unit-label {
     color: #4A4A58;
 }
 
-[data-theme="light"] .signature-text,
-.theme-light .signature-text {
-    color: #8C6200;
+[data-theme="light"] .stat-unit-icon,
+.theme-light .stat-unit-icon {
+    color: #B8860B;
 }
 
-[data-theme="light"] .signature-label,
-.theme-light .signature-label {
-    color: #575762;
+[data-theme="light"] .what-i-do-title,
+.theme-light .what-i-do-title {
+    color: #121216;
+}
+
+[data-theme="light"] .what-i-do-desc,
+.theme-light .what-i-do-desc {
+    color: #4A4A58;
 }
 
 [data-theme="light"] .stat-box-card,
@@ -1158,182 +1196,293 @@ body.cursor-hover .cursor-ring {
 }
 
 /* --------------------------------------------------------------------------
-   8. SECTION 01: ABOUT ME (EDITORIAL 3-COLUMN WITH NIGHT WALK PORTRAIT)
+   8. SECTION 01: ABOUT ME (MATCHING USER REFERENCE DESIGN)
    -------------------------------------------------------------------------- */
-.about-grid-presentation,
-.about-split-layout {
-    display: grid;
-    grid-template-columns: 1.15fr 0.95fr 1fr;
-    gap: 40px;
-    align-items: center;
+.about-cinematic-section {
+    position: relative;
+    padding: 100px 0 80px;
 }
 
-.about-narrative-col {
+.about-hero-split {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.about-left-editorial {
     display: flex;
     flex-direction: column;
 }
 
-.about-headline {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 3.2vw, 3.2rem);
-    font-weight: 600;
-    line-height: 1.2;
-    color: var(--text-pure);
-    margin-bottom: 24px;
+.about-tag-spine-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
-.about-text-lead {
-    font-family: var(--font-sans);
-    font-size: 1.02rem;
-    line-height: 1.8;
-    color: var(--text-muted);
+.about-headline-cinematic {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-pure);
+    letter-spacing: -0.01em;
     margin-bottom: 20px;
 }
 
-.about-text-sub {
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    line-height: 1.75;
-    color: var(--text-dim);
-    margin-bottom: 32px;
+.about-gold-hairline {
+    width: 60px;
+    height: 2px;
+    background: var(--gold-main);
+    margin-bottom: 24px;
+    border-radius: 2px;
 }
 
-.about-action-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.about-bio-text {
+    font-family: var(--font-sans);
+    font-size: 0.96rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 620px;
+}
+
+/* 2-Column Info Grid with Gold Icons */
+.about-meta-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 32px;
     margin-bottom: 36px;
 }
 
-/* Night Walk Portrait Stage in About Section */
-.about-portrait-stage {
+.meta-item-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.meta-icon-gold {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid var(--border-gold-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-main);
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: var(--transition-fast);
+}
+
+.meta-item-cell:hover .meta-icon-gold {
+    background: var(--gold-main);
+    color: #0A0A0D;
+    transform: scale(1.08);
+    box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.meta-data-group {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.35;
+}
+
+.meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.meta-val {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-ivory);
+}
+
+/* Download CV Gold Button */
+.btn-download-cv-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 28px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gold-main);
+    background: transparent;
+    color: var(--gold-main);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: fit-content;
+}
+
+.btn-download-cv-gold:hover {
+    background: var(--gold-main);
+    color: #0A0A0D;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--gold-glow);
+}
+
+/* Right Full Night Walk Portrait Stage */
+.about-right-portrait-stage {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.about-image-card {
+.about-portrait-cinematic-frame {
     position: relative;
     width: 100%;
-    max-width: 320px;
-    aspect-ratio: 3 / 4;
+    max-width: 440px;
+    aspect-ratio: 1 / 1.25;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border-gold-subtle);
     box-shadow: var(--project-card-shadow);
-    background: #0D0D12;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease;
+    background: #08080A;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
 }
 
-.about-image-card:hover {
+.about-portrait-cinematic-frame:hover {
     transform: translateY(-6px) scale(1.02);
     border-color: var(--border-gold-medium);
     box-shadow: var(--project-card-hover-shadow);
 }
 
-.about-portrait-img {
+.about-full-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.about-image-card:hover .about-portrait-img {
+.about-portrait-cinematic-frame:hover .about-full-photo {
     transform: scale(1.04);
 }
 
-.about-image-glare {
+.about-portrait-edge-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 60%, rgba(8, 8, 10, 0.8) 100%);
+    background: linear-gradient(180deg, transparent 65%, rgba(8, 8, 10, 0.8) 100%);
     pointer-events: none;
 }
 
-.about-image-badge {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    display: inline-flex;
+/* Bottom Full-Width Strip: 4 Stat Metrics + "WHAT I DO" Column */
+.about-bottom-bar-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-obsidian);
+    border-radius: 20px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 1.6fr;
+    gap: 32px;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 100px;
-    background: rgba(14, 14, 19, 0.85);
-    border: 1px solid var(--border-gold-subtle);
-    backdrop-filter: blur(10px);
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--gold-main);
+    box-shadow: var(--project-card-shadow);
+    backdrop-filter: blur(16px);
 }
 
-.btn-about-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 26px;
-    border-radius: 8px;
-    border: 1px solid var(--border-gold-medium);
-    color: var(--gold-light);
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: var(--transition-fast);
-}
-
-.btn-about-outline:hover {
-    background: var(--gold-main);
-    color: #0A0A0D;
-    box-shadow: 0 0 20px var(--gold-glow);
-    transform: translateY(-2px);
-}
-
-/* Elegant Handwritten Signature */
-.about-signature-strip {
+.bottom-stat-unit {
     display: flex;
-    align-items: center;
-    gap: 18px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-obsidian);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    border-right: 1px solid var(--border-obsidian);
+    padding-right: 20px;
 }
 
-.signature-text {
-    font-family: var(--font-script);
+.stat-unit-icon {
+    font-size: 1.4rem;
+    color: var(--gold-main);
+    margin-bottom: 4px;
+}
+
+.stat-unit-num {
+    font-family: var(--font-serif);
     font-size: 2.2rem;
-    color: var(--gold-light);
-    opacity: 0.9;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-pure);
 }
 
-.signature-label {
+.stat-unit-label {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+.bottom-what-i-do-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 10px;
+}
+
+.what-i-do-tag {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: var(--text-dim);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--gold-main);
     text-transform: uppercase;
 }
 
-/* 2x2 Dark Glass Stat Grid */
-.about-stats-2x2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+.what-i-do-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    line-height: 1.25;
 }
 
-.stat-box-card {
-    background: var(--gradient-card);
-    border: 1px solid var(--border-obsidian);
-    border-radius: 16px;
-    padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(16px);
+.what-i-do-desc {
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+@media (max-width: 1100px) {
+    .about-hero-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .about-bottom-bar-card {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 28px 24px;
+    }
+    .bottom-stat-unit {
+        border-right: none;
+        border-bottom: 1px solid var(--border-obsidian);
+        padding-bottom: 16px;
+    }
+    .bottom-what-i-do-unit {
+        grid-column: 1 / -1;
+        padding-left: 0;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-meta-grid-2col {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .about-bottom-bar-card {
+        grid-template-columns: 1fr;
+    }
 }
 
 .stat-box-card::before {

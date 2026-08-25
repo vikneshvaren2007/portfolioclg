@@ -1,7 +1,18 @@
 /* ==========================================================================
    RAJKUMAR — HYPER-CINEMATIC & MOBILE INTERACTIVITY CONTROLLER
-   Quantum Loader HUD Engine, Mobile Touch Physics & Ambient Telemetry
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   LOADER CUSTOMIZATION SETTINGS
+   You can easily customize or disable the loading screen here!
+   -------------------------------------------------------------------------- */
+window.LOADER_CONFIG = {
+    enabled: true,          // Set to false to disable the loading screen completely
+    durationMs: 900,        // Speed in milliseconds (e.g., 800 = 0.8s fast, 1200 = 1.2s cinematic)
+    monogram: "R.",         // Text inside the central logo
+    nameText: "RAJKUMAR",   // Title text
+    roleText: "WEB DEVELOPMENT • AI SYSTEMS"
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     initCinematicLoaderEngine();
@@ -11,18 +22,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. HYPER-CINEMATIC QUANTUM LOADER CONTROLLER (FAIL-SAFE & ULTRA-SMOOTH)
+   1. COMPACT ULTRA-LUXURY LOADER CONTROLLER (CUSTOMIZABLE & FAST)
    -------------------------------------------------------------------------- */
 function initCinematicLoaderEngine() {
     const loader = document.getElementById("intro");
     const progressFill = document.getElementById("loaderProgressFill");
     const percentageText = document.getElementById("loaderPercentText");
     const statusFeed = document.getElementById("loaderStatusFeed");
-    const enterBtn = document.getElementById("skipLoaderBtn");
 
     if (!loader) {
         document.body.classList.add("loaded");
         return;
+    }
+
+    // Check if loader is disabled in config
+    if (window.LOADER_CONFIG && window.LOADER_CONFIG.enabled === false) {
+        loader.remove();
+        document.body.classList.add("loaded");
+        return;
+    }
+
+    // Apply custom text if configured
+    if (window.LOADER_CONFIG) {
+        const monogramEl = document.getElementById("loaderMonogram");
+        const nameEl = document.getElementById("loaderName");
+        const roleEl = document.getElementById("loaderRole");
+        if (monogramEl && window.LOADER_CONFIG.monogram) monogramEl.textContent = window.LOADER_CONFIG.monogram;
+        if (nameEl && window.LOADER_CONFIG.nameText) nameEl.textContent = window.LOADER_CONFIG.nameText;
+        if (roleEl && window.LOADER_CONFIG.roleText) roleEl.textContent = window.LOADER_CONFIG.roleText;
     }
 
     let isDismissed = false;
@@ -42,26 +69,18 @@ function initCinematicLoaderEngine() {
 
     // Click anywhere on loader to skip instantly
     loader.addEventListener("click", dismissCinematicLoader);
-    if (enterBtn) {
-        enterBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            dismissCinematicLoader();
-        });
-    }
 
-    // Telemetry logs
+    // Status logs
     const telemetryLogs = [
-        "INITIALIZING FULL-STACK ENGINE...",
-        "MOUNTING PYTHON & FLASK APIS...",
-        "INTEGRATING SQLITE DATA STORE...",
-        "LOADING AI CORE ARCHITECTURE...",
-        "SYSTEMS 100% READY • WELCOME TO RAJKUMAR'S PORTFOLIO"
+        "INITIALIZING...",
+        "LOADING APIS...",
+        "READY"
     ];
 
     let currentPercent = 0;
     const targetPercent = 100;
     let startTime = null;
-    const duration = 1400; // Fast & responsive 1.4s
+    const duration = (window.LOADER_CONFIG && window.LOADER_CONFIG.durationMs) || 900;
 
     function animateLoader(timestamp) {
         if (isDismissed) return;
@@ -85,7 +104,7 @@ function initCinematicLoaderEngine() {
                 Math.floor(progressRatio * telemetryLogs.length),
                 telemetryLogs.length - 1
             );
-            statusFeed.innerHTML = `<span class="hud-pulse"></span> ${telemetryLogs[feedIndex]}`;
+            statusFeed.textContent = telemetryLogs[feedIndex];
         }
 
         if (progressRatio < 1) {
@@ -93,14 +112,14 @@ function initCinematicLoaderEngine() {
         } else {
             if (progressFill) progressFill.style.width = "100%";
             if (percentageText) percentageText.textContent = "100%";
-            setTimeout(dismissCinematicLoader, 250);
+            setTimeout(dismissCinematicLoader, 180);
         }
     }
 
     requestAnimationFrame(animateLoader);
 
-    // Absolute hard failsafe: dismiss after 2s no matter what
-    setTimeout(dismissCinematicLoader, 2000);
+    // Hard failsafe: dismiss after 1.8s
+    setTimeout(dismissCinematicLoader, 1800);
 }
 
 /* --------------------------------------------------------------------------

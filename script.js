@@ -347,7 +347,7 @@ function initStatCounterAnimations() {
         });
     }, { threshold: 0.2 });
 
-    const statsGrid = document.querySelector(".about-stats-2x2");
+    const statsGrid = document.querySelector(".about-bottom-bar-card, .about-stats-2x2");
     if (statsGrid) observer.observe(statsGrid);
 }
 
