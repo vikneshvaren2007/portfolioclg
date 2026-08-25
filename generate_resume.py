@@ -5,8 +5,16 @@ import shutil
 import re
 
 os.makedirs('resume', exist_ok=True)
+os.makedirs('images', exist_ok=True)
 
-# Encode profile photo (retouched clear portrait)
+# 1. Copy reference master images
+uploaded_src = r'C:\Users\acer\.gemini\antigravity-ide\brain\5fb42e20-35b4-47dc-b35d-73b32afce4fd\.user_uploaded\media_1787691757105.jpg'
+if os.path.exists(uploaded_src):
+    shutil.copy(uploaded_src, 'resume/Raj_Kumar_Resume.jpg')
+    shutil.copy(uploaded_src, 'images/Raj_Kumar_Resume.jpg')
+    shutil.copy(uploaded_src, 'resume/Raj_Kumar_Resume_Preview.jpg')
+
+# Encode profile photo
 img_b64 = ""
 profile_path = 'images/profile.jpg'
 if os.path.exists(profile_path):
@@ -14,31 +22,31 @@ if os.path.exists(profile_path):
         img_b64 = base64.b64encode(f.read()).decode('utf-8')
 
 # High quality SVG vector icons
-svg_user = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'
-svg_phone = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>'
-svg_email = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>'
-svg_location = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>'
-svg_github = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>'
-svg_instagram = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>'
+svg_user = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'
+svg_phone = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>'
+svg_email = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>'
+svg_location = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>'
+svg_github = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>'
+svg_instagram = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>'
 
-svg_code = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
-svg_wrench = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>'
-svg_lang = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>'
-svg_dumbbell = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"></path><path d="m21 21-1-1"></path><path d="m3 3 1 1"></path><path d="m18 22 4-4"></path><path d="m2 6 4-4"></path><path d="m3 10 7-7"></path><path d="m14 21 7-7"></path></svg>'
-svg_plane = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>'
+svg_code = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+svg_wrench = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>'
+svg_lang = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>'
+svg_dumbbell = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"></path><path d="m21 21-1-1"></path><path d="m3 3 1 1"></path><path d="m18 22 4-4"></path><path d="m2 6 4-4"></path><path d="m3 10 7-7"></path><path d="m14 21 7-7"></path></svg>'
+svg_plane = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>'
 
-svg_edu = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>'
-svg_briefcase = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>'
-svg_trophy = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.48-.63 6-3.66 6-7.32V4H4v5.34c0 3.66 2.52 6.69 6 7.32z"></path></svg>'
-svg_comp = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+svg_edu = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>'
+svg_briefcase = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>'
+svg_trophy = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.48-.63 6-3.66 6-7.32V4H4v5.34c0 3.66 2.52 6.69 6 7.32z"></path></svg>'
+svg_comp = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
 
-svg_star = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>'
-svg_paw = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"></circle><circle cx="18" cy="8" r="2"></circle><circle cx="20" cy="16" r="2"></circle><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 20.18A3.5 3.5 0 0 1 2 13.5V10a5 5 0 0 1 7 0"></path></svg>'
-svg_shield = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>'
-svg_check_gold = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
-svg_calendar = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>'
+svg_star = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>'
+svg_paw = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"></circle><circle cx="18" cy="8" r="2"></circle><circle cx="20" cy="16" r="2"></circle><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 20.18A3.5 3.5 0 0 1 2 13.5V10a5 5 0 0 1 7 0"></path></svg>'
+svg_shield = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>'
+svg_check_gold = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+svg_calendar = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>'
 
-html_luxury = f"""<!DOCTYPE html>
+html_exact = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,10 +54,10 @@ html_luxury = f"""<!DOCTYPE html>
     <title>Raj Kumar — Professional Full-Stack Developer Resume</title>
     <meta name="description" content="Raj Kumar - Full Stack Developer Resume (B.Sc Computer Science, Python, Flask, JavaScript, SQLite, AI Systems)">
     
-    <!-- Google Fonts: Inter, Cormorant Garamond, JetBrains Mono -->
+    <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         @page {{
@@ -62,25 +70,20 @@ html_luxury = f"""<!DOCTYPE html>
             --gold-bright: #D4AF37;
             --gold-light: #F3E5AB;
             --gold-deep: #8C6200;
-            --gold-glow: rgba(212, 175, 55, 0.25);
+            --gold-border: #D4AF37;
             
-            --bg-sidebar: #09090D;
-            --bg-sidebar-card: #121219;
-            --bg-main: #FCFBF9;
+            --bg-sidebar: #000000;
+            --bg-main: #FFFFFF;
             --bg-card: #FFFFFF;
             
-            --text-dark: #1A1A22;
-            --text-muted: #5A5A66;
-            --text-heading: #0E0E12;
-            --text-sidebar: #F4F4F6;
-            --text-sidebar-muted: #9E9EA8;
+            --text-dark: #121216;
+            --text-muted: #575762;
+            --text-heading: #000000;
+            --text-sidebar: #FFFFFF;
             
-            --border-sidebar: rgba(212, 175, 55, 0.22);
             --border-card: #E8E3DA;
-            --border-gold-soft: rgba(197, 155, 39, 0.35);
             
             --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-mono: 'JetBrains Mono', monospace;
         }}
 
@@ -169,14 +172,14 @@ html_luxury = f"""<!DOCTYPE html>
             font-weight: 700;
         }}
 
-        /* Strict A4 Document Canvas — Exact Single Page Fill */
+        /* Master Single Page Canvas */
         .resume-page {{
             width: 210mm;
             height: 297mm;
             max-height: 297mm;
             min-height: 297mm;
             display: grid;
-            grid-template-columns: 71mm 139mm;
+            grid-template-columns: 72mm 138mm;
             background-color: var(--bg-main);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
             overflow: hidden;
@@ -184,20 +187,19 @@ html_luxury = f"""<!DOCTYPE html>
             box-sizing: border-box;
             page-break-inside: avoid !important;
             page-break-after: avoid !important;
-            page-break-before: avoid !important;
             break-inside: avoid !important;
             break-after: avoid !important;
         }}
 
         /* ==================== LEFT SIDEBAR ==================== */
         .sidebar {{
-            background: linear-gradient(180deg, #09090D 0%, #0F0F16 100%);
+            background: #000000;
             color: var(--text-sidebar);
-            padding: 22px 16px 18px 16px;
+            padding: 24px 18px 20px 18px;
             display: flex;
             flex-direction: column;
-            gap: 13px;
-            border-right: 1.5px solid rgba(212, 175, 55, 0.28);
+            gap: 12px;
+            border-right: 1.5px solid #1A1A22;
             height: 297mm;
             max-height: 297mm;
             box-sizing: border-box;
@@ -215,12 +217,12 @@ html_luxury = f"""<!DOCTYPE html>
         }}
 
         .profile-img-wrap {{
-            width: 104px;
-            height: 104px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             padding: 3px;
-            background: linear-gradient(135deg, var(--gold-bright), #8C6200, var(--gold-bright));
-            box-shadow: 0 0 22px rgba(212, 175, 55, 0.35);
+            border: 2px solid var(--gold-bright);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
             margin-bottom: 4px;
         }}
 
@@ -236,13 +238,13 @@ html_luxury = f"""<!DOCTYPE html>
         .sidebar-section {{
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
 
         .sidebar-title {{
-            font-size: 10.5px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 1.2px;
             text-transform: uppercase;
@@ -250,29 +252,20 @@ html_luxury = f"""<!DOCTYPE html>
             display: flex;
             align-items: center;
             gap: 6px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-            padding-bottom: 3.5px;
-        }}
-
-        .sidebar-title svg {{
-            color: var(--gold-bright);
+            margin-bottom: 1px;
         }}
 
         .contact-list {{
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.025);
-            padding: 8px 9px;
-            border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            gap: 5.5px;
         }}
 
         .contact-item {{
             display: flex;
             align-items: center;
-            gap: 7px;
-            font-size: 9.2px;
+            gap: 8px;
+            font-size: 9.6px;
             color: #FFFFFF;
             text-decoration: none;
             word-break: break-all;
@@ -283,6 +276,27 @@ html_luxury = f"""<!DOCTYPE html>
             flex-shrink: 0;
             display: flex;
             align-items: center;
+        }}
+
+        /* Gold Divider Line with Center Dot */
+        .sidebar-divider {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 1px;
+            background: rgba(212, 175, 55, 0.4);
+            margin: 2px 0;
+        }}
+
+        .sidebar-divider::after {{
+            content: '';
+            width: 4.5px;
+            height: 4.5px;
+            background: var(--gold-bright);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 6px var(--gold-bright);
         }}
 
         /* Core Skills Progress Bars */
@@ -301,23 +315,22 @@ html_luxury = f"""<!DOCTYPE html>
         .skill-header {{
             display: flex;
             justify-content: space-between;
-            font-size: 9.3px;
+            font-size: 9.6px;
             font-weight: 500;
             color: #FFFFFF;
         }}
 
         .skill-bar-bg {{
-            height: 4px;
-            background: rgba(255, 255, 255, 0.08);
+            height: 3.5px;
+            background: #22222C;
             border-radius: 2px;
             overflow: hidden;
         }}
 
         .skill-bar-fill {{
             height: 100%;
-            background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+            background: var(--gold-bright);
             border-radius: 2px;
-            box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
         }}
 
         /* Outline Badge Pills */
@@ -329,24 +342,21 @@ html_luxury = f"""<!DOCTYPE html>
 
         .pill-tag {{
             font-family: var(--font-mono);
-            font-size: 8.5px;
-            color: var(--gold-light);
-            background: rgba(212, 175, 55, 0.07);
-            border: 1px solid rgba(212, 175, 55, 0.32);
-            padding: 3px 6.5px;
+            font-size: 8.6px;
+            color: #FFFFFF;
+            background: transparent;
+            border: 1px solid var(--gold-bright);
+            padding: 3px 7px;
             border-radius: 4px;
             font-weight: 500;
         }}
 
         /* Bottom Hobbies/Interests */
-        .interests-card {{
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(212, 175, 55, 0.18);
-            border-radius: 6px;
-            padding: 7px 10px;
+        .interests-row {{
             display: flex;
             justify-content: space-around;
             align-items: center;
+            padding-top: 4px;
             margin-top: auto;
         }}
 
@@ -355,9 +365,8 @@ html_luxury = f"""<!DOCTYPE html>
             flex-direction: column;
             align-items: center;
             gap: 2.5px;
-            font-size: 8.5px;
-            color: var(--text-sidebar);
-            font-weight: 500;
+            font-size: 9px;
+            color: #FFFFFF;
         }}
 
         .interest-item svg {{
@@ -369,7 +378,7 @@ html_luxury = f"""<!DOCTYPE html>
             padding: 22px 22px 18px 22px;
             display: flex;
             flex-direction: column;
-            gap: 11px;
+            gap: 10px;
             background-color: var(--bg-main);
             height: 297mm;
             max-height: 297mm;
@@ -379,19 +388,16 @@ html_luxury = f"""<!DOCTYPE html>
             break-inside: avoid !important;
         }}
 
-        /* Luxury Header Banner */
         .header-block {{
             display: flex;
             flex-direction: column;
-            gap: 3px;
-            border-bottom: 2px solid #E8E3DA;
-            padding-bottom: 8px;
+            gap: 2px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
 
         .candidate-name {{
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 900;
             color: var(--text-heading);
             letter-spacing: -0.5px;
@@ -404,26 +410,45 @@ html_luxury = f"""<!DOCTYPE html>
 
         .candidate-role {{
             font-family: var(--font-mono);
-            font-size: 10px;
+            font-size: 10.5px;
             font-weight: 700;
-            letter-spacing: 1.4px;
+            letter-spacing: 1.5px;
             color: var(--gold-main);
             text-transform: uppercase;
-            margin-top: 1px;
+            margin-top: 2px;
         }}
 
         .summary-text {{
-            font-size: 9.5px;
+            font-size: 9.8px;
             color: var(--text-muted);
-            line-height: 1.46;
-            margin-top: 3px;
+            line-height: 1.48;
+            margin-top: 4px;
+        }}
+
+        .main-gold-divider {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 1px;
+            background: #E8E3DA;
+            margin: 2px 0 1px;
+        }}
+
+        .main-gold-divider::after {{
+            content: '';
+            width: 4.5px;
+            height: 4.5px;
+            background: var(--gold-main);
+            border-radius: 50%;
+            position: absolute;
         }}
 
         /* Main Section Headers */
         .section-block {{
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5.5px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
@@ -432,13 +457,11 @@ html_luxury = f"""<!DOCTYPE html>
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             color: var(--gold-main);
-            border-bottom: 1.5px solid #EDE8E0;
-            padding-bottom: 2.5px;
         }}
 
         .section-header svg {{
@@ -450,12 +473,11 @@ html_luxury = f"""<!DOCTYPE html>
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-card);
+            background: #FFFFFF;
             border: 1px solid var(--border-card);
-            border-left: 4px solid var(--gold-main);
+            border-left: 3.5px solid var(--gold-main);
             border-radius: 6px;
-            padding: 8px 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            padding: 8px 14px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
@@ -467,19 +489,19 @@ html_luxury = f"""<!DOCTYPE html>
         }}
 
         .edu-degree {{
-            font-size: 11.5px;
+            font-size: 11.8px;
             font-weight: 700;
             color: var(--text-heading);
         }}
 
         .edu-institution {{
-            font-size: 9.6px;
+            font-size: 10px;
             color: var(--text-muted);
         }}
 
         .edu-meta {{
             font-family: var(--font-mono);
-            font-size: 9px;
+            font-size: 9.2px;
             color: var(--gold-main);
             font-weight: 600;
             display: flex;
@@ -487,21 +509,8 @@ html_luxury = f"""<!DOCTYPE html>
             gap: 4px;
         }}
 
-        .score-box {{
-            text-align: right;
-            padding-left: 12px;
-            border-left: 1px solid #ECE7DE;
-        }}
-
-        .score-label {{
-            font-size: 8px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 600;
-        }}
-
         .score-val {{
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--gold-main);
             line-height: 1;
@@ -515,20 +524,19 @@ html_luxury = f"""<!DOCTYPE html>
         }}
 
         .project-item {{
-            background: var(--bg-card);
+            background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 6px;
             padding: 8px 12px;
             display: flex;
             flex-direction: column;
             gap: 3px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
 
         .project-title {{
-            font-size: 11.2px;
+            font-size: 11.5px;
             font-weight: 700;
             color: var(--gold-main);
             display: flex;
@@ -537,9 +545,9 @@ html_luxury = f"""<!DOCTYPE html>
         }}
 
         .project-desc {{
-            font-size: 9.2px;
+            font-size: 9.5px;
             color: var(--text-dark);
-            line-height: 1.4;
+            line-height: 1.42;
         }}
 
         .tech-tags {{
@@ -551,11 +559,11 @@ html_luxury = f"""<!DOCTYPE html>
 
         .tech-tag {{
             font-family: var(--font-mono);
-            font-size: 7.8px;
+            font-size: 8px;
             font-weight: 600;
-            background: #F6F3EC;
+            background: transparent;
             color: var(--gold-deep);
-            border: 1px solid #E4DFD5;
+            border: 1px solid #E0DBD2;
             padding: 1.5px 6px;
             border-radius: 3px;
         }}
@@ -564,40 +572,35 @@ html_luxury = f"""<!DOCTYPE html>
         .strengths-grid {{
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 7px;
+            gap: 8px;
         }}
 
         .strength-card {{
-            background: var(--bg-card);
+            background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 6px;
-            padding: 7px 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            padding: 8px 10px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
 
         .strength-heading {{
-            font-size: 9.6px;
+            font-size: 10px;
             font-weight: 700;
             color: var(--text-heading);
             margin-bottom: 3.5px;
             display: flex;
             align-items: center;
-            gap: 4.5px;
-        }}
-
-        .strength-heading svg {{
-            color: var(--gold-main);
+            gap: 4px;
         }}
 
         .strength-item {{
             display: flex;
             align-items: flex-start;
-            gap: 4.5px;
-            font-size: 8.8px;
+            gap: 5px;
+            font-size: 9px;
             color: var(--text-dark);
-            line-height: 1.34;
+            line-height: 1.35;
             margin-bottom: 2px;
         }}
 
@@ -609,20 +612,19 @@ html_luxury = f"""<!DOCTYPE html>
 
         /* Technical Competencies Card (2 sub-columns) */
         .competencies-card {{
-            background: var(--bg-card);
+            background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 6px;
             padding: 8px 14px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
 
         .comp-col-title {{
-            font-size: 9.5px;
+            font-size: 9.8px;
             font-weight: 700;
             color: var(--text-heading);
             margin-bottom: 3px;
@@ -631,10 +633,10 @@ html_luxury = f"""<!DOCTYPE html>
         .comp-item {{
             display: flex;
             align-items: center;
-            gap: 4.5px;
-            font-size: 8.6px;
+            gap: 5px;
+            font-size: 8.8px;
             color: var(--text-dark);
-            line-height: 1.38;
+            line-height: 1.4;
         }}
 
         .comp-item svg {{
@@ -670,7 +672,6 @@ html_luxury = f"""<!DOCTYPE html>
                 padding: 0 !important;
                 page-break-inside: avoid !important;
                 page-break-after: avoid !important;
-                page-break-before: avoid !important;
                 break-inside: avoid !important;
                 break-after: avoid !important;
                 overflow: hidden !important;
@@ -731,6 +732,8 @@ html_luxury = f"""<!DOCTYPE html>
                 </div>
             </div>
 
+            <div class="sidebar-divider"></div>
+
             <!-- Core Skills -->
             <div class="sidebar-section">
                 <div class="sidebar-title">{svg_code} CORE SKILLS</div>
@@ -754,6 +757,8 @@ html_luxury = f"""<!DOCTYPE html>
                 </div>
             </div>
 
+            <div class="sidebar-divider"></div>
+
             <!-- Developer Tools -->
             <div class="sidebar-section">
                 <div class="sidebar-title">{svg_wrench} DEVELOPER TOOLS</div>
@@ -767,6 +772,8 @@ html_luxury = f"""<!DOCTYPE html>
                 </div>
             </div>
 
+            <div class="sidebar-divider"></div>
+
             <!-- Languages -->
             <div class="sidebar-section">
                 <div class="sidebar-title">{svg_lang} LANGUAGES</div>
@@ -776,8 +783,10 @@ html_luxury = f"""<!DOCTYPE html>
                 </div>
             </div>
 
+            <div class="sidebar-divider"></div>
+
             <!-- Interests & Hobbies -->
-            <div class="interests-card">
+            <div class="interests-row">
                 <div class="interest-item">
                     {svg_code}
                     <span>Coding</span>
@@ -804,6 +813,8 @@ html_luxury = f"""<!DOCTYPE html>
                 </p>
             </div>
 
+            <div class="main-gold-divider"></div>
+
             <!-- Education -->
             <div class="section-block">
                 <div class="section-header">{svg_edu} EDUCATION</div>
@@ -813,10 +824,7 @@ html_luxury = f"""<!DOCTYPE html>
                         <div class="edu-institution">Government Arts College &ndash; Tamil Nadu, India</div>
                         <div class="edu-meta">{svg_calendar} 2023 &ndash; 2026 (3rd Year Pursuing)</div>
                     </div>
-                    <div class="score-box">
-                        <div class="score-label">Aggregate</div>
-                        <div class="score-val">85%</div>
-                    </div>
+                    <div class="score-val">85%</div>
                 </div>
             </div>
 
@@ -898,9 +906,9 @@ html_luxury = f"""<!DOCTYPE html>
 
 # Write HTML file
 with open('resume/resume.html', 'w', encoding='utf-8') as f:
-    f.write(html_luxury)
+    f.write(html_exact)
 
-print('[OK] resume/resume.html generated with premium luxury layout!')
+print('[OK] resume/resume.html generated to match reference image!')
 
 # Generate PDF with Headless Chrome/Edge
 browser_candidates = [
