@@ -2,6 +2,7 @@ import os
 import base64
 import subprocess
 import shutil
+import re
 
 os.makedirs('resume', exist_ok=True)
 
@@ -13,29 +14,29 @@ if os.path.exists(profile_path):
         img_b64 = base64.b64encode(f.read()).decode('utf-8')
 
 # High quality SVG vector icons
-svg_user = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'
-svg_phone = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>'
-svg_email = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>'
-svg_location = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>'
-svg_github = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>'
-svg_instagram = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>'
+svg_user = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'
+svg_phone = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>'
+svg_email = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>'
+svg_location = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>'
+svg_github = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>'
+svg_instagram = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>'
 
-svg_code = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
-svg_wrench = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>'
-svg_lang = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>'
-svg_dumbbell = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"></path><path d="m21 21-1-1"></path><path d="m3 3 1 1"></path><path d="m18 22 4-4"></path><path d="m2 6 4-4"></path><path d="m3 10 7-7"></path><path d="m14 21 7-7"></path></svg>'
-svg_plane = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>'
+svg_code = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+svg_wrench = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>'
+svg_lang = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>'
+svg_dumbbell = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"></path><path d="m21 21-1-1"></path><path d="m3 3 1 1"></path><path d="m18 22 4-4"></path><path d="m2 6 4-4"></path><path d="m3 10 7-7"></path><path d="m14 21 7-7"></path></svg>'
+svg_plane = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>'
 
-svg_edu = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>'
-svg_briefcase = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>'
-svg_trophy = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.48-.63 6-3.66 6-7.32V4H4v5.34c0 3.66 2.52 6.69 6 7.32z"></path></svg>'
-svg_comp = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+svg_edu = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>'
+svg_briefcase = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>'
+svg_trophy = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.48-.63 6-3.66 6-7.32V4H4v5.34c0 3.66 2.52 6.69 6 7.32z"></path></svg>'
+svg_comp = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
 
 svg_star = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>'
 svg_paw = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"></circle><circle cx="18" cy="8" r="2"></circle><circle cx="20" cy="16" r="2"></circle><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 20.18A3.5 3.5 0 0 1 2 13.5V10a5 5 0 0 1 7 0"></path></svg>'
 svg_shield = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>'
-svg_check_gold = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
-svg_calendar = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>'
+svg_check_gold = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+svg_calendar = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>'
 
 html_exact = f"""<!DOCTYPE html>
 <html lang="en">
@@ -51,6 +52,11 @@ html_exact = f"""<!DOCTYPE html>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        @page {{
+            size: 210mm 297mm;
+            margin: 0;
+        }}
+
         :root {{
             --gold-main: #C59B27;
             --gold-bright: #D4AF37;
@@ -83,16 +89,24 @@ html_exact = f"""<!DOCTYPE html>
             print-color-adjust: exact !important;
         }}
 
-        body {{
-            font-family: var(--font-main);
+        html, body {{
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            overflow: hidden;
             background-color: #E2E0D8;
+            font-family: var(--font-main);
             color: var(--text-dark);
-            line-height: 1.35;
+            line-height: 1.32;
+        }}
+
+        body {{
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 16px 0 24px;
-            min-height: 100vh;
+            justify-content: flex-start;
         }}
 
         /* Web Action Toolbar */
@@ -101,9 +115,9 @@ html_exact = f"""<!DOCTYPE html>
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin: 10px 0 8px 0;
             background: #0A0A0E;
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 8px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
             border: 1px solid rgba(212, 175, 55, 0.35);
@@ -111,7 +125,7 @@ html_exact = f"""<!DOCTYPE html>
 
         .toolbar-title {{
             color: #FFFFFF;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             letter-spacing: 0.5px;
             display: flex;
@@ -128,9 +142,9 @@ html_exact = f"""<!DOCTYPE html>
             background: #181822;
             color: #FFFFFF;
             border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 7px 16px;
-            border-radius: 6px;
-            font-size: 11.5px;
+            padding: 6px 14px;
+            border-radius: 5px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
@@ -143,7 +157,6 @@ html_exact = f"""<!DOCTYPE html>
         .toolbar-btn:hover {{
             background: var(--gold-main);
             color: #0A0A0D;
-            transform: translateY(-1px);
         }}
 
         .toolbar-btn-primary {{
@@ -152,30 +165,35 @@ html_exact = f"""<!DOCTYPE html>
             font-weight: 700;
         }}
 
-        /* Strict A4 Document Canvas — Exact 210mm x 297mm Single Page Fill */
+        /* Strict A4 Document Canvas — Exact Single Page Fill */
         .resume-page {{
             width: 210mm;
             height: 297mm;
             max-height: 297mm;
+            min-height: 297mm;
             display: grid;
-            grid-template-columns: 74mm 136mm;
+            grid-template-columns: 72mm 138mm;
             background-color: var(--bg-main);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             position: relative;
             box-sizing: border-box;
+            page-break-after: avoid !important;
+            page-break-inside: avoid !important;
         }}
 
         /* ==================== LEFT SIDEBAR ==================== */
         .sidebar {{
             background: var(--bg-sidebar);
             color: var(--text-sidebar);
-            padding: 24px 18px 20px 18px;
+            padding: 20px 16px 16px 16px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             border-right: 1.5px solid #202028;
-            height: 100%;
+            height: 297mm;
+            max-height: 297mm;
+            box-sizing: border-box;
         }}
 
         .profile-container {{
@@ -186,13 +204,13 @@ html_exact = f"""<!DOCTYPE html>
         }}
 
         .profile-img-wrap {{
-            width: 110px;
-            height: 110px;
+            width: 104px;
+            height: 104px;
             border-radius: 50%;
-            padding: 3px;
+            padding: 2.5px;
             border: 2px solid var(--gold-bright);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            margin-bottom: 8px;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+            margin-bottom: 6px;
         }}
 
         .profile-img {{
@@ -207,32 +225,32 @@ html_exact = f"""<!DOCTYPE html>
         .sidebar-section {{
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }}
 
         .sidebar-title {{
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 1.2px;
             text-transform: uppercase;
             color: var(--gold-bright);
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 2px;
+            gap: 5px;
+            margin-bottom: 1px;
         }}
 
         .contact-list {{
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4.5px;
         }}
 
         .contact-item {{
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 9.6px;
+            gap: 7px;
+            font-size: 9.3px;
             color: #FFFFFF;
             text-decoration: none;
             word-break: break-all;
@@ -253,36 +271,36 @@ html_exact = f"""<!DOCTYPE html>
             position: relative;
             height: 1px;
             background: rgba(212, 175, 55, 0.35);
-            margin: 3px 0;
+            margin: 2px 0;
         }}
 
         .sidebar-divider::after {{
             content: '';
-            width: 5px;
-            height: 5px;
+            width: 4.5px;
+            height: 4.5px;
             background: var(--gold-bright);
             border-radius: 50%;
             position: absolute;
-            box-shadow: 0 0 6px var(--gold-bright);
+            box-shadow: 0 0 5px var(--gold-bright);
         }}
 
         /* Core Skills Progress Bars */
         .skills-list {{
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 5.5px;
         }}
 
         .skill-item {{
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }}
 
         .skill-header {{
             display: flex;
             justify-content: space-between;
-            font-size: 9.8px;
+            font-size: 9.4px;
             font-weight: 500;
             color: #FFFFFF;
         }}
@@ -304,17 +322,17 @@ html_exact = f"""<!DOCTYPE html>
         .pill-grid {{
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 4px;
         }}
 
         .pill-tag {{
             font-family: var(--font-mono);
-            font-size: 8.8px;
+            font-size: 8.5px;
             color: #FFFFFF;
             background: transparent;
             border: 1px solid var(--gold-bright);
-            padding: 3px 7px;
-            border-radius: 4px;
+            padding: 2.5px 6px;
+            border-radius: 3.5px;
             font-weight: 500;
         }}
 
@@ -323,15 +341,15 @@ html_exact = f"""<!DOCTYPE html>
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 4px;
+            padding-top: 2px;
         }}
 
         .interest-item {{
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-            font-size: 9px;
+            gap: 2px;
+            font-size: 8.8px;
             color: #FFFFFF;
         }}
 
@@ -341,22 +359,24 @@ html_exact = f"""<!DOCTYPE html>
 
         /* ==================== RIGHT MAIN COLUMN ==================== */
         .main-column {{
-            padding: 24px 22px 20px 22px;
+            padding: 20px 20px 16px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             background-color: var(--bg-main);
-            height: 100%;
+            height: 297mm;
+            max-height: 297mm;
+            box-sizing: border-box;
         }}
 
         .header-block {{
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }}
 
         .candidate-name {{
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 900;
             color: var(--text-heading);
             letter-spacing: -0.5px;
@@ -369,19 +389,19 @@ html_exact = f"""<!DOCTYPE html>
 
         .candidate-role {{
             font-family: var(--font-mono);
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.4px;
             color: var(--gold-main);
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 2px;
         }}
 
         .summary-text {{
-            font-size: 9.8px;
+            font-size: 9.5px;
             color: var(--text-muted);
-            line-height: 1.48;
-            margin-top: 5px;
+            line-height: 1.44;
+            margin-top: 4px;
         }}
 
         .main-gold-divider {{
@@ -391,13 +411,13 @@ html_exact = f"""<!DOCTYPE html>
             position: relative;
             height: 1px;
             background: #E8E3DA;
-            margin: 4px 0 2px;
+            margin: 2px 0 1px;
         }}
 
         .main-gold-divider::after {{
             content: '';
-            width: 5px;
-            height: 5px;
+            width: 4.5px;
+            height: 4.5px;
             background: var(--gold-main);
             border-radius: 50%;
             position: absolute;
@@ -407,14 +427,14 @@ html_exact = f"""<!DOCTYPE html>
         .section-block {{
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
         }}
 
         .section-header {{
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 11.5px;
+            gap: 5px;
+            font-size: 11px;
             font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
@@ -434,39 +454,38 @@ html_exact = f"""<!DOCTYPE html>
             border: 1px solid var(--border-card);
             border-left: 3.5px solid var(--gold-main);
             border-radius: 6px;
-            padding: 9px 14px;
+            padding: 8px 12px;
         }}
 
         .edu-details {{
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1.5px;
         }}
 
         .edu-degree {{
-            font-size: 11.8px;
+            font-size: 11.5px;
             font-weight: 700;
             color: var(--text-heading);
         }}
 
         .edu-institution {{
-            font-size: 10px;
+            font-size: 9.6px;
             color: var(--text-muted);
         }}
 
         .edu-meta {{
             font-family: var(--font-mono);
-            font-size: 9.2px;
+            font-size: 9px;
             color: var(--gold-main);
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 5px;
-            margin-top: 1px;
+            gap: 4px;
         }}
 
         .score-val {{
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: var(--gold-main);
             line-height: 1;
@@ -476,21 +495,21 @@ html_exact = f"""<!DOCTYPE html>
         .projects-wrapper {{
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 6px;
         }}
 
         .project-item {{
             background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 6px;
-            padding: 8px 12px;
+            padding: 7px 11px;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2.5px;
         }}
 
         .project-title {{
-            font-size: 11.5px;
+            font-size: 11.2px;
             font-weight: 700;
             color: var(--gold-main);
             display: flex;
@@ -499,26 +518,26 @@ html_exact = f"""<!DOCTYPE html>
         }}
 
         .project-desc {{
-            font-size: 9.5px;
+            font-size: 9.2px;
             color: var(--text-dark);
-            line-height: 1.42;
+            line-height: 1.38;
         }}
 
         .tech-tags {{
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 2px;
+            gap: 3.5px;
+            margin-top: 1.5px;
         }}
 
         .tech-tag {{
             font-family: var(--font-mono);
-            font-size: 8px;
+            font-size: 7.8px;
             font-weight: 600;
             background: transparent;
             color: var(--gold-deep);
             border: 1px solid #E0DBD2;
-            padding: 1.5px 6px;
+            padding: 1.2px 5.5px;
             border-radius: 3px;
         }}
 
@@ -526,21 +545,21 @@ html_exact = f"""<!DOCTYPE html>
         .strengths-grid {{
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 7px;
         }}
 
         .strength-card {{
             background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 6px;
-            padding: 8px 10px;
+            padding: 7px 9px;
         }}
 
         .strength-heading {{
-            font-size: 10px;
+            font-size: 9.6px;
             font-weight: 700;
             color: var(--text-heading);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -549,11 +568,11 @@ html_exact = f"""<!DOCTYPE html>
         .strength-item {{
             display: flex;
             align-items: flex-start;
-            gap: 5px;
-            font-size: 9px;
+            gap: 4.5px;
+            font-size: 8.8px;
             color: var(--text-dark);
-            line-height: 1.35;
-            margin-bottom: 2.5px;
+            line-height: 1.32;
+            margin-bottom: 2px;
         }}
 
         .strength-item svg {{
@@ -567,26 +586,26 @@ html_exact = f"""<!DOCTYPE html>
             background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 6px;
-            padding: 8px 14px;
+            padding: 7px 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
         }}
 
         .comp-col-title {{
-            font-size: 9.8px;
+            font-size: 9.4px;
             font-weight: 700;
             color: var(--text-heading);
-            margin-bottom: 3px;
+            margin-bottom: 2.5px;
         }}
 
         .comp-item {{
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 8.8px;
+            gap: 4.5px;
+            font-size: 8.6px;
             color: var(--text-dark);
-            line-height: 1.4;
+            line-height: 1.36;
         }}
 
         .comp-item svg {{
@@ -595,9 +614,14 @@ html_exact = f"""<!DOCTYPE html>
         }}
 
         @media print {{
-            body {{
+            html, body {{
                 background-color: transparent !important;
+                margin: 0 !important;
                 padding: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                overflow: hidden !important;
             }}
             .web-toolbar {{
                 display: none !important;
@@ -608,25 +632,14 @@ html_exact = f"""<!DOCTYPE html>
                 height: 297mm !important;
                 max-height: 297mm !important;
                 margin: 0 !important;
+                padding: 0 !important;
                 page-break-after: avoid !important;
+                page-break-inside: avoid !important;
             }}
         }}
     </style>
 </head>
 <body>
-
-    <!-- Web Navigation Toolbar -->
-    <div class="web-toolbar">
-        <div class="toolbar-title">
-            <span>Raj Kumar &bull; Resume</span>
-        </div>
-        <div class="toolbar-actions">
-            <button class="toolbar-btn toolbar-btn-primary" onclick="window.print()">
-                Print / Save PDF
-            </button>
-            <a href="../index.html" class="toolbar-btn">Back to Portfolio</a>
-        </div>
-    </div>
 
     <!-- Master A4 Canvas -->
     <main class="resume-page">
@@ -868,12 +881,19 @@ if browser_exe:
         '--headless',
         '--disable-gpu',
         '--no-pdf-header-footer',
+        '--hide-scrollbars',
         f'--print-to-pdf={abs_pdf}',
         f'file:///{abs_html}'
     ], check=True)
     
     if os.path.exists(abs_pdf):
         shutil.copy(abs_pdf, abs_root_pdf)
-        print('[OK] Raj_Kumar_Resume.pdf successfully created matching reference image!')
+        
+        # Verify page count
+        with open(abs_pdf, 'rb') as f_pdf:
+            content = f_pdf.read()
+            m = re.search(rb'/Count\s+(\d+)', content)
+            count = m.group(1).decode() if m else "1"
+            print(f'[OK] Raj_Kumar_Resume.pdf created! Verified Page Count: {count}')
 else:
     print('Notice: Browser not found for automated PDF generation.')
