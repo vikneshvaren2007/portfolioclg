@@ -283,9 +283,9 @@ img {
 }
 
 .nav-container {
-    max-width: 1280px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 clamp(20px, 3.5vw, 48px);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -403,15 +403,16 @@ img {
    -------------------------------------------------------------------------- */
 .hero-section {
     min-height: 100vh;
-    padding-top: 140px;
-    padding-bottom: 60px;
+    min-height: 100dvh;
+    padding-top: clamp(100px, 12vh, 140px);
+    padding-bottom: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 1280px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: clamp(20px, 3.5vw, 48px);
+    padding-right: clamp(20px, 3.5vw, 48px);
     position: relative;
     z-index: 2;
 }
@@ -420,7 +421,7 @@ img {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
-    gap: 48px;
+    gap: clamp(36px, 5vw, 64px);
     margin: auto 0;
 }
 
@@ -458,9 +459,9 @@ img {
 
 .hero-main-title {
     font-family: var(--font-serif);
-    font-size: clamp(52px, 7vw, 84px);
+    font-size: clamp(56px, 7.5vw, 92px);
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 1.02;
     letter-spacing: -0.5px;
     color: var(--ivory-warm);
 }
@@ -659,8 +660,8 @@ img {
 
 .portrait-stage {
     position: relative;
-    width: 380px;
-    height: 380px;
+    width: clamp(320px, 30vw, 420px);
+    height: clamp(320px, 30vw, 420px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -725,8 +726,8 @@ img {
 /* STRICT PERFECT CIRCULAR FRAME */
 .portrait-circle-frame {
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: clamp(260px, 25vw, 340px);
+    height: clamp(260px, 25vw, 340px);
     border-radius: 50%;
     overflow: hidden;
     background: var(--bg-surface);
@@ -883,9 +884,9 @@ img {
 }
 
 .editorial-container {
-    max-width: 1280px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 clamp(20px, 3.5vw, 48px);
 }
 
 .manifesto-grid {

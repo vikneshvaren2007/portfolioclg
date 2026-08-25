@@ -1,6 +1,6 @@
 /* ==========================================================================
    RAJ KUMAR — GRAND CINEMATIC & RECRUITER-FIRST INTRO ENGINE
-   Ultra-Luxury Full-Screen Quantum HUD, Recruiter Highlights & Mobile Graphics
+   Ultra-Luxury Full-Screen Quantum HUD, Recruiter Highlights & Mobile Architecture
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -11,13 +11,17 @@
     inset: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at center, #0B2923 0%, #071C18 45%, #020A08 100%);
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: radial-gradient(circle at center, #0B2B24 0%, #071C18 50%, #020A08 100%);
     z-index: 999999;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 0;
+    margin: 0;
     transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -32,51 +36,58 @@
 .loader-bg-grid {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     background-image: 
-        linear-gradient(rgba(184, 115, 74, 0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184, 115, 74, 0.07) 1px, transparent 1px);
-    background-size: 48px 48px;
+        linear-gradient(rgba(184, 115, 74, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 115, 74, 0.08) 1px, transparent 1px);
+    background-size: 54px 54px;
     background-position: center center;
-    opacity: 0.75;
+    opacity: 0.8;
     pointer-events: none;
     animation: gridDrift 30s linear infinite;
 }
 
 @keyframes gridDrift {
     0% { background-position: 0 0; }
-    100% { background-position: 48px 48px; }
+    100% { background-position: 54px 54px; }
 }
 
 .loader-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 20%, rgba(2, 10, 8, 0.88) 100%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 15%, rgba(2, 10, 8, 0.9) 100%);
     pointer-events: none;
 }
 
 .loader-ambient-aura {
     position: absolute;
-    width: 650px;
-    height: 650px;
+    width: clamp(450px, 60vw, 850px);
+    height: clamp(450px, 60vw, 850px);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(184, 115, 74, 0.18) 0%, rgba(14, 59, 50, 0.25) 45%, transparent 70%);
-    filter: blur(50px);
+    background: radial-gradient(circle, rgba(184, 115, 74, 0.22) 0%, rgba(14, 59, 50, 0.3) 45%, transparent 70%);
+    filter: blur(60px);
     pointer-events: none;
     animation: auraBreath 6s ease-in-out infinite alternate;
 }
 
 @keyframes auraBreath {
-    0% { transform: scale(0.85); opacity: 0.6; }
-    100% { transform: scale(1.15); opacity: 1; }
+    0% { transform: scale(0.85); opacity: 0.65; }
+    100% { transform: scale(1.18); opacity: 1; }
 }
 
-/* Grand Content Container */
+/* Grand Content Container - Fills Full Viewport Gracefully */
 .loader-container {
     width: 100%;
-    max-width: 920px;
-    padding: 36px 28px;
+    max-width: 1200px;
+    min-height: 90vh;
+    min-height: 90dvh;
+    padding: clamp(24px, 4vh, 48px) clamp(20px, 3.5vw, 44px);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 10;
@@ -90,28 +101,28 @@
     justify-content: space-between;
     align-items: center;
     font-family: var(--font-mono);
-    font-size: 11.5px;
-    letter-spacing: 1.5px;
+    font-size: clamp(11px, 1.1vw, 13px);
+    letter-spacing: 1.8px;
     color: var(--gray-muted);
-    margin-bottom: 26px;
+    margin-bottom: 20px;
     border-bottom: 1px solid rgba(184, 115, 74, 0.25);
     padding-bottom: 14px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
 }
 
 .hud-pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(14, 59, 50, 0.55);
-    border: 1px solid rgba(184, 115, 74, 0.4);
-    padding: 5px 12px;
+    background: rgba(14, 59, 50, 0.6);
+    border: 1px solid rgba(184, 115, 74, 0.45);
+    padding: 6px 14px;
     border-radius: 6px;
     color: var(--ivory-warm);
-    font-size: 11px;
-    font-weight: 500;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    font-size: clamp(10.5px, 1vw, 12px);
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .hud-pill i {
@@ -119,11 +130,11 @@
 }
 
 .hud-pulse {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: #10B981;
-    box-shadow: 0 0 12px #10B981;
+    box-shadow: 0 0 14px #10B981;
     animation: pulseGreen 1.4s ease-in-out infinite alternate;
 }
 
@@ -135,12 +146,12 @@
 /* Central Majestic Quantum Gyroscope System */
 .loader-gyro-system {
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: clamp(160px, 20vw, 240px);
+    height: clamp(160px, 20vw, 240px);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 22px;
+    margin: 12px 0 16px 0;
 }
 
 .gyro-ring {
@@ -151,54 +162,54 @@
 
 .gyro-ring-outer {
     inset: 0;
-    border: 2px dashed rgba(184, 115, 74, 0.55);
+    border: 2px dashed rgba(184, 115, 74, 0.6);
     animation: spinClockwise 18s linear infinite;
-    box-shadow: 0 0 25px rgba(184, 115, 74, 0.2);
+    box-shadow: 0 0 30px rgba(184, 115, 74, 0.25);
 }
 
 .gyro-ring-outer::before {
     content: '';
     position: absolute;
-    top: -5px;
+    top: -6px;
     left: 50%;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: var(--copper-light);
     border-radius: 50%;
-    box-shadow: 0 0 14px var(--copper-main), 0 0 28px var(--copper-main);
+    box-shadow: 0 0 16px var(--copper-main), 0 0 32px var(--copper-main);
 }
 
 .gyro-ring-outer::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -6px;
     right: 50%;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background: #10B981;
     border-radius: 50%;
-    box-shadow: 0 0 14px #10B981;
+    box-shadow: 0 0 16px #10B981;
 }
 
 .gyro-ring-mid {
-    inset: 18px;
-    border: 1.5px solid rgba(212, 154, 112, 0.4);
+    inset: clamp(14px, 2vw, 24px);
+    border: 2px solid rgba(212, 154, 112, 0.45);
     border-top-color: var(--copper-light);
     border-bottom-color: var(--copper-light);
     animation: spinCounter 10s linear infinite;
 }
 
 .gyro-ring-inner {
-    inset: 36px;
-    border: 1.5px dashed rgba(14, 59, 50, 0.9);
-    background: radial-gradient(circle, rgba(14, 59, 50, 0.6) 0%, transparent 85%);
+    inset: clamp(28px, 4vw, 48px);
+    border: 1.5px dashed rgba(14, 59, 50, 0.95);
+    background: radial-gradient(circle, rgba(14, 59, 50, 0.75) 0%, transparent 85%);
     animation: spinClockwise 7s linear infinite;
 }
 
 .gyro-ring-radar {
-    inset: 6px;
+    inset: 8px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0deg, transparent 290deg, rgba(184, 115, 74, 0.35) 360deg);
+    background: conic-gradient(from 0deg, transparent 0deg, transparent 290deg, rgba(184, 115, 74, 0.4) 360deg);
     animation: radarSweep 3s linear infinite;
 }
 
@@ -224,21 +235,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 84px;
-    height: 84px;
+    width: clamp(76px, 9.5vw, 110px);
+    height: clamp(76px, 9.5vw, 110px);
     border-radius: 50%;
-    background: rgba(7, 28, 24, 0.85);
-    border: 1.5px solid rgba(184, 115, 74, 0.5);
-    box-shadow: 0 0 20px rgba(184, 115, 74, 0.35), inset 0 0 15px rgba(14, 59, 50, 0.8);
+    background: rgba(7, 28, 24, 0.9);
+    border: 2px solid rgba(184, 115, 74, 0.6);
+    box-shadow: 0 0 28px rgba(184, 115, 74, 0.45), inset 0 0 20px rgba(14, 59, 50, 0.9);
 }
 
 .monogram-glitch-text {
     font-family: var(--font-serif);
-    font-size: 42px;
+    font-size: clamp(38px, 4.8vw, 54px);
     font-weight: 700;
     color: var(--ivory-warm);
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(184, 115, 74, 0.7);
+    text-shadow: 0 0 24px rgba(184, 115, 74, 0.75);
     position: relative;
     display: inline-block;
 }
@@ -250,7 +261,7 @@
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
     transform: skewX(-25deg);
     animation: shimmerSweep 2.8s infinite ease-in-out;
 }
@@ -263,86 +274,87 @@
 /* Hero Title & Subtitle */
 .loader-title-wrap {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     width: 100%;
 }
 
 .loader-role-subtitle {
     font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 4px;
+    font-size: clamp(11.5px, 1.2vw, 15px);
+    letter-spacing: 4.5px;
     color: var(--copper-light);
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     font-weight: 700;
 }
 
 .loader-full-name {
     font-family: var(--font-serif);
-    font-size: clamp(42px, 7.5vw, 68px);
+    font-size: clamp(44px, 7.5vw, 84px);
     font-weight: 700;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     background: linear-gradient(135deg, #FFFFFF 0%, var(--ivory-warm) 40%, var(--copper-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     line-height: 1.05;
     margin: 0 0 10px 0;
-    filter: drop-shadow(0 6px 30px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(0 8px 35px rgba(0, 0, 0, 0.85));
 }
 
 /* HR Credentials & Core Pillars Strip */
 .loader-hr-pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: clamp(12px, 1.8vw, 20px);
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .hr-pillar-card {
-    background: rgba(14, 43, 37, 0.6);
-    border: 1px solid rgba(184, 115, 74, 0.3);
-    border-radius: 8px;
-    padding: 10px 14px;
+    background: rgba(14, 43, 37, 0.65);
+    border: 1px solid rgba(184, 115, 74, 0.35);
+    border-radius: 10px;
+    padding: clamp(12px, 1.4vw, 18px) clamp(14px, 1.8vw, 22px);
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    gap: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
 .hr-pillar-card:hover {
     border-color: var(--copper-light);
-    background: rgba(14, 59, 50, 0.75);
-    transform: translateY(-2px);
+    background: rgba(14, 59, 50, 0.85);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(184, 115, 74, 0.3);
 }
 
 .pillar-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background: rgba(184, 115, 74, 0.2);
-    border: 1px solid rgba(184, 115, 74, 0.4);
+    width: clamp(34px, 3.2vw, 44px);
+    height: clamp(34px, 3.2vw, 44px);
+    border-radius: 8px;
+    background: rgba(184, 115, 74, 0.22);
+    border: 1px solid rgba(184, 115, 74, 0.45);
     color: var(--copper-light);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: clamp(14px, 1.4vw, 18px);
     flex-shrink: 0;
 }
 
 .pillar-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     text-align: left;
 }
 
 .pillar-title {
     font-family: var(--font-mono);
-    font-size: 10.5px;
+    font-size: clamp(11px, 1.1vw, 13px);
     font-weight: 700;
     color: var(--ivory-warm);
     letter-spacing: 0.8px;
@@ -350,9 +362,9 @@
 }
 
 .pillar-desc {
-    font-size: 10px;
+    font-size: clamp(10.5px, 1vw, 12px);
     color: var(--gray-muted);
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 /* Telemetry Status Feed & Big Digital Percentage Matrix */
@@ -363,21 +375,21 @@
     align-items: center;
     margin-bottom: 12px;
     font-family: var(--font-mono);
-    gap: 12px;
+    gap: 14px;
 }
 
 .terminal-status-feed {
-    font-size: 12px;
+    font-size: clamp(11.5px, 1.1vw, 13.5px);
     color: #6EE7B7;
     letter-spacing: 1.2px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-weight: 600;
-    background: rgba(7, 28, 24, 0.75);
-    padding: 6px 14px;
-    border-radius: 6px;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: rgba(7, 28, 24, 0.8);
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(16, 185, 129, 0.35);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -386,27 +398,27 @@
 .matrix-counter-group {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
 }
 
 .digital-percentage-readout {
-    font-size: 26px;
+    font-size: clamp(24px, 3vw, 36px);
     font-weight: 800;
     color: var(--copper-light);
     letter-spacing: 1.5px;
-    text-shadow: 0 0 16px var(--copper-glow);
+    text-shadow: 0 0 18px var(--copper-glow);
 }
 
 /* Frequency Equalizer Bars */
 .frequency-equalizer {
     display: inline-flex;
     align-items: flex-end;
-    gap: 3.5px;
-    height: 18px;
+    gap: 4px;
+    height: 20px;
 }
 
 .eq-bar {
-    width: 3.5px;
+    width: 4px;
     background: var(--copper-main);
     border-radius: 2px;
     animation: eqBounce 1s ease-in-out infinite alternate;
@@ -429,14 +441,14 @@
 /* Laser Progress Bar Track */
 .laser-progress-track {
     width: 100%;
-    height: 5px;
+    height: 6px;
     background: rgba(243, 239, 229, 0.08);
-    border-radius: 6px;
+    border-radius: 8px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 24px;
-    border: 1px solid rgba(184, 115, 74, 0.35);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 22px;
+    border: 1px solid rgba(184, 115, 74, 0.4);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .laser-progress-fill {
@@ -446,8 +458,8 @@
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, #7D4829 0%, var(--copper-main) 50%, #FFFFFF 100%);
-    box-shadow: 0 0 16px var(--copper-light), 0 0 32px var(--copper-main);
-    border-radius: 6px;
+    box-shadow: 0 0 18px var(--copper-light), 0 0 36px var(--copper-main);
+    border-radius: 8px;
     transition: width 0.06s linear;
 }
 
@@ -456,10 +468,10 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 20px;
+    width: 24px;
     height: 100%;
     background: #FFFFFF;
-    box-shadow: 0 0 12px #FFFFFF, 0 0 24px var(--copper-light);
+    box-shadow: 0 0 14px #FFFFFF, 0 0 28px var(--copper-light);
 }
 
 /* Loader Footer Controls */
@@ -468,37 +480,37 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
 }
 
 .hud-sys-label {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--gray-dim);
+    font-size: clamp(11px, 1.1vw, 13px);
+    letter-spacing: 1.8px;
+    color: var(--gray-muted);
 }
 
 .cinematic-enter-btn {
     background: linear-gradient(135deg, var(--copper-main) 0%, #964e28 100%);
     color: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 11px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: clamp(11px, 1.4vh, 16px) clamp(22px, 2.5vw, 36px);
     border-radius: 8px;
     font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 1.8px;
+    font-size: clamp(11.5px, 1.1vw, 14px);
+    letter-spacing: 2px;
     font-weight: 700;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     transition: all 0.25s ease;
-    box-shadow: 0 4px 20px var(--copper-glow);
+    box-shadow: 0 6px 24px var(--copper-glow);
 }
 
 .cinematic-enter-btn:hover {
     background: linear-gradient(135deg, var(--copper-light) 0%, var(--copper-main) 100%);
-    box-shadow: 0 0 25px var(--copper-glow);
+    box-shadow: 0 0 32px var(--copper-glow);
     transform: translateY(-2px);
 }
 
@@ -585,9 +597,48 @@
         gap: 8px;
     }
 
+    .portrait-stage {
+        width: 300px;
+        height: 300px;
+    }
+
+    .portrait-circle-frame {
+        width: 230px;
+        height: 230px;
+        box-shadow: 0 0 35px rgba(184, 115, 74, 0.4), 0 0 70px rgba(14, 59, 50, 0.6);
+    }
+}
+
+@media (max-width: 600px) {
+    .loader-container {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 24px 18px;
+        justify-content: space-between;
+    }
+
+    .loader-telemetry-hud {
+        margin-bottom: 12px;
+        justify-content: center;
+        gap: 6px;
+        border-bottom-color: rgba(184, 115, 74, 0.2);
+        padding-bottom: 10px;
+    }
+
+    .hud-pill {
+        font-size: 9.5px;
+        padding: 4px 9px;
+        letter-spacing: 0.5px;
+    }
+
+    .hud-pill:nth-child(3) {
+        display: none;
+    }
+
     .loader-gyro-system {
         width: 150px;
         height: 150px;
+        margin: 6px 0 12px 0;
     }
 
     .loader-hologram-monogram {
@@ -599,89 +650,39 @@
         font-size: 36px;
     }
 
-    .portrait-stage {
-        width: 270px;
-        height: 270px;
-    }
-
-    .portrait-circle-frame {
-        width: 210px;
-        height: 210px;
-        box-shadow: 0 0 35px rgba(184, 115, 74, 0.4), 0 0 70px rgba(14, 59, 50, 0.6);
-    }
-}
-
-@media (max-width: 600px) {
-    .loader-container {
-        padding: 20px 16px;
-    }
-
-    .loader-telemetry-hud {
-        margin-bottom: 16px;
-        justify-content: center;
-        gap: 6px;
-        border-bottom-color: rgba(184, 115, 74, 0.18);
-        padding-bottom: 10px;
-    }
-
-    .hud-pill {
-        font-size: 9px;
-        padding: 3.5px 8px;
-        letter-spacing: 0.5px;
-    }
-
-    .hud-pill:nth-child(3) {
-        display: none; /* Hide 3rd pill on narrow mobile to keep header clean & symmetrical */
-    }
-
-    .loader-gyro-system {
-        width: 140px;
-        height: 140px;
-        margin-bottom: 16px;
-    }
-
-    .loader-hologram-monogram {
-        width: 68px;
-        height: 68px;
-    }
-
-    .monogram-glitch-text {
-        font-size: 34px;
-    }
-
     .loader-role-subtitle {
-        font-size: 10px;
-        letter-spacing: 2px;
-    }
-
-    .loader-full-name {
-        font-size: 36px;
+        font-size: 10.5px;
         letter-spacing: 2.5px;
     }
 
+    .loader-full-name {
+        font-size: 38px;
+        letter-spacing: 3px;
+    }
+
     .loader-hr-pillars {
-        display: none; /* Keep mobile clean and focused on name, animation & progress */
+        display: none;
     }
 
     .loader-telemetry-matrix {
         flex-direction: column;
         align-items: center;
-        gap: 8px;
-    }
-
-    .terminal-status-feed {
-        font-size: 10px;
-        width: 100%;
-        justify-content: center;
-        padding: 5px 10px;
-    }
-
-    .matrix-counter-group {
         gap: 10px;
     }
 
+    .terminal-status-feed {
+        font-size: 11px;
+        width: 100%;
+        justify-content: center;
+        padding: 6px 12px;
+    }
+
+    .matrix-counter-group {
+        gap: 12px;
+    }
+
     .digital-percentage-readout {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .hud-sys-label {
@@ -690,12 +691,13 @@
 
     .loader-footer-controls {
         justify-content: center;
+        width: 100%;
     }
 
     .cinematic-enter-btn {
         width: 100%;
         justify-content: center;
-        padding: 10px 18px;
-        font-size: 11px;
+        padding: 12px 20px;
+        font-size: 12px;
     }
 }
