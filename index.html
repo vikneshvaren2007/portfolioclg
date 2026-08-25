@@ -21,8 +21,9 @@
     <!-- FontAwesome 6.5 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Main Stylesheet -->
+    <!-- Main Stylesheet & Cinematic Graphics Layer -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cinematic.css">
 </head>
 
 <body>
@@ -47,48 +48,62 @@
     <div class="copper-progress-line" id="scrollProgress"></div>
 
     <!-- =====================================================
-         1. CINEMATIC STARTUP LOADER (REDESIGNED)
+         1. HYPER-CINEMATIC QUANTUM GYROSCOPE STARTUP LOADER
     ===================================================== -->
     <div id="intro" class="cinematic-loader" aria-hidden="true">
-        <div class="loader-bg-overlay"></div>
-        <div class="loader-inner">
-            <!-- Top Telemetry -->
-            <div class="loader-meta-top">
-                <span class="mono-code"><i class="fa-solid fa-code"></i> PORTFOLIO // 2026</span>
-                <span class="mono-code"><i class="fa-solid fa-cube"></i> FULL-STACK &bull; AI</span>
+        <div class="loader-bg-grid"></div>
+        <div class="loader-vignette"></div>
+        <div class="loader-container">
+            <!-- Telemetry Header HUD -->
+            <div class="loader-telemetry-hud">
+                <span class="hud-pill"><span class="hud-pulse"></span> SYS.CORE // LIVE</span>
+                <span class="hud-pill"><i class="fa-solid fa-microchip"></i> FULL-STACK &bull; AI</span>
             </div>
 
-            <!-- Center Geometric Orbital Graphics & Monogram -->
-            <div class="loader-center">
-                <div class="loader-orbit-system">
-                    <div class="orbit-ring orbit-ring-1"></div>
-                    <div class="orbit-ring orbit-ring-2">
-                        <span class="orbit-sparkle"></span>
-                    </div>
-                    <div class="orbit-ring orbit-ring-3"></div>
-                    <div class="loader-monogram-badge">
-                        <span class="loader-monogram-text">RK<span class="copper-dot">.</span></span>
-                    </div>
-                </div>
-
-                <div class="loader-text-group">
-                    <span class="loader-sub">FULL-STACK ENGINEERING &bull; AI SYSTEMS</span>
-                    <h1 class="loader-title">RAJ KUMAR</h1>
-                </div>
-
-                <div class="loader-copper-track">
-                    <div class="loader-copper-fill" id="loaderFill"></div>
+            <!-- Central Quantum Gyroscope System & Monogram -->
+            <div class="loader-gyro-system">
+                <div class="gyro-ring gyro-ring-outer"></div>
+                <div class="gyro-ring gyro-ring-mid"></div>
+                <div class="gyro-ring gyro-ring-inner"></div>
+                <div class="gyro-ring gyro-ring-radar"></div>
+                <div class="loader-hologram-monogram">
+                    <span class="monogram-glitch-text">RK<span class="copper-dot">.</span></span>
                 </div>
             </div>
 
-            <!-- Bottom Status Indicator & Skip Button -->
-            <div class="loader-meta-bottom">
-                <div class="loader-status-wrapper">
-                    <span class="loader-pulse-dot"></span>
-                    <span class="loader-status" id="loaderStatusText">INITIALIZING...</span>
+            <!-- Title & Architecture Subtitle -->
+            <div class="loader-title-wrap">
+                <span class="loader-role-subtitle">FULL-STACK ENGINEERING &bull; AI SYSTEMS</span>
+                <h1 class="loader-full-name">RAJ KUMAR</h1>
+            </div>
+
+            <!-- Live Dynamic Status Feed & Precision Percentage Counter -->
+            <div class="loader-telemetry-matrix">
+                <div class="terminal-status-feed" id="loaderStatusFeed">
+                    <span class="hud-pulse"></span> INITIALIZING QUANTUM MATRIX...
                 </div>
-                <button class="skip-btn" id="skipLoaderBtn" type="button">
-                    <span>ENTER SITE</span>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="frequency-equalizer">
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                        <span class="eq-bar"></span>
+                    </div>
+                    <span class="digital-percentage-readout" id="loaderPercentText">00%</span>
+                </div>
+            </div>
+
+            <!-- High-Energy Laser Progress Track -->
+            <div class="laser-progress-track">
+                <div class="laser-progress-fill" id="loaderProgressFill"></div>
+            </div>
+
+            <!-- Bottom HUD Status & Enter Button -->
+            <div class="loader-footer-controls">
+                <span class="hud-sys-label">VERSION // 2026.4 &bull; SECURE</span>
+                <button class="cinematic-enter-btn" id="skipLoaderBtn" type="button">
+                    <span>ENTER PORTFOLIO</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -1190,8 +1205,26 @@
         <span id="toastMessage">Copied to clipboard!</span>
     </div>
 
-    <!-- Script Engine -->
+    <!-- Mobile Floating Action Command Dock -->
+    <div class="mobile-action-dock" id="mobileActionDock">
+        <a href="resume/Raj_Kumar_Resume.pdf" download="Raj_Kumar_Resume.pdf" class="dock-btn dock-btn-primary" onclick="handleResumeDownload(event)" title="Download Resume">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>RESUME</span>
+        </a>
+        <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="dock-btn-icon" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919445437069" class="dock-btn-icon" title="Call Raj Kumar">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="mailto:vikneshvaren2@gmail.com" class="dock-btn-icon" title="Email Raj Kumar">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    </div>
+
+    <!-- Script Engines: Core Engine & Cinematic Interactivity Engine -->
     <script src="script.js"></script>
+    <script src="cinematic.js"></script>
 </body>
 
 </html>

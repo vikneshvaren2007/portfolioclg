@@ -142,67 +142,10 @@ function initCinematicCanvas() {
 }
 
 /* --------------------------------------------------------------------------
-   2. CINEMATIC STARTUP LOADER (RK MONOGRAM + GEOMETRIC TELEMETRY)
+   2. CINEMATIC STARTUP LOADER (DELEGATED TO CINEMATIC.JS ENGINE)
    -------------------------------------------------------------------------- */
 function initLoader() {
-    const intro = document.getElementById("intro");
-    const loaderFill = document.getElementById("loaderFill");
-    const statusText = document.getElementById("loaderStatusText");
-    const skipBtn = document.getElementById("skipLoaderBtn");
-
-    if (!intro) return;
-
-    // Check if session has already viewed intro
-    const hasViewed = sessionStorage.getItem("raj_kumar_portfolio_intro_seen");
-    if (hasViewed) {
-        intro.classList.add("loader-hidden");
-        document.body.classList.add("loaded");
-        return;
-    }
-
-    const messages = [
-        "INITIALIZING...",
-        "LOADING EXPERIENCE...",
-        "BUILDING DIGITAL SPACE...",
-        "WELCOME."
-    ];
-
-    let progress = 0;
-
-    function updateProgress(val) {
-        progress = Math.min(val, 100);
-        if (loaderFill) {
-            loaderFill.style.width = `${progress}%`;
-        }
-        if (statusText) {
-            const msgIndex = Math.min(Math.floor((progress / 100) * messages.length), messages.length - 1);
-            statusText.textContent = messages[msgIndex];
-        }
-    }
-
-    let loaderInterval = setInterval(() => {
-        const increment = Math.floor(Math.random() * 8) + 6;
-        progress += increment;
-
-        if (progress >= 100) {
-            updateProgress(100);
-            clearInterval(loaderInterval);
-            setTimeout(dismissLoader, 350);
-        } else {
-            updateProgress(progress);
-        }
-    }, 40);
-
-    function dismissLoader() {
-        clearInterval(loaderInterval);
-        intro.classList.add("loader-hidden");
-        document.body.classList.add("loaded");
-        sessionStorage.setItem("raj_kumar_portfolio_intro_seen", "true");
-    }
-
-    if (skipBtn) {
-        skipBtn.addEventListener("click", dismissLoader);
-    }
+    // Controlled by cinematic.js for high-precision quantum telemetry & equalizer FX
 }
 
 /* --------------------------------------------------------------------------
