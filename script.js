@@ -1,26 +1,71 @@
 /* ==========================================================================
-   RAJ KUMAR — ULTRA-PREMIUM CINEMATIC DEVELOPER PORTFOLIO ENGINE
-   Author: Raj Kumar (B.Sc. Computer Science • Full-Stack Developer • AI)
+   RAJKUMAR — ULTRA-LUXURY OBSIDIAN & ROYAL GOLD PORTFOLIO ENGINE
+   Interactivity, Canvas Particles & Meteors, 3D Hero Parallax, Counters & Modals
    ========================================================================== */
 
 // ==========================================================================
-// CONFIGURABLE PROJECT DEPLOYMENT URLS (Easily replaceable)
+// CONFIGURABLE PROJECT DEPLOYMENT URLS
 // ==========================================================================
-const PET_NOVA_URL = "http://10.31.236.34:5000/"; // <-- Replace with your live PET NOVA URL
-const ROYAL_ROSE_MILK_URL = "https://royal-rosegunicorn-app-ap.onrender.com"; // Live Render deployment
+const PET_NEXA_URL = "https://pet-nexa.onrender.com";
+const PET_NOVA_URL = PET_NEXA_URL;
+const ROYAL_ROSE_MILK_URL = "https://royal-rosegunicorn-app-ap.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
+    initThemeToggle();
     initCinematicCanvas();
-    initLoader();
     initNavbar();
     initScrollProgress();
     initCustomCursor();
     initScrollObserver();
+    initHeroParallaxTilt();
+    initCard3DTiltAndSpotlight();
+    initStatCounterAnimations();
     applyProjectUrls();
+    initLaptopDefaults();
 });
 
 /* --------------------------------------------------------------------------
-   1. CINEMATIC BACKGROUND CANVAS (PARTICLES & CONSTELLATION MESH)
+   0. BRIGHT / DARK OBSIDIAN MODE THEME SWITCHER
+   -------------------------------------------------------------------------- */
+function initThemeToggle() {
+    const themeBtn = document.getElementById("themeToggleBtn");
+    const savedTheme = localStorage.getItem("raj_portfolio_theme") || "dark";
+
+    function applyTheme(theme) {
+        if (theme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+            document.body.classList.add("theme-light");
+            if (themeBtn) {
+                const label = themeBtn.querySelector(".theme-toggle-text");
+                if (label) label.textContent = "DARK";
+                themeBtn.setAttribute("title", "Switch to Dark Obsidian Mode");
+            }
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+            document.body.classList.remove("theme-light");
+            if (themeBtn) {
+                const label = themeBtn.querySelector(".theme-toggle-text");
+                if (label) label.textContent = "BRIGHT";
+                themeBtn.setAttribute("title", "Switch to Bright Mode");
+            }
+        }
+    }
+
+    applyTheme(savedTheme);
+
+    if (themeBtn) {
+        themeBtn.addEventListener("click", () => {
+            const currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            applyTheme(newTheme);
+            localStorage.setItem("raj_portfolio_theme", newTheme);
+            showToast(newTheme === "light" ? "Switched to Bright Alabaster Gold ☀️" : "Switched to Dark Obsidian Gold 🌙");
+        });
+    }
+}
+
+/* --------------------------------------------------------------------------
+   1. CINEMATIC GOLD PARTICLES & METEOR SHOOTING STAR CANVAS
    -------------------------------------------------------------------------- */
 function initCinematicCanvas() {
     const canvas = document.getElementById("cinematicCanvas");
@@ -29,8 +74,9 @@ function initCinematicCanvas() {
     const ctx = canvas.getContext("2d");
     let width, height;
     let particles = [];
+    let shootingStars = [];
     let animationFrameId;
-    let mouse = { x: null, y: null, radius: 140 };
+    let mouse = { x: null, y: null, radius: 160 };
 
     function resize() {
         width = canvas.width = window.innerWidth;
@@ -49,18 +95,18 @@ function initCinematicCanvas() {
         mouse.y = null;
     });
 
-    const particleCount = Math.min(Math.floor(window.innerWidth / 22), 65);
+    const particleCount = Math.min(Math.floor(window.innerWidth / 20), 75);
 
     class Particle {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.size = Math.random() * 2 + 0.8;
+            this.size = Math.random() * 2.2 + 0.8;
             this.baseX = this.x;
             this.baseY = this.y;
-            this.vx = (Math.random() - 0.5) * 0.45;
-            this.vy = (Math.random() - 0.5) * 0.45;
-            this.color = Math.random() > 0.4 ? "rgba(212, 154, 112, 0.45)" : "rgba(163, 216, 200, 0.35)";
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.color = Math.random() > 0.35 ? "rgba(212, 175, 55, 0.5)" : "rgba(243, 229, 171, 0.35)";
         }
 
         update() {
@@ -72,15 +118,14 @@ function initCinematicCanvas() {
             if (this.y < 0) this.y = height;
             if (this.y > height) this.y = 0;
 
-            // Mouse proximity interaction
             if (mouse.x !== null && mouse.y !== null) {
                 const dx = mouse.x - this.x;
                 const dy = mouse.y - this.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < mouse.radius) {
                     const force = (mouse.radius - dist) / mouse.radius;
-                    const fx = (dx / dist) * force * 1.5;
-                    const fy = (dy / dist) * force * 1.5;
+                    const fx = (dx / dist) * force * 1.8;
+                    const fy = (dy / dist) * force * 1.8;
                     this.x -= fx;
                     this.y -= fy;
                 }
@@ -88,10 +133,54 @@ function initCinematicCanvas() {
         }
 
         draw() {
+            const isLight = document.documentElement.getAttribute("data-theme") === "light";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
+            ctx.fillStyle = isLight ? "rgba(184, 134, 11, 0.5)" : this.color;
             ctx.fill();
+        }
+    }
+
+    class ShootingStar {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * width;
+            this.y = 0;
+            this.len = Math.random() * 90 + 50;
+            this.speed = Math.random() * 8 + 6;
+            this.size = Math.random() * 1.5 + 0.8;
+            this.angle = Math.PI / 4;
+            this.opacity = 1;
+            this.active = true;
+        }
+
+        update() {
+            this.x += this.speed * Math.cos(this.angle);
+            this.y += this.speed * Math.sin(this.angle);
+            this.opacity -= 0.012;
+            if (this.opacity <= 0 || this.x > width || this.y > height) {
+                this.active = false;
+            }
+        }
+
+        draw() {
+            if (!this.active) return;
+            const tailX = this.x - this.len * Math.cos(this.angle);
+            const tailY = this.y - this.len * Math.sin(this.angle);
+
+            const gradient = ctx.createLinearGradient(tailX, tailY, this.x, this.y);
+            gradient.addColorStop(0, "rgba(212, 175, 55, 0)");
+            gradient.addColorStop(1, `rgba(255, 235, 175, ${this.opacity})`);
+
+            ctx.beginPath();
+            ctx.moveTo(tailX, tailY);
+            ctx.lineTo(this.x, this.y);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = this.size;
+            ctx.stroke();
         }
     }
 
@@ -99,8 +188,17 @@ function initCinematicCanvas() {
         particles.push(new Particle());
     }
 
+    let lastStarTime = Date.now();
+
     function animate() {
         ctx.clearRect(0, 0, width, height);
+        const isLight = document.documentElement.getAttribute("data-theme") === "light";
+
+        // Spawn meteor shooting stars periodically
+        if (Date.now() - lastStarTime > 4000 && Math.random() > 0.4) {
+            shootingStars.push(new ShootingStar());
+            lastStarTime = Date.now();
+        }
 
         // Draw connections
         for (let a = 0; a < particles.length; a++) {
@@ -109,10 +207,10 @@ function initCinematicCanvas() {
                 const dy = particles[a].y - particles[b].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 130) {
-                    const opacity = (1 - dist / 130) * 0.15;
+                if (dist < 135) {
+                    const opacity = (1 - dist / 135) * (isLight ? 0.25 : 0.18);
                     ctx.beginPath();
-                    ctx.strokeStyle = `rgba(184, 115, 74, ${opacity})`;
+                    ctx.strokeStyle = isLight ? `rgba(184, 134, 11, ${opacity})` : `rgba(212, 175, 55, ${opacity})`;
                     ctx.lineWidth = 0.7;
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(particles[b].x, particles[b].y);
@@ -121,17 +219,23 @@ function initCinematicCanvas() {
             }
         }
 
-        // Update and draw particles
+        // Update particles
         particles.forEach(p => {
             p.update();
             p.draw();
+        });
+
+        // Update shooting stars
+        shootingStars = shootingStars.filter(s => s.active);
+        shootingStars.forEach(s => {
+            s.update();
+            s.draw();
         });
 
         animationFrameId = requestAnimationFrame(animate);
     }
     animate();
 
-    // Pause canvas if document is hidden to conserve performance
     document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
             cancelAnimationFrame(animationFrameId);
@@ -142,14 +246,113 @@ function initCinematicCanvas() {
 }
 
 /* --------------------------------------------------------------------------
-   2. CINEMATIC STARTUP LOADER (DELEGATED TO CINEMATIC.JS ENGINE)
+   2. HERO PORTRAIT 3D MAGNETIC PARALLAX & TILT PHYSICS
    -------------------------------------------------------------------------- */
-function initLoader() {
-    // Controlled by cinematic.js for high-precision quantum telemetry & equalizer FX
+function initHeroParallaxTilt() {
+    const stage = document.getElementById("portraitStage");
+    if (!stage) return;
+
+    window.addEventListener("mousemove", (e) => {
+        if (window.innerWidth < 992) return;
+        const rect = stage.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
+        const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
+
+        const tiltX = deltaY * -12;
+        const tiltY = deltaX * 12;
+
+        stage.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+
+        // Parallax inner photo and chips
+        const img = stage.querySelector(".portrait-hero-img");
+        if (img) img.style.transform = `translateX(${deltaX * -10}px) translateY(${deltaY * -10}px) scale(1.04)`;
+
+        const chips = stage.querySelectorAll(".hero-floating-chip");
+        chips.forEach((chip, i) => {
+            const factor = (i + 1) * 8;
+            chip.style.transform = `translateX(${deltaX * factor}px) translateY(${deltaY * factor}px)`;
+        });
+    });
+
+    stage.addEventListener("mouseleave", () => {
+        stage.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+        const img = stage.querySelector(".portrait-hero-img");
+        if (img) img.style.transform = "translateX(0) translateY(0) scale(1)";
+        const chips = stage.querySelectorAll(".hero-floating-chip");
+        chips.forEach(chip => chip.style.transform = "");
+    });
 }
 
 /* --------------------------------------------------------------------------
-   3. MINIMALIST STICKY NAVBAR & MOBILE DRAWER
+   3. 3D CARD TILT & SPOTLIGHT FOLLOWER PHYSICS
+   -------------------------------------------------------------------------- */
+function initCard3DTiltAndSpotlight() {
+    const cards = document.querySelectorAll(".stat-box-card, .gold-skill-badge, .luxury-work-banner-card");
+
+    cards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate tilt angle
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(212, 175, 55, 0.12) 0%, rgba(18, 18, 24, 0.85) 60%)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "";
+            card.style.background = "";
+        });
+    });
+}
+
+/* --------------------------------------------------------------------------
+   4. ANIMATED STAT NUMBER COUNTERS (TRIGGERED ON SCROLL)
+   -------------------------------------------------------------------------- */
+function initStatCounterAnimations() {
+    const counters = document.querySelectorAll(".counter-number");
+    let animated = false;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute("data-target"), 10);
+                    const suffix = counter.getAttribute("data-suffix") || "";
+                    let current = 0;
+                    const increment = Math.max(Math.floor(target / 40), 1);
+                    const duration = 1200;
+                    const stepTime = Math.max(Math.floor(duration / (target / increment || 1)), 20);
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = `${current}${suffix}`;
+                    }, stepTime);
+                });
+            }
+        });
+    }, { threshold: 0.2 });
+
+    const statsGrid = document.querySelector(".about-stats-2x2");
+    if (statsGrid) observer.observe(statsGrid);
+}
+
+/* --------------------------------------------------------------------------
+   5. STICKY NAVBAR & MOBILE DRAWER
    -------------------------------------------------------------------------- */
 function initNavbar() {
     const navbar = document.getElementById("navbar");
@@ -177,7 +380,6 @@ function initNavbar() {
         });
     }
 
-    // Scrollspy for active navigation state
     const sections = document.querySelectorAll("section[id]");
     window.addEventListener("scroll", () => {
         let current = "";
@@ -201,7 +403,7 @@ function initNavbar() {
 }
 
 /* --------------------------------------------------------------------------
-   4. SCROLL PROGRESS INDICATOR
+   6. SCROLL PROGRESS INDICATOR
    -------------------------------------------------------------------------- */
 function initScrollProgress() {
     const progressLine = document.getElementById("scrollProgress");
@@ -216,12 +418,11 @@ function initScrollProgress() {
 }
 
 /* --------------------------------------------------------------------------
-   5. DESKTOP CONTEXT CURSOR
+   7. DESKTOP CONTEXT CURSOR
    -------------------------------------------------------------------------- */
 function initCustomCursor() {
     const cursorDot = document.getElementById("cursorDot");
     const cursorRing = document.getElementById("cursorRing");
-    const cursorLabel = document.getElementById("cursorLabel");
 
     if (!cursorDot || !cursorRing) return;
 
@@ -249,35 +450,21 @@ function initCustomCursor() {
     }
     renderRing();
 
-    // Hover expansions on project media
-    const projectFrames = document.querySelectorAll(".project-media-wrapper");
-    projectFrames.forEach(frame => {
-        frame.addEventListener("mouseenter", () => {
-            cursorRing.classList.add("cursor-project");
-            if (cursorLabel) cursorLabel.textContent = "VIEW ↗";
-        });
-        frame.addEventListener("mouseleave", () => {
-            cursorRing.classList.remove("cursor-project");
-            if (cursorLabel) cursorLabel.textContent = "";
-        });
-    });
-
-    // General interactive hover expansions
     const interactives = document.querySelectorAll(
-        "a, button, input, select, .skill-card, .stat-card, .channel-card-row, .timeline-card, .pillar-item"
+        "a, button, input, select, .gold-skill-badge, .stat-box-card, .channel-card-row, .timeline-card, .luxury-work-banner-card, .hero-floating-chip"
     );
     interactives.forEach(el => {
-        el.addEventListener("mouseenter", () => cursorRing.classList.add("cursor-hover"));
-        el.addEventListener("mouseleave", () => cursorRing.classList.remove("cursor-hover"));
+        el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+        el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
     });
 }
 
 /* --------------------------------------------------------------------------
-   6. SCROLL REVEAL OBSERVER
+   8. SCROLL REVEAL OBSERVER
    -------------------------------------------------------------------------- */
 function initScrollObserver() {
     const targets = document.querySelectorAll(
-        ".manifesto-content-col, .about-stats-grid, .about-editorial-grid, .skill-card, .project-showcase-entry, .timeline-row, .contact-dramatic-layout"
+        ".about-split-layout, .skills-cards-grid, .selected-works-layout, .timeline-row, .contact-dramatic-layout"
     );
 
     const observer = new IntersectionObserver((entries) => {
@@ -299,432 +486,419 @@ function initScrollObserver() {
 }
 
 /* --------------------------------------------------------------------------
-   7. APPLY CONFIGURABLE PROJECT URLS ACROSS DOM
+   9. INTERACTIVE LAPTOP SHOWCASE CONTROLLER ("and the laptop.....")
    -------------------------------------------------------------------------- */
-function applyProjectUrls() {
-    // Pet Nova Elements
-    const petNovaUrlDisplay = document.getElementById("petNovaUrlDisplay");
-    const petNovaDirectBtn = document.getElementById("petNovaDirectBtn");
-    if (petNovaUrlDisplay) {
-        petNovaUrlDisplay.href = PET_NOVA_URL;
-        petNovaUrlDisplay.textContent = PET_NOVA_URL;
-    }
-    if (petNovaDirectBtn) {
-        petNovaDirectBtn.href = PET_NOVA_URL;
-    }
-
-    // Royal Rose Milk Elements
-    const royalRoseUrlDisplay = document.getElementById("royalRoseUrlDisplay");
-    const royalRoseDirectBtn = document.getElementById("royalRoseDirectBtn");
-    if (royalRoseUrlDisplay) {
-        royalRoseUrlDisplay.href = ROYAL_ROSE_MILK_URL;
-        royalRoseUrlDisplay.textContent = ROYAL_ROSE_MILK_URL;
-    }
-    if (royalRoseDirectBtn) {
-        royalRoseDirectBtn.href = ROYAL_ROSE_MILK_URL;
-    }
-}
-
-/* --------------------------------------------------------------------------
-   8. EXPANDABLE CASE STUDY DRAWER TOGGLE
-   -------------------------------------------------------------------------- */
-function toggleCaseStudy(drawerId) {
-    const drawer = document.getElementById(drawerId);
-    if (!drawer) return;
-
-    const btn = event.currentTarget;
-    drawer.classList.toggle("open");
-    if (btn) btn.classList.toggle("active");
-}
-
-/* --------------------------------------------------------------------------
-   9. PROJECT SHOWCASE DATA & INTERACTIVE MODAL CONTROLLER
-   -------------------------------------------------------------------------- */
-const PROJECTS_DATA = {
-    petNova: {
-        title: "PET NOVA",
-        badge: "FLAGSHIP // AI PET CARE PLATFORM",
-        heroImg: "images/pet-nexa-showcase.jpg",
-        heading: "PET NOVA — AI-Powered Pet-Care Platform",
-        description: "PET NOVA is a comprehensive pet-care platform engineered to integrate multiple pet services into a single digital ecosystem. It connects pet parents with grooming appointment scheduling, pet specialist consultations, an integrated product shop, order tracking, and an intelligent AI Pet Health Advisor rule engine.",
-        liveUrl: PET_NOVA_URL,
-        specs: [
-            { label: "PROJECT SERVER", value: PET_NOVA_URL },
-            { label: "BACKEND STACK", value: "Python / Flask REST Server" },
-            { label: "FRONTEND UI", value: "HTML5, CSS3, JavaScript (ES6+)" },
-            { label: "DATABASE", value: "SQLite Relational Store" },
-            { label: "AI SUBSYSTEM", value: "Rule-Based Health Advisor" },
-            { label: "KEY SERVICES", value: "Grooming, Specialist, Shop, Booking" }
-        ],
-        features: [
-            {
-                title: "Pet Grooming Service Booking",
-                desc: "Customizable service selection allowing pet parents to choose tailored bathing, trimming, and styling packages."
-            },
-            {
-                title: "Pet Specialist & Appointments",
-                desc: "Dedicated veterinary specialist profiles with instant appointment reservation workflows and schedule management."
-            },
-            {
-                title: "Pet Product Shop & Categories",
-                desc: "Comprehensive e-commerce catalog featuring categorized products for both dogs and cats with direct checkout."
-            },
-            {
-                title: "AI Pet Advisor",
-                desc: "Intelligent health assessment engine analyzing pet vitals and symptoms to output diagnostic advice."
-            },
-            {
-                title: "Order Tracking & Manage Booking",
-                desc: "Real-time status tracking for customer orders and dynamic booking modification dashboards."
-            },
-            {
-                title: "Database-Driven Architecture",
-                desc: "Robust SQLite schema management tracking inventory, users, appointments, and diagnostic records."
-            }
-        ],
-        codeSnippet: `# ==========================================================
-# PET NOVA - Flask Backend API & AI Diagnostic Engine
-# ==========================================================
-from flask import Flask, request, jsonify
-import sqlite3
-
-app = Flask(__name__)
-
-def evaluate_pet_health(symptoms, activity_level, age):
-    """AI Pet Advisor Rule Engine"""
-    base_score = 100
-    deductions = {
-        'lethargy': 20,
-        'loss_of_appetite': 25,
-        'coughing': 15,
-        'dental_plaque': 10,
-        'skin_itching': 12
-    }
-    for symptom in symptoms:
-        base_score -= deductions.get(symptom, 5)
-    
-    if activity_level < 40:
-        base_score -= 10
-    
-    score = max(min(base_score, 100), 20)
-    
-    if score >= 85:
-        verdict = "Optimal Vitality: Pet exhibits healthy biometrics."
-    elif score >= 65:
-        verdict = "Moderate Health: Routine checkup & hydration recommended."
-    else:
-        verdict = "Attention Required: Schedule a specialist appointment."
-        
-    return score, verdict
-
-@app.route('/api/pet/advisor', methods=['POST'])
-def run_pet_advisor():
-    data = request.get_json()
-    symptoms = data.get('symptoms', [])
-    activity = int(data.get('activity', 70))
-    age = float(data.get('age', 2))
-    
-    score, verdict = evaluate_pet_health(symptoms, activity, age)
-    return jsonify({
-        "status": "success",
-        "health_score": score,
-        "diagnosis": verdict
-    }), 200`
+const LAPTOP_PROJECTS = {
+    petNexa: {
+        name: "PET NEXA",
+        url: PET_NEXA_URL,
+        img: "images/pet-nexa-dark-crest.jpg",
+        fallback: "images/pet-nexa-showcase.jpg",
+        badge: "GEMINI FLASH AI PLATFORM"
     },
-
     royalRose: {
-        title: "ROYAL ROSE MILK",
-        badge: "BRAND EXPERIENCE // PRODUCT WEBSITE",
-        heroImg: "images/royal-rose-milk.jpg",
-        heading: "ROYAL ROSE MILK — Interactive Brand & Product Website",
-        description: "ROYAL ROSE MILK is a visually immersive product website created for an artisanal rose-flavoured milk brand, focusing on modern UI design, interactive animations, artisanal flavor customizers, and sensory storytelling.",
-        liveUrl: ROYAL_ROSE_MILK_URL,
-        specs: [
-            { label: "LIVE SERVER", value: ROYAL_ROSE_MILK_URL },
-            { label: "FRONTEND CORE", value: "HTML5, CSS3, Tailwind CSS" },
-            { label: "INTERACTIONS", value: "Vanilla JavaScript ES6+" },
-            { label: "DESIGN SYSTEM", value: "Midnight Emerald & Radiant Copper" },
-            { label: "RESPONSIVENESS", value: "100% Mobile & Desktop" },
-            { label: "KEY HIGHLIGHTS", value: "Artisanal Flavor Customizer & Cart" }
-        ],
-        features: [
-            {
-                title: "Interactive Hero Section",
-                desc: "High-impact visual opening with sensory branding, animated typography, and fluid transitions."
-            },
-            {
-                title: "Product Showcase & Customizer",
-                desc: "Interactive bottle blend customizer adjusting rose essence, sweetness, and milk richness in real-time."
-            },
-            {
-                title: "Cinematic Storytelling",
-                desc: "Sensory brand narrative exploring Damascus rose heritage, artisanal ingredients, and farm milk source."
-            },
-            {
-                title: "Interactive Shopping Experience",
-                desc: "Dynamic cart addition, package bundle selection, and instant price breakdown calculation."
-            }
-        ],
-        codeSnippet: `/* ==========================================================
- * ROYAL ROSE MILK — Dynamic Sensory Blend Engine
- * ========================================================== */
-const RoseBlendEngine = {
-    basePrice: 120, // INR
-    calculateBlend(essenceLevel, sweetnessType, milkRichness) {
-        let multiplier = 1.0;
-        if (essenceLevel > 70) multiplier += 0.25;
-        if (sweetnessType === 'Wild Forest Honey') multiplier += 0.18;
-        if (milkRichness === 'Almond Milk') multiplier += 0.25;
-        
-        const finalPrice = Math.round(this.basePrice * multiplier);
-        return {
-            price: finalPrice,
-            flavorNotes: \`Damascus Rose (\${essenceLevel}%), \${sweetnessType}, \${milkRichness}\`
-        };
-    }
-};`
+        name: "ROYAL ROSE MILK",
+        url: ROYAL_ROSE_MILK_URL,
+        img: "images/royal-rose-milk.jpg",
+        fallback: "images/royal-rose-milk.jpg",
+        badge: "INTERACTIVE BRAND WEBSITE"
+    },
+    portfolio: {
+        name: "PORTFOLIO WEBSITE",
+        url: "#home",
+        img: "portfolio_desktop.png",
+        fallback: "images/pet-nexa-ui.jpg",
+        badge: "LUXURY OBSIDIAN PORTFOLIO"
     }
 };
 
-let currentActiveProject = "petNova";
+function initLaptopDefaults() {
+    switchLaptopProject('petNexa');
+}
+
+function switchLaptopProject(projectId) {
+    const project = LAPTOP_PROJECTS[projectId];
+    if (!project) return;
+
+    document.querySelectorAll('.laptop-tab-pill').forEach(btn => btn.classList.remove('active'));
+    if (projectId === 'petNexa') document.getElementById('laptopTabPetNexa')?.classList.add('active');
+    if (projectId === 'royalRose') document.getElementById('laptopTabRoyalRose')?.classList.add('active');
+    if (projectId === 'portfolio') document.getElementById('laptopTabPortfolio')?.classList.add('active');
+
+    const imgEl = document.getElementById('laptopScreenImg');
+    const nameEl = document.getElementById('laptopProjectName');
+    const urlEl = document.getElementById('laptopProjectUrl');
+    const liveBtn = document.getElementById('laptopLiveBtn');
+
+    if (imgEl) {
+        imgEl.style.opacity = '0';
+        imgEl.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            imgEl.src = project.img;
+            imgEl.onerror = () => { imgEl.src = project.fallback; };
+            imgEl.style.opacity = '1';
+            imgEl.style.transform = 'scale(1)';
+        }, 200);
+    }
+
+    if (nameEl) nameEl.textContent = project.name;
+    if (urlEl) urlEl.textContent = project.url;
+    if (liveBtn) {
+        liveBtn.href = project.url;
+        if (project.url.startsWith('http')) {
+            liveBtn.target = '_blank';
+        } else {
+            liveBtn.removeAttribute('target');
+        }
+    }
+
+    showToast(`Laptop preview switched to ${project.name}`);
+}
+
+function setLaptopMode(mode) {
+    const chassis = document.getElementById('macbookChassis');
+    const btnLaptop = document.getElementById('modeBtnLaptop');
+    const btnMobile = document.getElementById('modeBtnMobile');
+
+    if (!chassis) return;
+
+    if (mode === 'mobile') {
+        chassis.classList.add('mobile-view');
+        btnMobile?.classList.add('active');
+        btnLaptop?.classList.remove('active');
+        showToast("Switched to Mobile Viewport Mode 📱");
+    } else {
+        chassis.classList.remove('mobile-view');
+        btnLaptop?.classList.add('active');
+        btnMobile?.classList.remove('active');
+        showToast("Switched to MacBook Pro 16\" Display View 💻");
+    }
+}
+
+/* --------------------------------------------------------------------------
+   10. APPLY CONFIGURABLE PROJECT URLS ACROSS DOM
+   -------------------------------------------------------------------------- */
+function applyProjectUrls() {
+    // Project URLs directly synchronized
+}
+
+/* --------------------------------------------------------------------------
+   11. PROJECT SHOWCASE DATA & INTERACTIVE MODAL CONTROLLER
+   -------------------------------------------------------------------------- */
+const PET_NEXA_DATA = {
+    title: "PET NEXA",
+    badge: "FLAGSHIP // AI PET CARE PLATFORM",
+    heroImg: "images/pet-nexa-dark-crest.jpg",
+    heading: "PET NEXA — AI-Powered Multi-Service Platform",
+    description: "PET NEXA is a full-stack pet care ecosystem combining pet grooming appointment scheduling, veterinary specialist bookings, e-commerce shop, order tracking, and an intelligent Gemini Flash AI Pet Health Advisor.",
+    liveUrl: PET_NEXA_URL,
+    specs: [
+        { label: "LIVE SERVER", value: PET_NEXA_URL },
+        { label: "BACKEND STACK", value: "Python / Flask REST Server" },
+        { label: "FRONTEND UI", value: "HTML5, CSS3, JavaScript (ES6+)" },
+        { label: "DATABASE", value: "SQLite Relational Store" },
+        { label: "AI ENGINE", value: "Gemini Flash AI Model" },
+        { label: "ARCHITECTURE", value: "Modular MVC Pattern" }
+    ],
+    features: [
+        { title: "Pet Grooming Booking", desc: "Customized grooming package selections with real-time slot scheduling." },
+        { title: "Veterinary Specialists", desc: "Browse qualified vets, book consultations, and view care history." },
+        { title: "E-Commerce Pet Shop", desc: "Dynamic product catalog, shopping cart, and persistent order tracking." },
+        { title: "Gemini AI Health Advisor", desc: "Evaluates multi-symptom pet diagnostics and generates instant guidance." },
+        { title: "Booking Management", desc: "Live dashboard to modify appointments and persist user session records." },
+        { title: "Responsive Layout", desc: "Engineered with 60fps micro-animations and zero-lag mobile responsiveness." }
+    ],
+    codeSnippet: `@app.route('/api/ai/diagnose', methods=['POST'])
+def diagnose_pet_symptom():
+    data = request.get_json()
+    pet_name = data.get('pet_name', 'Pet')
+    symptoms = data.get('symptoms', [])
+    
+    # Gemini AI Diagnostic Assessment
+    prompt = f"Evaluate symptoms for {pet_name}: {', '.join(symptoms)}"
+    evaluation = gemini_model.generate_content(prompt)
+    
+    # Persist log to SQLite database
+    db.execute("INSERT INTO diagnostic_logs (pet_name, symptoms, verdict) VALUES (?, ?, ?)",
+               (pet_name, str(symptoms), evaluation.text))
+    db.commit()
+    
+    return jsonify({
+        "status": "success",
+        "pet": pet_name,
+        "assessment": evaluation.text
+    })`
+};
+
+const ROYAL_ROSE_DATA = {
+    title: "ROYAL ROSE MILK",
+    badge: "INTERACTIVE SENSORY BRAND EXPERIENCE",
+    heroImg: "images/royal-rose-milk.jpg",
+    heading: "ROYAL ROSE MILK — Sensory Brand Website",
+    description: "An artisanal, interactive sensory product brand experience designed for Royal Rose Milk, featuring real-time bottle formulation engine, dynamic price calculations, and smooth 60fps micro-animations.",
+    liveUrl: ROYAL_ROSE_MILK_URL,
+    specs: [
+        { label: "LIVE SERVER", value: ROYAL_ROSE_MILK_URL },
+        { label: "FRONTEND CORE", value: "HTML5 & Tailwind CSS" },
+        { label: "CLIENT LOGIC", value: "JavaScript (ES6+ State Engine)" },
+        { label: "EXPERIENCE", value: "Sensory Interactive Design" },
+        { label: "PERFORMANCE", value: "60 FPS Hardware-Accelerated" }
+    ],
+    features: [
+        { title: "Cinematic Visuals", desc: "Atmospheric dark palette with obsidian and rose gold accents." },
+        { title: "Dynamic Customizer", desc: "Real-time bottle blend formulation adjusting rose essence and milk base." },
+        { title: "Interactive Storytelling", desc: "Heritage exploration of Damascus rose extract craftsmanship." },
+        { title: "Shopping Workflow", desc: "Responsive product catalog with instant price calculation algorithms." }
+    ],
+    codeSnippet: `// Real-Time Sensory Flavor Formulation Engine
+function calculateCustomRoseBlend(essenceRatio, sweetnessType, baseMilk) {
+    let basePrice = 120;
+    const sweetnessMultiplier = { "Pure Honey": 20, "Organic Jaggery": 15, "Stevia": 10 };
+    const milkMultiplier = { "Almond Milk": 30, "Oat Milk": 25, "Whole Farm Milk": 0 };
+    
+    const finalPrice = basePrice + (sweetnessMultiplier[sweetnessType] || 0) + (milkMultiplier[baseMilk] || 0);
+    const blendGrade = essenceRatio >= 80 ? "Royal Damask Reserve" : "Artisanal Classic";
+    
+    return { finalPrice, blendGrade, ratio: essenceRatio };
+}`
+};
+
+const PORTFOLIO_DATA = {
+    title: "PORTFOLIO WEBSITE",
+    badge: "ENGINEERING SHOWCASE // OBSIDIAN & GOLD",
+    heroImg: "portfolio_desktop.png",
+    heading: "Rajkumar — Developer Portfolio Architecture",
+    description: "Personal portfolio website engineered with an ultra-luxury obsidian and royal gold design system, 3D interactive MacBook device workbench, quantum loader, and responsive client-side engines.",
+    liveUrl: "#home",
+    specs: [
+        { label: "DESIGN PALETTE", value: "Velvet Obsidian (#08080A) & Royal Gold (#D4AF37)" },
+        { label: "CORE STACK", value: "HTML5, Vanilla CSS3, JavaScript (ES6+)" },
+        { label: "ANIMATIONS", value: "Canvas Constellation Particles & 3D Tilt" },
+        { label: "RESPONSIVENESS", value: "Mobile, Tablet, Laptop, 4K Display" }
+    ],
+    features: [
+        { title: "Golden Halo Hero", desc: "Art-directed portrait with glowing orbital rings and dotted grid accent." },
+        { title: "MacBook Pro Workbench", desc: "Realistic 3D laptop chassis with live project switching and viewport toggles." },
+        { title: "2x2 Stat Cards", desc: "Glassmorphic metric indicators highlighting experience and skills." },
+        { title: "Quantum Loader", desc: "Startup telemetry sequence with laser progress bar and monogram glow." }
+    ],
+    codeSnippet: `/* Ultra-Luxury Obsidian & Royal Gold Design Token Architecture */
+:root {
+    --bg-obsidian: #08080A;
+    --gold-main: #D4AF37;
+    --gold-light: #F3E5AB;
+    --gold-glow: rgba(212, 175, 55, 0.38);
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+}`
+};
+
+let currentModalProject = "petNexa";
 
 function openProjectModal(projectId) {
-    const data = PROJECTS_DATA[projectId];
-    if (!data) return;
-
-    currentActiveProject = projectId;
-
-    const modal = document.getElementById("projectModalBackdrop");
-    const badge = document.getElementById("modalBadge");
-    const title = document.getElementById("modalTitle");
-    const heroImg = document.getElementById("modalHeroImg");
-    const heading = document.getElementById("modalOverviewHeading");
-    const desc = document.getElementById("modalOverviewDesc");
-    const specGrid = document.getElementById("modalSpecGrid");
-    const featGrid = document.getElementById("modalFeaturesGrid");
-    const codeSnippet = document.getElementById("modalCodeSnippet");
-    const codeLang = document.getElementById("codeLangTitle");
-
-    // Dynamic Live Project Links in Modal
+    currentModalProject = projectId;
+    const backdrop = document.getElementById("projectModalBackdrop");
+    const titleEl = document.getElementById("modalTitle");
+    const badgeEl = document.getElementById("modalBadge");
+    const heroImgEl = document.getElementById("modalHeroImg");
+    const headingEl = document.getElementById("modalOverviewHeading");
+    const descEl = document.getElementById("modalOverviewDesc");
+    const liveAnchor = document.getElementById("modalOverviewLiveAnchor");
+    const liveBtn = document.getElementById("modalOverviewLiveBtn");
     const headerLiveLink = document.getElementById("modalHeaderLiveLink");
-    const overviewLiveAnchor = document.getElementById("modalOverviewLiveAnchor");
-    const overviewLiveBtn = document.getElementById("modalOverviewLiveBtn");
     const footerLiveLink = document.getElementById("modalFooterLiveLink");
+    const specGrid = document.getElementById("modalSpecGrid");
+    const featuresGrid = document.getElementById("modalFeaturesGrid");
+    const codeSnippet = document.getElementById("modalCodeSnippet");
 
-    if (badge) badge.textContent = data.badge;
-    if (title) title.textContent = data.title;
-    if (heroImg) heroImg.src = data.heroImg;
-    if (heading) heading.textContent = data.heading;
-    if (desc) desc.textContent = data.description;
+    let data = PET_NEXA_DATA;
+    if (projectId === "royalRose") data = ROYAL_ROSE_DATA;
+    if (projectId === "portfolio") data = PORTFOLIO_DATA;
 
-    const liveUrl = data.liveUrl || (projectId === "royalRose" ? ROYAL_ROSE_MILK_URL : PET_NOVA_URL);
-    if (headerLiveLink) headerLiveLink.href = liveUrl;
-    if (overviewLiveAnchor) {
-        overviewLiveAnchor.href = liveUrl;
-        overviewLiveAnchor.textContent = liveUrl;
+    if (titleEl) titleEl.textContent = data.title;
+    if (badgeEl) badgeEl.textContent = data.badge;
+    if (heroImgEl) {
+        heroImgEl.src = data.heroImg;
+        heroImgEl.onerror = () => { heroImgEl.src = "images/pet-nexa-dark-crest.jpg"; };
     }
-    if (overviewLiveBtn) overviewLiveBtn.href = liveUrl;
-    if (footerLiveLink) footerLiveLink.href = liveUrl;
+    if (headingEl) headingEl.textContent = data.heading;
+    if (descEl) descEl.textContent = data.description;
+    if (liveAnchor) {
+        liveAnchor.href = data.liveUrl;
+        liveAnchor.textContent = data.liveUrl;
+    }
+    if (liveBtn) liveBtn.href = data.liveUrl;
+    if (headerLiveLink) headerLiveLink.href = data.liveUrl;
+    if (footerLiveLink) footerLiveLink.href = data.liveUrl;
+    if (codeSnippet) codeSnippet.textContent = data.codeSnippet;
 
-    // Populate specs
     if (specGrid) {
         specGrid.innerHTML = data.specs.map(s => `
-            <div class="spec-entry">
-                <span>${s.label}</span>
-                <strong>${s.value}</strong>
+            <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-obsidian); border-radius: 8px; margin-bottom: 8px;">
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--gold-main);">${s.label}</div>
+                <div style="font-size: 13px; color: var(--text-pure); font-weight: 600;">${s.value}</div>
             </div>
-        `).join("");
+        `).join('');
     }
 
-    // Populate features
-    if (featGrid) {
-        featGrid.innerHTML = data.features.map(f => `
-            <div class="feat-item">
-                <h5>${f.title}</h5>
-                <p>${f.desc}</p>
+    if (featuresGrid) {
+        featuresGrid.innerHTML = data.features.map(f => `
+            <div style="padding: 16px; background: var(--gradient-card); border: 1px solid var(--border-obsidian); border-radius: 12px; margin-bottom: 12px;">
+                <h5 style="font-family: var(--font-serif); font-size: 16px; color: var(--gold-light); margin-bottom: 6px;">${f.title}</h5>
+                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">${f.desc}</p>
             </div>
-        `).join("");
+        `).join('');
     }
 
-    // Populate code snippet
-    if (codeSnippet) codeSnippet.textContent = data.codeSnippet;
-    if (codeLang) codeLang.innerHTML = `<i class="fa-solid fa-terminal"></i> ${projectId === 'petNova' ? 'PET_NOVA_FLASK_API.PY' : 'ROYAL_ROSE_BLEND_ENGINE.JS'}`;
+    switchModalTab("tabOverview");
 
-    // Render interactive simulator
-    renderProjectSimulator(projectId);
-
-    // Switch to Overview Tab by default
-    switchModalTab('tabOverview');
-
-    if (modal) {
-        modal.classList.add("open");
-        modal.setAttribute("aria-hidden", "false");
+    if (backdrop) {
+        backdrop.classList.add("active");
         document.body.style.overflow = "hidden";
     }
 }
 
-function closeProjectModal(event) {
-    if (event && event.target !== event.currentTarget && !event.target.closest('.modal-close-button') && !event.target.closest('.btn-footer-close')) {
+function closeProjectModal(e) {
+    if (e && e.target && e.target.id !== "projectModalBackdrop" && !e.target.closest(".modal-close-button") && !e.target.closest(".btn-footer-close")) {
         return;
     }
-    const modal = document.getElementById("projectModalBackdrop");
-    if (modal) {
-        modal.classList.remove("open");
-        modal.setAttribute("aria-hidden", "true");
+    const backdrop = document.getElementById("projectModalBackdrop");
+    if (backdrop) {
+        backdrop.classList.remove("active");
         document.body.style.overflow = "";
     }
 }
 
 function switchModalTab(tabId) {
-    const tabPanes = document.querySelectorAll(".tab-pane");
-    const tabBtns = document.querySelectorAll(".tab-btn");
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".tab-pane").forEach(pane => pane.classList.remove("active"));
 
-    tabPanes.forEach(pane => pane.classList.remove("active"));
-    tabBtns.forEach(btn => btn.classList.remove("active"));
+    const tabBtn = document.getElementById(`tabBtn${tabId.replace("tab", "")}`);
+    const tabPane = document.getElementById(tabId);
 
-    const targetPane = document.getElementById(tabId);
-    if (targetPane) targetPane.classList.add("active");
+    if (tabBtn) tabBtn.classList.add("active");
+    if (tabPane) tabPane.classList.add("active");
 
-    const btnId = "tabBtn" + tabId.replace("tab", "");
-    const targetBtn = document.getElementById(btnId);
-    if (targetBtn) targetBtn.classList.add("active");
+    if (tabId === "tabSimulator") {
+        renderModalSimulator(currentModalProject);
+    }
 }
 
-/* --------------------------------------------------------------------------
-   10. INTERACTIVE SIMULATOR ENGINES
-   -------------------------------------------------------------------------- */
-function renderProjectSimulator(projectId) {
+function renderModalSimulator(projectId) {
     const container = document.getElementById("simulatorContainer");
     if (!container) return;
 
-    if (projectId === "petNova") {
+    if (projectId === "petNexa") {
         container.innerHTML = `
-            <div class="sim-header-row">
-                <span class="sim-heading">PET NOVA AI Diagnostic Simulator</span>
-                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--copper-main);">REST API TELEMETRY</span>
-            </div>
-            <div class="sim-layout-grid">
-                <div class="sim-control-group">
-                    <label>Pet Species &amp; Name:</label>
-                    <input type="text" id="simPetName" class="sim-text-input" value="Milo (Golden Retriever)">
-                </div>
-                <div class="sim-control-group">
-                    <label>Reported Symptoms:</label>
-                    <select id="simPetSymptoms" class="sim-select-input">
-                        <option value="none">Routine Wellness Checkup (No symptoms)</option>
-                        <option value="lethargy">Lethargy &amp; Reduced Mobility</option>
-                        <option value="loss_of_appetite">Loss of Appetite &amp; Water Avoidance</option>
-                        <option value="dental_plaque">Dental Plaque &amp; Bad Breath</option>
-                        <option value="skin_itching">Skin Itching &amp; Frequent Scratching</option>
-                    </select>
-                </div>
-                <button class="btn-copper-fill" style="margin-top: 10px; width: 100%; justify-content: center;" onclick="runPetNovaDiagnostic()">
-                    <span>RUN AI HEALTH SCAN</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-                <div class="sim-results-pane" id="simPetOutput" style="margin-top: 20px;">
-                    <div class="sim-score-ring">
-                        <span class="sim-score-digit" id="simScoreNum">94</span>
+            <div style="padding: 20px; background: rgba(18, 18, 24, 0.9); border: 1px solid var(--border-gold-subtle); border-radius: 14px;">
+                <h4 style="font-family: var(--font-serif); font-size: 20px; color: var(--gold-light); margin-bottom: 12px;">Gemini Flash AI Pet Health Evaluation</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Test the AI diagnostic rule engine with simulated clinical biometrics:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+                    <div>
+                        <label style="font-size: 11px; font-family: var(--font-mono); color: var(--gold-main); display: block; margin-bottom: 6px;">PET NAME</label>
+                        <input type="text" id="simPetName" value="Bruno" style="width: 100%; padding: 10px; border-radius: 6px; background: #0A0A0D; border: 1px solid var(--border-obsidian); color: #fff;">
                     </div>
-                    <h5 id="simScoreHeading">Optimal Vitality</h5>
-                    <p id="simVerdictText">Pet exhibits high energy and normal biometrics. Routine wellness schedule maintained.</p>
+                    <div>
+                        <label style="font-size: 11px; font-family: var(--font-mono); color: var(--gold-main); display: block; margin-bottom: 6px;">SELECT SYMPTOM</label>
+                        <select id="simPetSymptoms" style="width: 100%; padding: 10px; border-radius: 6px; background: #0A0A0D; border: 1px solid var(--border-obsidian); color: #fff;">
+                            <option value="none">Normal Activity (Healthy Baseline)</option>
+                            <option value="lethargy">Reduced Energy & Lethargy</option>
+                            <option value="loss_of_appetite">Appetite Suppression</option>
+                            <option value="dental_plaque">Dental Plaque & Breath Odor</option>
+                            <option value="skin_itching">Dermatological Irritation & Scratching</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-gold-solid" style="width: 100%; justify-content: center;" onclick="runPetDiagnosticSim()">
+                    <span>RUN GEMINI AI DIAGNOSTIC EVALUATION</span>
+                    <i class="fa-solid fa-brain"></i>
+                </button>
+                <div id="simDiagnosticOutput" style="margin-top: 18px; padding: 16px; border-radius: 8px; background: rgba(212, 175, 55, 0.06); border: 1px solid var(--border-gold-subtle);">
+                    <div style="font-family: var(--font-serif); font-size: 28px; color: var(--gold-main);" id="simScoreNum">96/100</div>
+                    <h5 id="simScoreHeading" style="color: var(--text-pure); font-size: 16px; margin: 4px 0 8px;">Optimal Vitality Status</h5>
+                    <p id="simVerdictText" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">Biometric indicators are within optimal healthy thresholds. No intervention needed.</p>
                 </div>
             </div>
         `;
     } else {
         container.innerHTML = `
-            <div class="sim-header-row">
-                <span class="sim-heading">ROYAL ROSE MILK Blend Customizer</span>
-                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--copper-main);">SENSORY FORMULATION</span>
-            </div>
-            <div class="sim-layout-grid">
-                <div class="sim-control-group">
-                    <label>Rose Essence Level: <strong id="simRoseVal" style="color:var(--copper-main);">65%</strong></label>
-                    <input type="range" id="simRoseEssence" style="width:100%; accent-color:var(--copper-main);" min="20" max="100" value="65" oninput="updateRoyalRoseCustomizer()">
+            <div style="padding: 20px; background: rgba(18, 18, 24, 0.9); border: 1px solid var(--border-gold-subtle); border-radius: 14px;">
+                <h4 style="font-family: var(--font-serif); font-size: 20px; color: var(--gold-light); margin-bottom: 12px;">Sensory Flavor Formulation Simulator</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Adjust recipe parameters to calculate live price and flavor balance:</p>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11px; font-family: var(--font-mono); color: var(--gold-main); display: block; margin-bottom: 6px;">DAMASCUS ROSE ESSENCE RATIO: <span id="simRoseVal">65%</span></label>
+                    <input type="range" id="simRoseEssence" min="30" max="95" value="65" style="width: 100%; accent-color: var(--gold-main);" oninput="updateRoseCustomizerSim()">
                 </div>
-                <div class="sim-control-group">
-                    <label>Sweetness Infusion:</label>
-                    <select id="simSweetness" class="sim-select-input" onchange="updateRoyalRoseCustomizer()">
-                        <option value="Organic Cane Sugar">Organic Cane Sugar</option>
-                        <option value="Wild Forest Honey">Wild Forest Honey (+₹20)</option>
-                        <option value="Palm Jaggery">Palm Jaggery (+₹15)</option>
-                    </select>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+                    <div>
+                        <label style="font-size: 11px; font-family: var(--font-mono); color: var(--gold-main); display: block; margin-bottom: 6px;">ORGANIC SWEETENER</label>
+                        <select id="simSweetness" style="width: 100%; padding: 10px; border-radius: 6px; background: #0A0A0D; border: 1px solid var(--border-obsidian); color: #fff;" onchange="updateRoseCustomizerSim()">
+                            <option value="Organic Cane Sugar">Organic Cane Sugar (+₹0)</option>
+                            <option value="Pure Honey">Wild Pure Honey (+₹20)</option>
+                            <option value="Jaggery Extract">Organic Jaggery (+₹15)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size: 11px; font-family: var(--font-mono); color: var(--gold-main); display: block; margin-bottom: 6px;">MILK BASE</label>
+                        <select id="simMilkBase" style="width: 100%; padding: 10px; border-radius: 6px; background: #0A0A0D; border: 1px solid var(--border-obsidian); color: #fff;" onchange="updateRoseCustomizerSim()">
+                            <option value="Whole Farm Milk">Whole Farm Milk (+₹0)</option>
+                            <option value="Almond Milk">Silky Almond Milk (+₹30)</option>
+                            <option value="Oat Milk">Creamy Oat Milk (+₹25)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="sim-control-group">
-                    <label>Milk Base Texture:</label>
-                    <select id="simMilkBase" class="sim-select-input" onchange="updateRoyalRoseCustomizer()">
-                        <option value="Pure Rich Farm Milk">Pure Rich Farm Milk (Creamy)</option>
-                        <option value="Almond Milk">Artisanal Almond Milk (+₹30)</option>
-                        <option value="Oat Milk">Velvety Oat Milk (+₹25)</option>
-                    </select>
-                </div>
-                <button class="btn-copper-fill" style="margin-top: 10px; width: 100%; justify-content: center;" onclick="handleRoseOrderSimulation()">
-                    <span>TEST CART ADDITION</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-                <div class="sim-results-pane" id="simRoseOutput" style="margin-top: 20px;">
-                    <div style="font-family: var(--font-serif); font-size: 38px; color: var(--copper-light);" id="simRosePrice">₹120</div>
-                    <h5 id="simRoseBlendName" style="font-family: var(--font-serif); font-size: 18px; margin-top: 4px;">Artisanal Rose Classic</h5>
-                    <p id="simRoseDescription" style="font-size: 13px; color: var(--cream-soft);">Handcrafted with 65% Damascus rose extract.</p>
+                <div id="simRoseOutput" style="padding: 16px; border-radius: 8px; background: rgba(212, 175, 55, 0.06); border: 1px solid var(--border-gold-subtle);">
+                    <div style="font-family: var(--font-serif); font-size: 28px; color: var(--gold-main);" id="simRosePrice">₹120</div>
+                    <h5 id="simRoseBlendName" style="color: var(--text-pure); font-size: 16px; margin: 4px 0 8px;">Artisanal Rose Classic</h5>
+                    <p id="simRoseDescription" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">Handcrafted with 65% Damascus rose extract blended in Whole Farm Milk with Organic Cane Sugar.</p>
                 </div>
             </div>
         `;
     }
 }
 
-function runPetNovaDiagnostic() {
-    const petName = document.getElementById("simPetName") ? document.getElementById("simPetName").value || "Pet" : "Pet";
-    const symptom = document.getElementById("simPetSymptoms") ? document.getElementById("simPetSymptoms").value : "none";
+function runPetDiagnosticSim() {
+    const petName = document.getElementById("simPetName")?.value || "Pet";
+    const symptom = document.getElementById("simPetSymptoms")?.value || "none";
     const scoreNum = document.getElementById("simScoreNum");
     const heading = document.getElementById("simScoreHeading");
     const verdict = document.getElementById("simVerdictText");
 
     let score = 96;
-    let headingText = "Optimal Vitality";
-    let descText = `${petName} exhibits excellent telemetry data. All biometric indicators are within healthy thresholds.`;
+    let headingText = "Optimal Vitality Status";
+    let descText = `${petName} exhibits excellent biometric telemetry. All indicators within normal range.`;
 
     if (symptom === "lethargy") {
         score = 74;
         headingText = "Fatigue & Low Activity Alert";
-        descText = `${petName} shows reduced mobility score. Recommended action: Increase hydration and monitor body temperature.`;
+        descText = `${petName} exhibits reduced mobility index. Recommend hydration & monitoring.`;
     } else if (symptom === "loss_of_appetite") {
         score = 68;
         headingText = "Nutritional Imbalance Alert";
-        descText = `${petName} is experiencing appetite suppression. Recommended action: Transition to probiotic-rich soft diet.`;
+        descText = `${petName} has appetite suppression. Recommend probiotic soft-diet regimen.`;
     } else if (symptom === "dental_plaque") {
         score = 82;
         headingText = "Dental Hygiene Advisory";
-        descText = `Oral plaque detected. Recommended action: Schedule ultrasonic dental cleaning with a Pet Nova specialist.`;
+        descText = `Oral plaque detected. Recommend scheduling ultrasonic dental cleaning with a Pet Nexa specialist.`;
     } else if (symptom === "skin_itching") {
         score = 78;
         headingText = "Dermatological Irritation";
-        descText = `Frequent scratching detected. Recommended action: Hypoallergenic medicated oatmeal bath and omega-3 supplement.`;
+        descText = `Frequent scratching observed. Recommend hypoallergenic medicated oatmeal bath.`;
     }
 
-    if (scoreNum) scoreNum.textContent = score;
+    if (scoreNum) scoreNum.textContent = `${score}/100`;
     if (heading) heading.textContent = headingText;
     if (verdict) verdict.textContent = descText;
 
-    showToast(`AI Diagnostic complete for ${petName}! Score: ${score}/100`);
+    showToast(`AI diagnostic completed for ${petName}! Score: ${score}/100`);
 }
 
-function updateRoyalRoseCustomizer() {
-    const essenceInput = document.getElementById("simRoseEssence");
-    const sweetnessInput = document.getElementById("simSweetness");
-    const milkInput = document.getElementById("simMilkBase");
+function updateRoseCustomizerSim() {
+    const essence = parseInt(document.getElementById("simRoseEssence")?.value || "65", 10);
+    const sweetness = document.getElementById("simSweetness")?.value || "Organic Cane Sugar";
+    const milk = document.getElementById("simMilkBase")?.value || "Whole Farm Milk";
 
-    if (!essenceInput || !sweetnessInput || !milkInput) return;
-
-    const essence = parseInt(essenceInput.value, 10);
-    const sweetness = sweetnessInput.value;
-    const milk = milkInput.value;
-
-    const roseVal = document.getElementById("simRoseVal");
-    const priceEl = document.getElementById("simRosePrice");
-    const blendEl = document.getElementById("simRoseBlendName");
-    const descEl = document.getElementById("simRoseDescription");
-
-    if (roseVal) roseVal.textContent = `${essence}%`;
+    document.getElementById("simRoseVal").textContent = `${essence}%`;
 
     let price = 120;
     if (sweetness.includes("Honey")) price += 20;
@@ -732,26 +906,13 @@ function updateRoyalRoseCustomizer() {
     if (milk.includes("Almond")) price += 30;
     if (milk.includes("Oat")) price += 25;
 
-    if (priceEl) priceEl.textContent = `₹${price}`;
-
-    if (blendEl) {
-        if (essence >= 80) blendEl.textContent = "Royal Damask Reserve (Intense)";
-        else if (essence >= 50) blendEl.textContent = "Artisanal Rose Classic";
-        else blendEl.textContent = "Subtle Rose Blossom Blend";
-    }
-
-    if (descEl) {
-        descEl.textContent = `Handcrafted with ${essence}% Damascus rose extract, blended in ${milk} with ${sweetness}.`;
-    }
-}
-
-function handleRoseOrderSimulation() {
-    const price = document.getElementById("simRosePrice") ? document.getElementById("simRosePrice").textContent : "₹120";
-    showToast(`Added custom Royal Rose blend (${price}) to cart!`);
+    document.getElementById("simRosePrice").textContent = `₹${price}`;
+    document.getElementById("simRoseBlendName").textContent = essence >= 80 ? "Royal Damask Reserve" : "Artisanal Rose Classic";
+    document.getElementById("simRoseDescription").textContent = `Handcrafted with ${essence}% Damascus rose extract blended in ${milk} with ${sweetness}.`;
 }
 
 /* --------------------------------------------------------------------------
-   11. COPY TO CLIPBOARD & TOAST NOTIFICATIONS
+   12. COPY TO CLIPBOARD & TOAST NOTIFICATIONS
    -------------------------------------------------------------------------- */
 function copyContactInfo(text, message) {
     if (navigator.clipboard && window.isSecureContext) {
@@ -785,7 +946,7 @@ function fallbackCopy(text, message) {
 function copySnippet() {
     const code = document.getElementById("modalCodeSnippet");
     if (code) {
-        copyContactInfo(code.textContent, "Architecture snippet copied to clipboard!");
+        copyContactInfo(code.textContent, "Architecture code copied to clipboard!");
     }
 }
 
@@ -796,26 +957,16 @@ function showToast(message) {
     if (!toast) return;
     if (toastMsg) toastMsg.textContent = message;
 
-    toast.classList.add("show");
+    toast.classList.add("active");
 
     setTimeout(() => {
-        toast.classList.remove("show");
+        toast.classList.remove("active");
     }, 2800);
 }
 
 /* --------------------------------------------------------------------------
-   12. RESUME DOWNLOAD HANDLER
+   13. RESUME DOWNLOAD HANDLER
    -------------------------------------------------------------------------- */
 function handleResumeDownload(event) {
-    showToast("Downloading Raj Kumar's Resume (PDF)...");
-    
-    // Provide programmatic fallback if event is triggered from an element without direct href
-    if (event && event.currentTarget && event.currentTarget.tagName.toLowerCase() !== 'a') {
-        const link = document.createElement('a');
-        link.href = 'resume/Raj_Kumar_Resume.pdf';
-        link.download = 'Raj_Kumar_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+    showToast("Downloading Rajkumar's Resume (PDF)...");
 }

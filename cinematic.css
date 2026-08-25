@@ -1,6 +1,6 @@
 /* ==========================================================================
-   RAJ KUMAR — GRAND CINEMATIC & RECRUITER-FIRST INTRO ENGINE
-   Ultra-Luxury Full-Screen Quantum HUD, Recruiter Highlights & Mobile Architecture
+   RAJKUMAR — GRAND CINEMATIC & RECRUITER-FIRST OBSIDIAN & GOLD INTRO ENGINE
+   Ultra-Luxury Full-Screen Quantum HUD, Recruiter Highlights & Micro-Animations
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -13,7 +13,7 @@
     height: 100vh;
     min-height: 100vh;
     min-height: 100dvh;
-    background: radial-gradient(circle at center, #0B2B24 0%, #071C18 50%, #020A08 100%);
+    background: radial-gradient(circle at center, #14141C 0%, #0D0D12 50%, #050507 100%);
     z-index: 999999;
     display: flex;
     align-items: center;
@@ -22,25 +22,25 @@
     overflow-x: hidden;
     padding: 0;
     margin: 0;
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cinematic-loader.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.06);
-    pointer-events: none;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: scale(1.04) !important;
+    pointer-events: none !important;
 }
 
-/* Background Cybernetic Matrix & Cosmic Glow */
+/* Background Matrix Grid & Gold Glow */
 .loader-bg-grid {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(184, 115, 74, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184, 115, 74, 0.08) 1px, transparent 1px);
+        linear-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
     background-size: 54px 54px;
     background-position: center center;
     opacity: 0.8;
@@ -58,7 +58,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, transparent 15%, rgba(2, 10, 8, 0.9) 100%);
+    background: radial-gradient(circle at center, transparent 15%, rgba(5, 5, 7, 0.92) 100%);
     pointer-events: none;
 }
 
@@ -67,7 +67,7 @@
     width: clamp(450px, 60vw, 850px);
     height: clamp(450px, 60vw, 850px);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(184, 115, 74, 0.22) 0%, rgba(14, 59, 50, 0.3) 45%, transparent 70%);
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(154, 116, 40, 0.15) 45%, transparent 70%);
     filter: blur(60px);
     pointer-events: none;
     animation: auraBreath 6s ease-in-out infinite alternate;
@@ -78,7 +78,7 @@
     100% { transform: scale(1.18); opacity: 1; }
 }
 
-/* Grand Content Container - Fills Full Viewport Gracefully */
+/* Grand Content Container */
 .loader-container {
     width: 100%;
     max-width: 1200px;
@@ -103,9 +103,9 @@
     font-family: var(--font-mono);
     font-size: clamp(11px, 1.1vw, 13px);
     letter-spacing: 1.8px;
-    color: var(--gray-muted);
+    color: var(--text-muted);
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(184, 115, 74, 0.25);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
     padding-bottom: 14px;
     flex-wrap: wrap;
     gap: 12px;
@@ -115,30 +115,30 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(14, 59, 50, 0.6);
-    border: 1px solid rgba(184, 115, 74, 0.45);
+    background: rgba(22, 22, 30, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.45);
     padding: 6px 14px;
     border-radius: 6px;
-    color: var(--ivory-warm);
+    color: var(--text-pure);
     font-size: clamp(10.5px, 1vw, 12px);
     font-weight: 600;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 .hud-pill i {
-    color: var(--copper-light);
+    color: var(--gold-main);
 }
 
 .hud-pulse {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #10B981;
-    box-shadow: 0 0 14px #10B981;
-    animation: pulseGreen 1.4s ease-in-out infinite alternate;
+    background: #D4AF37;
+    box-shadow: 0 0 14px #D4AF37;
+    animation: pulseGold 1.4s ease-in-out infinite alternate;
 }
 
-@keyframes pulseGreen {
+@keyframes pulseGold {
     0% { transform: scale(0.8); opacity: 0.6; }
     100% { transform: scale(1.35); opacity: 1; }
 }
@@ -151,223 +151,172 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 12px 0 16px 0;
+    margin: 16px 0;
 }
 
 .gyro-ring {
     position: absolute;
     border-radius: 50%;
-    box-sizing: border-box;
+    pointer-events: none;
 }
 
 .gyro-ring-outer {
     inset: 0;
-    border: 2px dashed rgba(184, 115, 74, 0.6);
-    animation: spinClockwise 18s linear infinite;
-    box-shadow: 0 0 30px rgba(184, 115, 74, 0.25);
-}
-
-.gyro-ring-outer::before {
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    width: 12px;
-    height: 12px;
-    background: var(--copper-light);
-    border-radius: 50%;
-    box-shadow: 0 0 16px var(--copper-main), 0 0 32px var(--copper-main);
-}
-
-.gyro-ring-outer::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    right: 50%;
-    width: 10px;
-    height: 10px;
-    background: #10B981;
-    border-radius: 50%;
-    box-shadow: 0 0 16px #10B981;
+    border: 1.5px dashed rgba(212, 175, 55, 0.5);
+    animation: gyroSpinCw 18s linear infinite;
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.15);
 }
 
 .gyro-ring-mid {
-    inset: clamp(14px, 2vw, 24px);
-    border: 2px solid rgba(212, 154, 112, 0.45);
-    border-top-color: var(--copper-light);
-    border-bottom-color: var(--copper-light);
-    animation: spinCounter 10s linear infinite;
+    inset: 16px;
+    border: 1px solid rgba(243, 229, 171, 0.35);
+    border-top-color: var(--gold-main);
+    border-bottom-color: var(--gold-main);
+    animation: gyroSpinCcw 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
 .gyro-ring-inner {
-    inset: clamp(28px, 4vw, 48px);
-    border: 1.5px dashed rgba(14, 59, 50, 0.95);
-    background: radial-gradient(circle, rgba(14, 59, 50, 0.75) 0%, transparent 85%);
-    animation: spinClockwise 7s linear infinite;
+    inset: 32px;
+    border: 1.5px dotted rgba(212, 175, 55, 0.7);
+    animation: gyroSpinCw 8s linear infinite;
 }
 
 .gyro-ring-radar {
     inset: 8px;
+    background: conic-gradient(from 0deg, transparent 75%, rgba(212, 175, 55, 0.25) 100%);
     border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0deg, transparent 290deg, rgba(184, 115, 74, 0.4) 360deg);
-    animation: radarSweep 3s linear infinite;
+    animation: radarSweep 3.5s linear infinite;
 }
 
-@keyframes spinClockwise {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes gyroSpinCw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-@keyframes spinCounter {
-    0% { transform: rotate(360deg); }
-    100% { transform: rotate(0deg); }
+@keyframes gyroSpinCcw {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
 }
 
 @keyframes radarSweep {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* Center Holographic Monogram */
 .loader-hologram-monogram {
-    position: relative;
     z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(76px, 9.5vw, 110px);
-    height: clamp(76px, 9.5vw, 110px);
-    border-radius: 50%;
-    background: rgba(7, 28, 24, 0.9);
-    border: 2px solid rgba(184, 115, 74, 0.6);
-    box-shadow: 0 0 28px rgba(184, 115, 74, 0.45), inset 0 0 20px rgba(14, 59, 50, 0.9);
-}
-
-.monogram-glitch-text {
     font-family: var(--font-serif);
-    font-size: clamp(38px, 4.8vw, 54px);
+    font-size: clamp(42px, 5.5vw, 68px);
     font-weight: 700;
-    color: var(--ivory-warm);
     letter-spacing: 2px;
-    text-shadow: 0 0 24px rgba(184, 115, 74, 0.75);
-    position: relative;
-    display: inline-block;
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4);
+    animation: hologramGlow 2.5s ease-in-out infinite alternate;
 }
 
-.monogram-glitch-text::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
-    transform: skewX(-25deg);
-    animation: shimmerSweep 2.8s infinite ease-in-out;
+@keyframes hologramGlow {
+    0% { transform: scale(0.96); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
+    100% { transform: scale(1.04); filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.95)); }
 }
 
-@keyframes shimmerSweep {
-    0% { left: -100%; }
-    40%, 100% { left: 180%; }
-}
-
-/* Hero Title & Subtitle */
+/* Grand Title Wrap */
 .loader-title-wrap {
     text-align: center;
-    margin-bottom: 18px;
-    width: 100%;
+    margin-bottom: 20px;
 }
 
 .loader-role-subtitle {
-    font-family: var(--font-mono);
-    font-size: clamp(11.5px, 1.2vw, 15px);
-    letter-spacing: 4.5px;
-    color: var(--copper-light);
     display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 1.3vw, 15px);
+    letter-spacing: 4px;
+    color: var(--gold-main);
     margin-bottom: 8px;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .loader-full-name {
     font-family: var(--font-serif);
-    font-size: clamp(44px, 7.5vw, 84px);
+    font-size: clamp(34px, 4.8vw, 64px);
     font-weight: 700;
-    letter-spacing: 6px;
-    background: linear-gradient(135deg, #FFFFFF 0%, var(--ivory-warm) 40%, var(--copper-light) 100%);
+    letter-spacing: 4px;
+    background: var(--gradient-gold-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
-    line-height: 1.05;
-    margin: 0 0 10px 0;
-    filter: drop-shadow(0 8px 35px rgba(0, 0, 0, 0.85));
+    line-height: 1.1;
+    margin: 0;
+    filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.4));
 }
 
-/* HR Credentials & Core Pillars Strip */
+/* Recruiter Highlights Strip */
 .loader-hr-pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(12px, 1.8vw, 20px);
+    gap: clamp(12px, 1.8vw, 24px);
     width: 100%;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
 }
 
 .hr-pillar-card {
-    background: rgba(14, 43, 37, 0.65);
-    border: 1px solid rgba(184, 115, 74, 0.35);
-    border-radius: 10px;
-    padding: clamp(12px, 1.4vw, 18px) clamp(14px, 1.8vw, 22px);
+    background: rgba(18, 18, 24, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 12px;
+    padding: clamp(12px, 1.5vh, 18px) clamp(12px, 1.2vw, 18px);
     display: flex;
     align-items: center;
-    gap: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    gap: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .hr-pillar-card:hover {
-    border-color: var(--copper-light);
-    background: rgba(14, 59, 50, 0.85);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(184, 115, 74, 0.3);
+    border-color: var(--gold-main);
+    transform: translateY(-2px);
 }
 
 .pillar-icon {
     width: clamp(34px, 3.2vw, 44px);
     height: clamp(34px, 3.2vw, 44px);
-    border-radius: 8px;
-    background: rgba(184, 115, 74, 0.22);
-    border: 1px solid rgba(184, 115, 74, 0.45);
-    color: var(--copper-light);
+    border-radius: 10px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(14px, 1.4vw, 18px);
+    color: var(--gold-main);
+    font-size: clamp(16px, 1.4vw, 20px);
     flex-shrink: 0;
 }
 
 .pillar-info {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    text-align: left;
+    gap: 2px;
+    overflow: hidden;
 }
 
 .pillar-title {
-    font-family: var(--font-mono);
-    font-size: clamp(11px, 1.1vw, 13px);
+    font-family: var(--font-sans);
+    font-size: clamp(12px, 1.1vw, 14px);
     font-weight: 700;
-    color: var(--ivory-warm);
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
+    color: var(--text-pure);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pillar-desc {
-    font-size: clamp(10.5px, 1vw, 12px);
-    color: var(--gray-muted);
-    line-height: 1.35;
+    font-family: var(--font-mono);
+    font-size: clamp(10.5px, 0.95vw, 12px);
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Telemetry Status Feed & Big Digital Percentage Matrix */
+/* Status Feed & Percentage Readout */
 .loader-telemetry-matrix {
     width: 100%;
     display: flex;
@@ -375,329 +324,387 @@
     align-items: center;
     margin-bottom: 12px;
     font-family: var(--font-mono);
-    gap: 14px;
+    gap: 16px;
 }
 
 .terminal-status-feed {
-    font-size: clamp(11.5px, 1.1vw, 13.5px);
-    color: #6EE7B7;
-    letter-spacing: 1.2px;
+    font-size: clamp(11px, 1.1vw, 13px);
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 600;
-    background: rgba(7, 28, 24, 0.8);
-    padding: 8px 18px;
-    border-radius: 8px;
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .matrix-counter-group {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
 }
 
-.digital-percentage-readout {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 800;
-    color: var(--copper-light);
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 18px var(--copper-glow);
-}
-
-/* Frequency Equalizer Bars */
 .frequency-equalizer {
-    display: inline-flex;
+    display: flex;
     align-items: flex-end;
-    gap: 4px;
-    height: 20px;
+    gap: 3px;
+    height: 16px;
 }
 
 .eq-bar {
-    width: 4px;
-    background: var(--copper-main);
+    width: 3px;
+    background: var(--gold-main);
     border-radius: 2px;
-    animation: eqBounce 1s ease-in-out infinite alternate;
+    animation: eqBounce 1.2s ease-in-out infinite alternate;
 }
 
-.eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
-.eq-bar:nth-child(2) { height: 80%; animation-delay: 0.35s; }
-.eq-bar:nth-child(3) { height: 100%; animation-delay: 0.15s; }
-.eq-bar:nth-child(4) { height: 60%; animation-delay: 0.4s; }
-.eq-bar:nth-child(5) { height: 90%; animation-delay: 0.25s; }
-.eq-bar:nth-child(6) { height: 75%; animation-delay: 0.45s; }
-.eq-bar:nth-child(7) { height: 95%; animation-delay: 0.2s; }
-.eq-bar:nth-child(8) { height: 50%; animation-delay: 0.3s; }
+.eq-bar:nth-child(2) { animation-delay: 0.15s; height: 60%; }
+.eq-bar:nth-child(3) { animation-delay: 0.3s; height: 100%; }
+.eq-bar:nth-child(4) { animation-delay: 0.45s; height: 40%; }
+.eq-bar:nth-child(5) { animation-delay: 0.6s; height: 85%; }
+.eq-bar:nth-child(6) { animation-delay: 0.75s; height: 50%; }
+.eq-bar:nth-child(7) { animation-delay: 0.9s; height: 75%; }
+.eq-bar:nth-child(8) { animation-delay: 1.05s; height: 30%; }
 
 @keyframes eqBounce {
-    0% { transform: scaleY(0.25); opacity: 0.35; }
-    100% { transform: scaleY(1); opacity: 1; }
+    0% { height: 15%; opacity: 0.4; }
+    100% { height: 100%; opacity: 1; }
 }
 
-/* Laser Progress Bar Track */
+.digital-percentage-readout {
+    font-family: var(--font-mono);
+    font-size: clamp(15px, 1.6vw, 20px);
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* High-Energy Laser Progress Track */
 .laser-progress-track {
     width: 100%;
-    height: 6px;
-    background: rgba(243, 239, 229, 0.08);
-    border-radius: 8px;
-    position: relative;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 22px;
-    border: 1px solid rgba(184, 115, 74, 0.4);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    margin-bottom: 24px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .laser-progress-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #7D4829 0%, var(--copper-main) 50%, #FFFFFF 100%);
-    box-shadow: 0 0 18px var(--copper-light), 0 0 36px var(--copper-main);
-    border-radius: 8px;
-    transition: width 0.06s linear;
+    background: var(--gradient-gold);
+    border-radius: 4px;
+    box-shadow: 0 0 18px var(--gold-glow-intense);
+    transition: width 0.15s linear;
+    position: relative;
 }
 
 .laser-progress-fill::after {
     content: '';
     position: absolute;
-    top: 0;
     right: 0;
-    width: 24px;
-    height: 100%;
+    top: -2px;
+    bottom: -2px;
+    width: 12px;
     background: #FFFFFF;
-    box-shadow: 0 0 14px #FFFFFF, 0 0 28px var(--copper-light);
+    border-radius: 50%;
+    box-shadow: 0 0 14px #FFFFFF, 0 0 24px var(--gold-main);
 }
 
-/* Loader Footer Controls */
+/* Bottom Controls */
 .loader-footer-controls {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-}
-
-.hud-sys-label {
     font-family: var(--font-mono);
-    font-size: clamp(11px, 1.1vw, 13px);
-    letter-spacing: 1.8px;
-    color: var(--gray-muted);
+    font-size: clamp(10.5px, 1vw, 12px);
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .cinematic-enter-btn {
-    background: linear-gradient(135deg, var(--copper-main) 0%, #964e28 100%);
-    color: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: clamp(11px, 1.4vh, 16px) clamp(22px, 2.5vw, 36px);
-    border-radius: 8px;
-    font-family: var(--font-mono);
-    font-size: clamp(11.5px, 1.1vw, 14px);
-    letter-spacing: 2px;
-    font-weight: 700;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    transition: all 0.25s ease;
-    box-shadow: 0 6px 24px var(--copper-glow);
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: 100px;
+    background: var(--gradient-gold);
+    color: #0A0A0D;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .cinematic-enter-btn:hover {
-    background: linear-gradient(135deg, var(--copper-light) 0%, var(--copper-main) 100%);
-    box-shadow: 0 0 32px var(--copper-glow);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 30px var(--gold-glow-intense);
 }
 
 /* --------------------------------------------------------------------------
-   2. MOBILE FLOATING ACTION COMMAND DOCK
+   2. HERO PROFILE CELESTIAL ORBITAL ANIMATIONS & GRAPHICS (HIGH IMPACT)
    -------------------------------------------------------------------------- */
-.mobile-action-dock {
-    position: fixed;
-    bottom: 20px;
+
+/* Core Ambient Radiant Energy Behind Portrait */
+.portrait-ambient-glow-core {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(229, 185, 103, 0.15) 45%, transparent 70%);
+    filter: blur(50px);
+    top: 45%;
     left: 50%;
-    transform: translateX(-50%) translateY(120px);
-    z-index: 9990;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    background: rgba(7, 28, 24, 0.92);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    padding: 8px 14px;
-    border-radius: 40px;
-    border: 1px solid rgba(184, 115, 74, 0.45);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65), 0 0 25px rgba(184, 115, 74, 0.3);
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
-    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: coreEnergyPulse 4.5s ease-in-out infinite alternate;
 }
 
-.mobile-action-dock.dock-visible {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
+@keyframes coreEnergyPulse {
+    0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.95; }
 }
 
-.dock-btn {
+/* Outer Celestial Orbit Ring with Orbiting Pulse Nodes */
+.portrait-orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.orbit-ring-outer {
+    width: 420px;
+    height: 420px;
+    border: 1px dashed rgba(212, 175, 55, 0.38);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+    z-index: 1;
+    animation: celestialSpinCw 24s linear infinite;
+}
+
+.orbit-pulse-dot {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-main);
+    box-shadow: 0 0 12px var(--gold-bright), 0 0 20px var(--gold-main);
+}
+
+.orbit-pulse-dot.dot-1 { top: -3.5px; left: 50%; transform: translateX(-50%); }
+.orbit-pulse-dot.dot-2 { bottom: -3.5px; left: 50%; transform: translateX(-50%); }
+.orbit-pulse-dot.dot-3 { left: -3.5px; top: 50%; transform: translateY(-50%); }
+.orbit-pulse-dot.dot-4 { right: -3.5px; top: 50%; transform: translateY(-50%); }
+
+/* Middle Continuous Ring with Traveling Photon Satellite */
+.orbit-ring-middle {
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(243, 229, 171, 0.25);
+    border-top: 2px solid var(--gold-main);
+    border-bottom: 2px solid var(--gold-main);
+    z-index: 1;
+    animation: celestialSpinCcw 16s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.orbit-satellite-bead {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 14px #FFFFFF, 0 0 24px var(--gold-main);
+}
+
+/* Inner Precision Ring */
+.portrait-inner-ring {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px dotted rgba(212, 175, 55, 0.55);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    animation: celestialSpinCw 10s linear infinite;
+}
+
+/* Radar Sweep Conic Light Beam */
+.portrait-radar-sweep {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 80%, rgba(212, 175, 55, 0.22) 100%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    animation: radarSweep 4s linear infinite;
+}
+
+@keyframes celestialSpinCw {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes celestialSpinCcw {
+    from { transform: translate(-50%, -50%) rotate(360deg); }
+    to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+/* Dotted Matrix Twinkle Stars */
+.matrix-twinkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 8px var(--gold-bright);
+    animation: starTwinkle 2s ease-in-out infinite alternate;
+}
+
+.matrix-twinkle.star-1 { top: 14px; left: 28px; animation-delay: 0.2s; }
+.matrix-twinkle.star-2 { top: 56px; right: 20px; animation-delay: 0.7s; }
+.matrix-twinkle.star-3 { bottom: 18px; left: 45px; animation-delay: 1.3s; }
+
+@keyframes starTwinkle {
+    0% { transform: scale(0.6); opacity: 0.2; }
+    100% { transform: scale(1.6); opacity: 1; filter: drop-shadow(0 0 8px var(--gold-main)); }
+}
+
+/* Floating Glassmorphic Telemetry Chips */
+.hero-floating-chip {
+    position: absolute;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 11.5px;
+    border-radius: 100px;
+    background: rgba(14, 14, 19, 0.88);
+    border: 1px solid var(--border-gold-medium);
+    color: var(--text-pure);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     font-weight: 700;
-    text-decoration: none;
-    color: var(--ivory-warm);
-    transition: all 0.2s ease;
-    white-space: nowrap;
+    letter-spacing: 0.08em;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.2);
+    z-index: 4;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.dock-btn-primary {
-    background: linear-gradient(135deg, var(--copper-main), var(--copper-deep));
-    color: #FFFFFF;
-    box-shadow: 0 3px 12px var(--copper-glow);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.hero-floating-chip i {
+    color: var(--gold-main);
+    font-size: 0.8rem;
 }
 
-.dock-btn-icon {
-    width: 36px;
-    height: 36px;
+.hero-floating-chip .chip-dot {
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: rgba(14, 59, 50, 0.85);
-    border: 1px solid rgba(184, 115, 74, 0.4);
-    color: var(--copper-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    background: #10B981;
+    box-shadow: 0 0 8px #10B981;
 }
 
-.dock-btn-icon:active {
-    background: var(--copper-main);
-    color: #FFFFFF;
-    transform: scale(0.92);
+.hero-floating-chip.chip-top-left {
+    top: 40px;
+    left: -20px;
+    animation: floatBobbing1 4.5s ease-in-out infinite alternate;
+}
+
+.hero-floating-chip.chip-bottom-right {
+    bottom: 45px;
+    right: -25px;
+    animation: floatBobbing2 5.2s ease-in-out infinite alternate;
+}
+
+.hero-floating-chip.chip-top-right {
+    top: 15px;
+    right: 30px;
+    animation: floatBobbing3 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatBobbing1 {
+    0% { transform: translateY(0px) rotate(-2deg); }
+    100% { transform: translateY(-14px) rotate(2deg); }
+}
+
+@keyframes floatBobbing2 {
+    0% { transform: translateY(0px) rotate(2deg); }
+    100% { transform: translateY(-16px) rotate(-2deg); }
+}
+
+@keyframes floatBobbing3 {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-10px); }
 }
 
 /* --------------------------------------------------------------------------
-   3. RESPONSIVE DESIGN (DESKTOP, TABLET & MOBILE)
+   3. SHIMMER & LUXURY TYPOGRAPHY ANIMATIONS
    -------------------------------------------------------------------------- */
-@media (max-width: 992px) {
-    .mobile-action-dock {
-        display: flex;
-    }
-
-    .loader-hr-pillars {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-
-    .portrait-stage {
-        width: 300px;
-        height: 300px;
-    }
-
-    .portrait-circle-frame {
-        width: 230px;
-        height: 230px;
-        box-shadow: 0 0 35px rgba(184, 115, 74, 0.4), 0 0 70px rgba(14, 59, 50, 0.6);
-    }
+.hero-grand-name {
+    background: linear-gradient(90deg, #F3E5AB 0%, #D4AF37 25%, #FFF6D6 50%, #D4AF37 75%, #9A7428 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldTextShimmer 6s linear infinite;
 }
 
-@media (max-width: 600px) {
-    .loader-container {
-        min-height: 100vh;
-        min-height: 100dvh;
-        padding: 24px 18px;
-        justify-content: space-between;
-    }
+@keyframes goldTextShimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
 
-    .loader-telemetry-hud {
-        margin-bottom: 12px;
-        justify-content: center;
-        gap: 6px;
-        border-bottom-color: rgba(184, 115, 74, 0.2);
-        padding-bottom: 10px;
-    }
+/* Interactive Card Spotlight Glare */
+.stat-box-card, .luxury-project-card, .gold-skill-badge {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
 
-    .hud-pill {
-        font-size: 9.5px;
-        padding: 4px 9px;
-        letter-spacing: 0.5px;
-    }
-
-    .hud-pill:nth-child(3) {
-        display: none;
-    }
-
-    .loader-gyro-system {
-        width: 150px;
-        height: 150px;
-        margin: 6px 0 12px 0;
-    }
-
-    .loader-hologram-monogram {
-        width: 72px;
-        height: 72px;
-    }
-
-    .monogram-glitch-text {
-        font-size: 36px;
-    }
-
-    .loader-role-subtitle {
-        font-size: 10.5px;
-        letter-spacing: 2.5px;
-    }
-
-    .loader-full-name {
-        font-size: 38px;
-        letter-spacing: 3px;
-    }
-
+/* Mobile Loader Tweaks */
+@media (max-width: 767px) {
     .loader-hr-pillars {
-        display: none;
-    }
-
-    .loader-telemetry-matrix {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
         gap: 10px;
     }
-
-    .terminal-status-feed {
-        font-size: 11px;
-        width: 100%;
+    .loader-telemetry-hud {
         justify-content: center;
-        padding: 6px 12px;
+        text-align: center;
     }
-
-    .matrix-counter-group {
-        gap: 12px;
-    }
-
-    .digital-percentage-readout {
-        font-size: 24px;
-    }
-
-    .hud-sys-label {
-        display: none;
-    }
-
     .loader-footer-controls {
         justify-content: center;
-        width: 100%;
     }
-
-    .cinematic-enter-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 12px 20px;
-        font-size: 12px;
+    .hero-floating-chip.chip-top-left {
+        top: 10px;
+        left: 0;
+    }
+    .hero-floating-chip.chip-bottom-right {
+        bottom: 20px;
+        right: 0;
+    }
+    .hero-floating-chip.chip-top-right {
+        display: none;
+    }
+    .orbit-ring-outer {
+        width: 320px;
+        height: 320px;
+    }
+    .orbit-ring-middle {
+        width: 280px;
+        height: 280px;
     }
 }

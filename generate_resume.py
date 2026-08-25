@@ -56,37 +56,37 @@ html_content = f'''<!DOCTYPE html>
 
     <style>
         :root {{
-            /* Portfolio Color Scheme: Midnight Green, Deep Emerald, Radiant Copper & Warm Ivory */
-            --bg-midnight: #071C18;
-            --bg-deep-emerald: #0E3B32;
-            --bg-dark-forest: #102923;
-            --bg-surface: #0B241F;
-            --bg-surface-elevated: #133830;
+            /* Portfolio Color Scheme: Obsidian Black, Midnight Onyx, Royal Gold & Warm Ivory */
+            --bg-midnight: #08080A;
+            --bg-deep-emerald: #14141C;
+            --bg-dark-forest: #0D0D12;
+            --bg-surface: #121217;
+            --bg-surface-elevated: #1B1B24;
             
-            --copper-main: #B8734A;
-            --copper-light: #D49A70;
-            --copper-glow: rgba(184, 115, 74, 0.4);
-            --copper-subtle: rgba(184, 115, 74, 0.15);
-            --copper-deep: #7D4829;
+            --copper-main: #D4AF37;
+            --copper-light: #F3E5AB;
+            --copper-glow: rgba(212, 175, 55, 0.4);
+            --copper-subtle: rgba(212, 175, 55, 0.15);
+            --copper-deep: #9A7428;
             
-            --ivory-warm: #F3EFE5;
-            --cream-soft: #E5DDCF;
-            --gray-muted: #9BA7A2;
-            --gray-dim: #5E6E69;
+            --ivory-warm: #FBFBFC;
+            --cream-soft: #EDE8DF;
+            --gray-muted: #A1A1AA;
+            --gray-dim: #71717A;
             
-            --text-dark: #091C18;
-            --text-heading: #071C18;
-            --text-body: #243B35;
-            --text-muted: #5B726C;
-            --sidebar-text: #E5DDCF;
-            --sidebar-muted: #9BA7A2;
+            --text-dark: #0A0A0D;
+            --text-heading: #08080A;
+            --text-body: #24242C;
+            --text-muted: #575762;
+            --sidebar-text: #FBFBFC;
+            --sidebar-muted: #A1A1AA;
             
             --bg-light: #FFFFFF;
-            --bg-card: #F9F7F2;
-            --bg-card-alt: #F3F7F5;
-            --border-color: #E2EAE6;
-            --border-subtle: #EEF4F1;
-            --tag-bg: #EEF4F1;
+            --bg-card: #FAF9F5;
+            --bg-card-alt: #F4F2EC;
+            --border-color: #E5E0D6;
+            --border-subtle: #EFECE6;
+            --tag-bg: #F5F2EB;
             
             --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             --font-mono: 'JetBrains Mono', 'Courier New', monospace;
@@ -984,7 +984,7 @@ html_content = f'''<!DOCTYPE html>
                             <span class="project-title">{svg_code} PET NEXA</span>
                         </div>
                         <p class="project-desc">
-                            A pet care and grooming website with booking system, AI assistant, shop, and admin dashboard.
+                            A pet care and grooming website with booking system, Gemini Flash AI assistant, shop, and admin dashboard.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag">HTML</span>
@@ -993,7 +993,7 @@ html_content = f'''<!DOCTYPE html>
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">Flask</span>
                             <span class="tech-tag">SQLite</span>
-                            <span class="tech-tag ai-tag">{svg_brain} AI (Ollama)</span>
+                            <span class="tech-tag ai-tag">{svg_brain} Gemini Flash AI</span>
                         </div>
                     </div>
                 </div>
@@ -1025,7 +1025,7 @@ html_content = f'''<!DOCTYPE html>
                         </div>
                         <ul class="exp-bullets">
                             <li class="exp-bullet">Developed multiple projects to improve skills.</li>
-                            <li class="exp-bullet">Explored AI integration in web applications.</li>
+                            <li class="exp-bullet">Explored Gemini AI integration in web applications.</li>
                         </ul>
                     </div>
                 </div>
@@ -1049,7 +1049,7 @@ html_content = f'''<!DOCTYPE html>
                         </li>
                         <li class="bullet-item">
                             {svg_check}
-                            <span>Integrated AI assistant (Ollama) for intelligent user queries.</span>
+                            <span>Integrated Gemini Flash AI assistant for intelligent user queries.</span>
                         </li>
                     </ul>
                 </div>

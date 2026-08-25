@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RAJ KUMAR — HYPER-CINEMATIC & MOBILE INTERACTIVITY CONTROLLER
+   RAJKUMAR — HYPER-CINEMATIC & MOBILE INTERACTIVITY CONTROLLER
    Quantum Loader HUD Engine, Mobile Touch Physics & Ambient Telemetry
    ========================================================================== */
 
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. HYPER-CINEMATIC QUANTUM LOADER CONTROLLER
+   1. HYPER-CINEMATIC QUANTUM LOADER CONTROLLER (FAIL-SAFE & ULTRA-SMOOTH)
    -------------------------------------------------------------------------- */
 function initCinematicLoaderEngine() {
     const loader = document.getElementById("intro");
@@ -20,51 +20,66 @@ function initCinematicLoaderEngine() {
     const statusFeed = document.getElementById("loaderStatusFeed");
     const enterBtn = document.getElementById("skipLoaderBtn");
 
-    if (!loader) return;
-
-    // Check if user already saw the intro in this browser session
-    const seen = sessionStorage.getItem("raj_kumar_intro_seen_v2");
-    if (seen) {
-        loader.classList.add("loader-hidden");
+    if (!loader) {
         document.body.classList.add("loaded");
         return;
     }
 
+    let isDismissed = false;
+
+    function dismissCinematicLoader() {
+        if (isDismissed) return;
+        isDismissed = true;
+        loader.classList.add("loader-hidden");
+        document.body.classList.add("loaded");
+        document.body.style.overflow = "";
+
+        const heroStage = document.getElementById("portraitStage");
+        if (heroStage) {
+            heroStage.style.transform = "scale(1)";
+        }
+    }
+
+    // Click anywhere on loader to skip instantly
+    loader.addEventListener("click", dismissCinematicLoader);
+    if (enterBtn) {
+        enterBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dismissCinematicLoader();
+        });
+    }
+
+    // Telemetry logs
     const telemetryLogs = [
         "INITIALIZING FULL-STACK ENGINE...",
-        "MOUNTING PYTHON & FLASK BACKEND...",
-        "INITIALIZING SQLITE DATA MATRIX...",
-        "INTEGRATING LOCAL OLLAMA AI ENGINES...",
-        "SYNCHRONIZING CINEMATIC VIEWPORTS...",
-        "VERIFYING PORTFOLIO ASSETS & CREDENTIALS...",
-        "SYSTEMS 100% READY • WELCOME TO RAJ KUMAR'S PORTFOLIO"
+        "MOUNTING PYTHON & FLASK APIS...",
+        "INTEGRATING SQLITE DATA STORE...",
+        "LOADING AI CORE ARCHITECTURE...",
+        "SYSTEMS 100% READY • WELCOME TO RAJKUMAR'S PORTFOLIO"
     ];
 
     let currentPercent = 0;
-    let targetPercent = 100;
+    const targetPercent = 100;
     let startTime = null;
-    const duration = 2500; // 2.5 seconds high-impact recruiter cinematic experience
+    const duration = 1400; // Fast & responsive 1.4s
 
     function animateLoader(timestamp) {
+        if (isDismissed) return;
         if (!startTime) startTime = timestamp;
         const elapsed = timestamp - startTime;
         const progressRatio = Math.min(elapsed / duration, 1);
 
-        // Smooth ease-out-cubic curve
-        const easeProgress = 1 - Math.pow(1 - progressRatio, 3);
-        currentPercent = Math.floor(easeProgress * targetPercent);
+        const easeProgress = 1 - Math.pow(1 - progressRatio, 2.5);
+        currentPercent = Math.min(Math.floor(easeProgress * targetPercent), 100);
 
-        // Update progress bar width
         if (progressFill) {
             progressFill.style.width = `${currentPercent}%`;
         }
 
-        // Update percentage digital readout
         if (percentageText) {
             percentageText.textContent = `${String(currentPercent).padStart(2, '0')}%`;
         }
 
-        // Cycle through status feeds
         if (statusFeed) {
             const feedIndex = Math.min(
                 Math.floor(progressRatio * telemetryLogs.length),
@@ -76,30 +91,16 @@ function initCinematicLoaderEngine() {
         if (progressRatio < 1) {
             requestAnimationFrame(animateLoader);
         } else {
-            // Completed
             if (progressFill) progressFill.style.width = "100%";
             if (percentageText) percentageText.textContent = "100%";
-            setTimeout(dismissCinematicLoader, 400);
+            setTimeout(dismissCinematicLoader, 250);
         }
     }
 
     requestAnimationFrame(animateLoader);
 
-    function dismissCinematicLoader() {
-        loader.classList.add("loader-hidden");
-        document.body.classList.add("loaded");
-        sessionStorage.setItem("raj_kumar_intro_seen_v2", "true");
-
-        // Trigger smooth reveal animation for the hero section
-        const heroStage = document.getElementById("portraitStage");
-        if (heroStage) {
-            heroStage.style.transform = "scale(1)";
-        }
-    }
-
-    if (enterBtn) {
-        enterBtn.addEventListener("click", dismissCinematicLoader);
-    }
+    // Absolute hard failsafe: dismiss after 2s no matter what
+    setTimeout(dismissCinematicLoader, 2000);
 }
 
 /* --------------------------------------------------------------------------
@@ -108,8 +109,6 @@ function initCinematicLoaderEngine() {
 function initMobileActionDock() {
     const dock = document.getElementById("mobileActionDock");
     if (!dock) return;
-
-    let lastScrollY = window.scrollY;
 
     function updateDockVisibility() {
         if (window.innerWidth <= 992) {
@@ -153,10 +152,10 @@ function initMobileTouchCanvas() {
 }
 
 /* --------------------------------------------------------------------------
-   4. TOUCH CARD 3D TILT EFFECT FOR MOBILE & DESKTOP
+   4. TOUCH CARD 3D TILT EFFECT
    -------------------------------------------------------------------------- */
 function initTouchCardTilt() {
-    const cards = document.querySelectorAll(".cinematic-project-showcase, .skills-card, .editorial-manifesto-card");
+    const cards = document.querySelectorAll(".luxury-work-banner-card, .stat-box-card, .gold-skill-badge");
     
     cards.forEach(card => {
         card.addEventListener("mousemove", (e) => {
