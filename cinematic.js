@@ -31,19 +31,19 @@ function initCinematicLoaderEngine() {
     }
 
     const telemetryLogs = [
-        "INITIALIZING QUANTUM MATRIX...",
-        "ACTIVATING NEURAL AI ENGINE...",
-        "MOUNTING PYTHON & FLASK ARCHITECTURE...",
-        "RENDERING CINEMATIC VIEWPORTS...",
-        "CONNECTING SQLITE DATA LAYER...",
-        "SYNCHRONIZING INTERACTIVE PARTICLES...",
-        "SYSTEMS OPTIMAL • WELCOME TO PORTFOLIO"
+        "INITIALIZING FULL-STACK ENGINE...",
+        "MOUNTING PYTHON & FLASK BACKEND...",
+        "INITIALIZING SQLITE DATA MATRIX...",
+        "INTEGRATING LOCAL OLLAMA AI ENGINES...",
+        "SYNCHRONIZING CINEMATIC VIEWPORTS...",
+        "VERIFYING PORTFOLIO ASSETS & CREDENTIALS...",
+        "SYSTEMS 100% READY • WELCOME TO RAJ KUMAR'S PORTFOLIO"
     ];
 
     let currentPercent = 0;
     let targetPercent = 100;
     let startTime = null;
-    const duration = 2200; // 2.2 seconds luxury cinematic duration
+    const duration = 2500; // 2.5 seconds high-impact recruiter cinematic experience
 
     function animateLoader(timestamp) {
         if (!startTime) startTime = timestamp;

@@ -1,62 +1,80 @@
 /* ==========================================================================
-   RAJ KUMAR — HYPER-CINEMATIC & MOBILE GRAPHICS ENGINE
-   Ultra-High-End Visual FX, Quantum Gyroscope Loader & Mobile Architecture
+   RAJ KUMAR — GRAND CINEMATIC & RECRUITER-FIRST INTRO ENGINE
+   Ultra-Luxury Full-Screen Quantum HUD, Recruiter Highlights & Mobile Graphics
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. HYPER-CINEMATIC QUANTUM GYROSCOPE LOADER
+   1. GRAND CINEMATIC FULL-SCREEN LOADER
    -------------------------------------------------------------------------- */
 .cinematic-loader {
     position: fixed;
     inset: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at center, #0B241F 0%, #071C18 50%, #030D0B 100%);
+    background: radial-gradient(circle at center, #0B2923 0%, #071C18 45%, #020A08 100%);
     z-index: 999999;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cinematic-loader.loader-hidden {
     opacity: 0;
     visibility: hidden;
-    transform: scale(1.08);
+    transform: scale(1.06);
     pointer-events: none;
 }
 
-/* Background Cybernetic Grid & Ambient Fog */
+/* Background Cybernetic Matrix & Cosmic Glow */
 .loader-bg-grid {
     position: absolute;
     inset: 0;
     background-image: 
-        linear-gradient(rgba(184, 115, 74, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184, 115, 74, 0.05) 1px, transparent 1px);
-    background-size: 36px 36px;
+        linear-gradient(rgba(184, 115, 74, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 115, 74, 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
     background-position: center center;
-    opacity: 0.6;
+    opacity: 0.75;
     pointer-events: none;
-    animation: gridDrift 24s linear infinite;
+    animation: gridDrift 30s linear infinite;
 }
 
 @keyframes gridDrift {
     0% { background-position: 0 0; }
-    100% { background-position: 36px 36px; }
+    100% { background-position: 48px 48px; }
 }
 
 .loader-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 30%, rgba(3, 13, 11, 0.85) 100%);
+    background: radial-gradient(circle at center, transparent 20%, rgba(2, 10, 8, 0.88) 100%);
     pointer-events: none;
 }
 
+.loader-ambient-aura {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184, 115, 74, 0.18) 0%, rgba(14, 59, 50, 0.25) 45%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    animation: auraBreath 6s ease-in-out infinite alternate;
+}
+
+@keyframes auraBreath {
+    0% { transform: scale(0.85); opacity: 0.6; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Grand Content Container */
 .loader-container {
     width: 100%;
-    max-width: 580px;
-    padding: 24px 20px;
+    max-width: 920px;
+    padding: 36px 28px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,53 +83,60 @@
     box-sizing: border-box;
 }
 
-/* Telemetry Header HUD */
+/* Top Telemetry Header Bar */
 .loader-telemetry-hud {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 11.5px;
     letter-spacing: 1.5px;
     color: var(--gray-muted);
-    margin-bottom: 24px;
-    border-bottom: 1px solid rgba(184, 115, 74, 0.2);
-    padding-bottom: 10px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid rgba(184, 115, 74, 0.25);
+    padding-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .hud-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: rgba(14, 59, 50, 0.4);
-    border: 1px solid rgba(184, 115, 74, 0.3);
-    padding: 3.5px 9px;
-    border-radius: 4px;
+    gap: 8px;
+    background: rgba(14, 59, 50, 0.55);
+    border: 1px solid rgba(184, 115, 74, 0.4);
+    padding: 5px 12px;
+    border-radius: 6px;
     color: var(--ivory-warm);
-    font-size: 10px;
-    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 500;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.hud-pill i {
+    color: var(--copper-light);
 }
 
 .hud-pulse {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #10B981;
-    box-shadow: 0 0 10px #10B981;
+    box-shadow: 0 0 12px #10B981;
     animation: pulseGreen 1.4s ease-in-out infinite alternate;
 }
 
 @keyframes pulseGreen {
     0% { transform: scale(0.8); opacity: 0.6; }
-    100% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1.35); opacity: 1; }
 }
 
-/* Central Quantum Gyroscope System */
+/* Central Majestic Quantum Gyroscope System */
 .loader-gyro-system {
     position: relative;
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,54 +151,55 @@
 
 .gyro-ring-outer {
     inset: 0;
-    border: 1.5px dashed rgba(184, 115, 74, 0.45);
-    animation: spinClockwise 16s linear infinite;
+    border: 2px dashed rgba(184, 115, 74, 0.55);
+    animation: spinClockwise 18s linear infinite;
+    box-shadow: 0 0 25px rgba(184, 115, 74, 0.2);
 }
 
 .gyro-ring-outer::before {
     content: '';
     position: absolute;
-    top: -4px;
+    top: -5px;
     left: 50%;
-    width: 7px;
-    height: 7px;
+    width: 10px;
+    height: 10px;
     background: var(--copper-light);
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--copper-main), 0 0 20px var(--copper-main);
+    box-shadow: 0 0 14px var(--copper-main), 0 0 28px var(--copper-main);
+}
+
+.gyro-ring-outer::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 50%;
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 14px #10B981;
 }
 
 .gyro-ring-mid {
-    inset: 14px;
-    border: 1px solid rgba(212, 154, 112, 0.35);
+    inset: 18px;
+    border: 1.5px solid rgba(212, 154, 112, 0.4);
     border-top-color: var(--copper-light);
     border-bottom-color: var(--copper-light);
-    animation: spinCounter 9s linear infinite;
-}
-
-.gyro-ring-mid::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    right: 50%;
-    width: 6px;
-    height: 6px;
-    background: #6EE7B7;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #10B981;
+    animation: spinCounter 10s linear infinite;
 }
 
 .gyro-ring-inner {
-    inset: 28px;
-    border: 1px dashed rgba(14, 59, 50, 0.8);
-    background: radial-gradient(circle, rgba(14, 59, 50, 0.45) 0%, transparent 80%);
-    animation: spinClockwise 6s linear infinite;
+    inset: 36px;
+    border: 1.5px dashed rgba(14, 59, 50, 0.9);
+    background: radial-gradient(circle, rgba(14, 59, 50, 0.6) 0%, transparent 85%);
+    animation: spinClockwise 7s linear infinite;
 }
 
 .gyro-ring-radar {
-    inset: 4px;
+    inset: 6px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0deg, transparent 300deg, rgba(184, 115, 74, 0.25) 360deg);
-    animation: radarSweep 2.8s linear infinite;
+    background: conic-gradient(from 0deg, transparent 0deg, transparent 290deg, rgba(184, 115, 74, 0.35) 360deg);
+    animation: radarSweep 3s linear infinite;
 }
 
 @keyframes spinClockwise {
@@ -198,15 +224,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: rgba(7, 28, 24, 0.85);
+    border: 1.5px solid rgba(184, 115, 74, 0.5);
+    box-shadow: 0 0 20px rgba(184, 115, 74, 0.35), inset 0 0 15px rgba(14, 59, 50, 0.8);
 }
 
 .monogram-glitch-text {
     font-family: var(--font-serif);
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 700;
     color: var(--ivory-warm);
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(184, 115, 74, 0.6);
+    text-shadow: 0 0 20px rgba(184, 115, 74, 0.7);
     position: relative;
     display: inline-block;
 }
@@ -218,9 +250,9 @@
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
     transform: skewX(-25deg);
-    animation: shimmerSweep 3s infinite ease-in-out;
+    animation: shimmerSweep 2.8s infinite ease-in-out;
 }
 
 @keyframes shimmerSweep {
@@ -228,104 +260,183 @@
     40%, 100% { left: 180%; }
 }
 
-/* Loader Title & Subtitle */
+/* Hero Title & Subtitle */
 .loader-title-wrap {
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     width: 100%;
 }
 
 .loader-role-subtitle {
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 2.5px;
+    font-size: 13px;
+    letter-spacing: 4px;
     color: var(--copper-light);
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .loader-full-name {
     font-family: var(--font-serif);
-    font-size: clamp(28px, 6vw, 42px);
-    font-weight: 600;
-    letter-spacing: 3px;
-    color: var(--ivory-warm);
+    font-size: clamp(42px, 7.5vw, 68px);
+    font-weight: 700;
+    letter-spacing: 5px;
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--ivory-warm) 40%, var(--copper-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
-    line-height: 1.1;
-    margin: 0;
-    text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+    line-height: 1.05;
+    margin: 0 0 10px 0;
+    filter: drop-shadow(0 6px 30px rgba(0, 0, 0, 0.8));
 }
 
-/* High-Precision Digital Percentage & Equalizer */
+/* HR Credentials & Core Pillars Strip */
+.loader-hr-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.hr-pillar-card {
+    background: rgba(14, 43, 37, 0.6);
+    border: 1px solid rgba(184, 115, 74, 0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.hr-pillar-card:hover {
+    border-color: var(--copper-light);
+    background: rgba(14, 59, 50, 0.75);
+    transform: translateY(-2px);
+}
+
+.pillar-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(184, 115, 74, 0.2);
+    border: 1px solid rgba(184, 115, 74, 0.4);
+    color: var(--copper-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.pillar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+}
+
+.pillar-title {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--ivory-warm);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.pillar-desc {
+    font-size: 10px;
+    color: var(--gray-muted);
+    line-height: 1.3;
+}
+
+/* Telemetry Status Feed & Big Digital Percentage Matrix */
 .loader-telemetry-matrix {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     font-family: var(--font-mono);
-    gap: 8px;
+    gap: 12px;
 }
 
 .terminal-status-feed {
-    font-size: 10.5px;
+    font-size: 12px;
     color: #6EE7B7;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-weight: 500;
+    gap: 8px;
+    font-weight: 600;
+    background: rgba(7, 28, 24, 0.75);
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.matrix-counter-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
 .digital-percentage-readout {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 800;
     color: var(--copper-light);
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px var(--copper-glow);
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 16px var(--copper-glow);
 }
 
 /* Frequency Equalizer Bars */
 .frequency-equalizer {
     display: inline-flex;
     align-items: flex-end;
-    gap: 2.5px;
-    height: 12px;
+    gap: 3.5px;
+    height: 18px;
 }
 
 .eq-bar {
-    width: 2.5px;
+    width: 3.5px;
     background: var(--copper-main);
-    border-radius: 1px;
+    border-radius: 2px;
     animation: eqBounce 1s ease-in-out infinite alternate;
 }
 
 .eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
-.eq-bar:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+.eq-bar:nth-child(2) { height: 80%; animation-delay: 0.35s; }
 .eq-bar:nth-child(3) { height: 100%; animation-delay: 0.15s; }
 .eq-bar:nth-child(4) { height: 60%; animation-delay: 0.4s; }
 .eq-bar:nth-child(5) { height: 90%; animation-delay: 0.25s; }
+.eq-bar:nth-child(6) { height: 75%; animation-delay: 0.45s; }
+.eq-bar:nth-child(7) { height: 95%; animation-delay: 0.2s; }
+.eq-bar:nth-child(8) { height: 50%; animation-delay: 0.3s; }
 
 @keyframes eqBounce {
-    0% { transform: scaleY(0.3); opacity: 0.4; }
+    0% { transform: scaleY(0.25); opacity: 0.35; }
     100% { transform: scaleY(1); opacity: 1; }
 }
 
-/* Laser Progress Bar */
+/* Laser Progress Bar Track */
 .laser-progress-track {
     width: 100%;
-    height: 3.5px;
+    height: 5px;
     background: rgba(243, 239, 229, 0.08);
-    border-radius: 4px;
+    border-radius: 6px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 20px;
-    border: 1px solid rgba(184, 115, 74, 0.2);
+    margin-bottom: 24px;
+    border: 1px solid rgba(184, 115, 74, 0.35);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .laser-progress-fill {
@@ -334,9 +445,9 @@
     left: 0;
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #7D4829, var(--copper-main), #F3EFE5);
-    box-shadow: 0 0 12px var(--copper-light), 0 0 24px var(--copper-main);
-    border-radius: 4px;
+    background: linear-gradient(90deg, #7D4829 0%, var(--copper-main) 50%, #FFFFFF 100%);
+    box-shadow: 0 0 16px var(--copper-light), 0 0 32px var(--copper-main);
+    border-radius: 6px;
     transition: width 0.06s linear;
 }
 
@@ -345,54 +456,50 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 12px;
+    width: 20px;
     height: 100%;
     background: #FFFFFF;
-    box-shadow: 0 0 8px #FFFFFF, 0 0 16px var(--copper-light);
+    box-shadow: 0 0 12px #FFFFFF, 0 0 24px var(--copper-light);
 }
 
-/* Loader Footer & Skip Button */
+/* Loader Footer Controls */
 .loader-footer-controls {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .hud-sys-label {
     font-family: var(--font-mono);
-    font-size: 9.5px;
-    letter-spacing: 1.2px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
     color: var(--gray-dim);
-    white-space: nowrap;
 }
 
 .cinematic-enter-btn {
-    background: rgba(14, 59, 50, 0.6);
-    color: var(--ivory-warm);
-    border: 1px solid rgba(184, 115, 74, 0.5);
-    padding: 6.5px 14px;
-    border-radius: 6px;
+    background: linear-gradient(135deg, var(--copper-main) 0%, #964e28 100%);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 11px 24px;
+    border-radius: 8px;
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 1.2px;
-    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1.8px;
+    font-weight: 700;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     transition: all 0.25s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    white-space: nowrap;
+    box-shadow: 0 4px 20px var(--copper-glow);
 }
 
 .cinematic-enter-btn:hover {
-    background: var(--copper-main);
-    color: #FFFFFF;
-    border-color: var(--copper-light);
-    box-shadow: 0 0 18px var(--copper-glow);
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, var(--copper-light) 0%, var(--copper-main) 100%);
+    box-shadow: 0 0 25px var(--copper-glow);
+    transform: translateY(-2px);
 }
 
 /* --------------------------------------------------------------------------
@@ -400,20 +507,20 @@
    -------------------------------------------------------------------------- */
 .mobile-action-dock {
     position: fixed;
-    bottom: 18px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(120px);
     z-index: 9990;
     display: none;
     align-items: center;
     gap: 8px;
-    background: rgba(7, 28, 24, 0.9);
+    background: rgba(7, 28, 24, 0.92);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    padding: 7px 12px;
+    padding: 8px 14px;
     border-radius: 40px;
     border: 1px solid rgba(184, 115, 74, 0.45);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(184, 115, 74, 0.25);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65), 0 0 25px rgba(184, 115, 74, 0.3);
     transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
     opacity: 0;
 }
@@ -427,9 +534,9 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 14px;
+    padding: 8px 16px;
     border-radius: 30px;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 700;
     text-decoration: none;
     color: var(--ivory-warm);
@@ -444,21 +551,17 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.dock-btn-primary:active {
-    transform: scale(0.95);
-}
-
 .dock-btn-icon {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: rgba(14, 59, 50, 0.8);
+    background: rgba(14, 59, 50, 0.85);
     border: 1px solid rgba(184, 115, 74, 0.4);
     color: var(--copper-light);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13.5px;
+    font-size: 14px;
     text-decoration: none;
     transition: all 0.2s ease;
 }
@@ -470,24 +573,30 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. MOBILE-OPTIMIZED CINEMATIC GRAPHICS & LAYOUTS
+   3. RESPONSIVE DESIGN (DESKTOP, TABLET & MOBILE)
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
     .mobile-action-dock {
         display: flex;
     }
 
-    /* Ambient Lighting Mesh on Mobile */
-    .ambient-glow {
-        opacity: 0.55;
+    .loader-hr-pillars {
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 
-    /* Enhanced Mobile Hero Stage */
-    .hero-right {
-        margin-top: 10px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
+    .loader-gyro-system {
+        width: 150px;
+        height: 150px;
+    }
+
+    .loader-hologram-monogram {
+        width: 72px;
+        height: 72px;
+    }
+
+    .monogram-glitch-text {
+        font-size: 36px;
     }
 
     .portrait-stage {
@@ -500,99 +609,79 @@
         height: 210px;
         box-shadow: 0 0 35px rgba(184, 115, 74, 0.4), 0 0 70px rgba(14, 59, 50, 0.6);
     }
-
-    .portrait-orbit-ring {
-        border-color: rgba(184, 115, 74, 0.5);
-    }
-
-    .orbit-node {
-        width: 36px;
-        height: 36px;
-        font-size: 15px;
-        background: rgba(7, 28, 24, 0.95);
-        border: 1.5px solid var(--copper-light);
-        box-shadow: 0 0 15px var(--copper-glow);
-    }
-
-    /* Card Glow Sweeps on Mobile */
-    .cinematic-project-showcase, .skills-card, .editorial-manifesto-card {
-        position: relative;
-        border: 1px solid rgba(184, 115, 74, 0.35) !important;
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(14, 59, 50, 0.3) !important;
-        background: linear-gradient(145deg, rgba(14, 43, 37, 0.85) 0%, rgba(7, 28, 24, 0.95) 100%) !important;
-    }
-
-    /* Animated Energy Pulse along Timeline */
-    .timeline-copper-spine::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 80px;
-        background: linear-gradient(180deg, transparent, var(--copper-light), transparent);
-        animation: spinePulse 3.5s linear infinite;
-    }
-
-    @keyframes spinePulse {
-        0% { top: -80px; opacity: 0; }
-        20% { opacity: 1; }
-        80% { opacity: 1; }
-        100% { top: 100%; opacity: 0; }
-    }
-
-    .copper-node {
-        box-shadow: 0 0 16px var(--copper-main), 0 0 30px var(--copper-glow);
-        animation: radarBlip 2s ease-out infinite;
-    }
-
-    @keyframes radarBlip {
-        0% { box-shadow: 0 0 0 0 rgba(184, 115, 74, 0.7); }
-        70% { box-shadow: 0 0 0 12px rgba(184, 115, 74, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(184, 115, 74, 0); }
-    }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .loader-container {
-        padding: 16px 14px;
+        padding: 20px 16px;
     }
 
     .loader-telemetry-hud {
         margin-bottom: 16px;
+        justify-content: center;
+        gap: 6px;
+        border-bottom-color: rgba(184, 115, 74, 0.18);
+        padding-bottom: 10px;
     }
 
     .hud-pill {
-        font-size: 8.5px;
-        padding: 2.5px 7px;
+        font-size: 9px;
+        padding: 3.5px 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .hud-pill:nth-child(3) {
+        display: none; /* Hide 3rd pill on narrow mobile to keep header clean & symmetrical */
     }
 
     .loader-gyro-system {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
         margin-bottom: 16px;
     }
 
-    .monogram-glitch-text {
-        font-size: 32px;
+    .loader-hologram-monogram {
+        width: 68px;
+        height: 68px;
     }
 
-    .loader-full-name {
-        font-size: 26px;
-        letter-spacing: 2px;
+    .monogram-glitch-text {
+        font-size: 34px;
     }
 
     .loader-role-subtitle {
-        font-size: 9px;
-        letter-spacing: 1.5px;
+        font-size: 10px;
+        letter-spacing: 2px;
     }
 
-    .digital-percentage-readout {
-        font-size: 15px;
+    .loader-full-name {
+        font-size: 36px;
+        letter-spacing: 2.5px;
+    }
+
+    .loader-hr-pillars {
+        display: none; /* Keep mobile clean and focused on name, animation & progress */
+    }
+
+    .loader-telemetry-matrix {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
     }
 
     .terminal-status-feed {
-        font-size: 9px;
+        font-size: 10px;
+        width: 100%;
+        justify-content: center;
+        padding: 5px 10px;
+    }
+
+    .matrix-counter-group {
+        gap: 10px;
+    }
+
+    .digital-percentage-readout {
+        font-size: 22px;
     }
 
     .hud-sys-label {
@@ -603,42 +692,10 @@
         justify-content: center;
     }
 
-    /* Mobile Portrait Stage Scaled */
-    .portrait-stage {
-        width: 230px;
-        height: 230px;
-    }
-
-    .portrait-circle-frame {
-        width: 175px;
-        height: 175px;
-    }
-
-    .orbit-node {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-    }
-
-    .hero-main-title {
-        font-size: 36px;
-        letter-spacing: 1.2px;
-    }
-
-    .mobile-action-dock {
-        bottom: 12px;
-        padding: 5px 8px;
-        gap: 5px;
-    }
-
-    .dock-btn {
-        padding: 6px 10px;
-        font-size: 10px;
-    }
-
-    .dock-btn-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
+    .cinematic-enter-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 18px;
+        font-size: 11px;
     }
 }
