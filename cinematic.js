@@ -4,14 +4,10 @@
 
 /* --------------------------------------------------------------------------
    LOADER CUSTOMIZATION SETTINGS
-   You can easily customize or disable the loading screen here!
    -------------------------------------------------------------------------- */
 window.LOADER_CONFIG = {
     enabled: true,          // Set to false to disable the loading screen completely
-    durationMs: 900,        // Speed in milliseconds (e.g., 800 = 0.8s fast, 1200 = 1.2s cinematic)
-    monogram: "R.",         // Text inside the central logo
-    nameText: "RAJKUMAR",   // Title text
-    roleText: "WEB DEVELOPMENT • AI SYSTEMS"
+    durationMs: 480         // Ultra-fast & sleek 0.48s reveal
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,34 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. COMPACT ULTRA-LUXURY LOADER CONTROLLER (CUSTOMIZABLE & FAST)
+   1. LUXURY MINIMALIST EDITORIAL REVEAL CONTROLLER
    -------------------------------------------------------------------------- */
 function initCinematicLoaderEngine() {
     const loader = document.getElementById("intro");
     const progressFill = document.getElementById("loaderProgressFill");
-    const percentageText = document.getElementById("loaderPercentText");
-    const statusFeed = document.getElementById("loaderStatusFeed");
 
     if (!loader) {
         document.body.classList.add("loaded");
         return;
     }
 
-    // Check if loader is disabled in config
     if (window.LOADER_CONFIG && window.LOADER_CONFIG.enabled === false) {
         loader.remove();
         document.body.classList.add("loaded");
         return;
-    }
-
-    // Apply custom text if configured
-    if (window.LOADER_CONFIG) {
-        const monogramEl = document.getElementById("loaderMonogram");
-        const nameEl = document.getElementById("loaderName");
-        const roleEl = document.getElementById("loaderRole");
-        if (monogramEl && window.LOADER_CONFIG.monogram) monogramEl.textContent = window.LOADER_CONFIG.monogram;
-        if (nameEl && window.LOADER_CONFIG.nameText) nameEl.textContent = window.LOADER_CONFIG.nameText;
-        if (roleEl && window.LOADER_CONFIG.roleText) roleEl.textContent = window.LOADER_CONFIG.roleText;
     }
 
     let isDismissed = false;
@@ -65,61 +48,25 @@ function initCinematicLoaderEngine() {
         if (heroStage) {
             heroStage.style.transform = "scale(1)";
         }
+        setTimeout(() => {
+            try { loader.remove(); } catch(e) {}
+        }, 500);
     }
 
-    // Click anywhere on loader to skip instantly
     loader.addEventListener("click", dismissCinematicLoader);
 
-    // Status logs
-    const telemetryLogs = [
-        "INITIALIZING...",
-        "LOADING APIS...",
-        "READY"
-    ];
-
-    let currentPercent = 0;
-    const targetPercent = 100;
-    let startTime = null;
-    const duration = (window.LOADER_CONFIG && window.LOADER_CONFIG.durationMs) || 900;
-
-    function animateLoader(timestamp) {
-        if (isDismissed) return;
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progressRatio = Math.min(elapsed / duration, 1);
-
-        const easeProgress = 1 - Math.pow(1 - progressRatio, 2.5);
-        currentPercent = Math.min(Math.floor(easeProgress * targetPercent), 100);
-
+    // Smooth hairline growth
+    setTimeout(() => {
         if (progressFill) {
-            progressFill.style.width = `${currentPercent}%`;
+            progressFill.style.width = "120px";
         }
+    }, 40);
 
-        if (percentageText) {
-            percentageText.textContent = `${String(currentPercent).padStart(2, '0')}%`;
-        }
+    const duration = (window.LOADER_CONFIG && window.LOADER_CONFIG.durationMs) || 480;
+    setTimeout(dismissCinematicLoader, duration);
 
-        if (statusFeed) {
-            const feedIndex = Math.min(
-                Math.floor(progressRatio * telemetryLogs.length),
-                telemetryLogs.length - 1
-            );
-            statusFeed.textContent = telemetryLogs[feedIndex];
-        }
-
-        if (progressRatio < 1) {
-            requestAnimationFrame(animateLoader);
-        } else {
-            if (progressFill) progressFill.style.width = "100%";
-            if (percentageText) percentageText.textContent = "100%";
-            setTimeout(dismissCinematicLoader, 180);
-        }
-    }
-
-    requestAnimationFrame(animateLoader);
-
-    // Hard failsafe: dismiss after 1.8s
-    setTimeout(dismissCinematicLoader, 1800);
+    // Hard failsafe
+    setTimeout(dismissCinematicLoader, 1200);
 }
 
 /* --------------------------------------------------------------------------
