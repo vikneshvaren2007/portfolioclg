@@ -52,8 +52,9 @@ html_exact = f"""<!DOCTYPE html>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Exact A4 Print Configuration (Requirement 1, 2, 3, 4) */
         @page {{
-            size: 210mm 297mm;
+            size: A4;
             margin: 0;
         }}
 
@@ -100,6 +101,7 @@ html_exact = f"""<!DOCTYPE html>
             font-family: var(--font-main);
             color: var(--text-dark);
             line-height: 1.32;
+            box-sizing: border-box;
         }}
 
         body {{
@@ -165,7 +167,7 @@ html_exact = f"""<!DOCTYPE html>
             font-weight: 700;
         }}
 
-        /* Strict A4 Document Canvas — Exact Single Page Fill */
+        /* Strict A4 Document Canvas — Exact Single Page Fill (Requirement 2, 5, 6, 7, 8) */
         .resume-page {{
             width: 210mm;
             height: 297mm;
@@ -178,8 +180,11 @@ html_exact = f"""<!DOCTYPE html>
             overflow: hidden;
             position: relative;
             box-sizing: border-box;
-            page-break-after: avoid !important;
             page-break-inside: avoid !important;
+            page-break-after: avoid !important;
+            page-break-before: avoid !important;
+            break-inside: avoid !important;
+            break-after: avoid !important;
         }}
 
         /* ==================== LEFT SIDEBAR ==================== */
@@ -194,6 +199,9 @@ html_exact = f"""<!DOCTYPE html>
             height: 297mm;
             max-height: 297mm;
             box-sizing: border-box;
+            overflow: hidden;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .profile-container {{
@@ -226,6 +234,8 @@ html_exact = f"""<!DOCTYPE html>
             display: flex;
             flex-direction: column;
             gap: 4px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .sidebar-title {{
@@ -367,12 +377,17 @@ html_exact = f"""<!DOCTYPE html>
             height: 297mm;
             max-height: 297mm;
             box-sizing: border-box;
+            overflow: hidden;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .header-block {{
             display: flex;
             flex-direction: column;
             gap: 2px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .candidate-name {{
@@ -428,6 +443,8 @@ html_exact = f"""<!DOCTYPE html>
             display: flex;
             flex-direction: column;
             gap: 5px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .section-header {{
@@ -455,6 +472,8 @@ html_exact = f"""<!DOCTYPE html>
             border-left: 3.5px solid var(--gold-main);
             border-radius: 6px;
             padding: 8px 12px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .edu-details {{
@@ -506,6 +525,8 @@ html_exact = f"""<!DOCTYPE html>
             display: flex;
             flex-direction: column;
             gap: 2.5px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .project-title {{
@@ -553,6 +574,8 @@ html_exact = f"""<!DOCTYPE html>
             border: 1px solid var(--border-card);
             border-radius: 6px;
             padding: 7px 9px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .strength-heading {{
@@ -590,6 +613,8 @@ html_exact = f"""<!DOCTYPE html>
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }}
 
         .comp-col-title {{
@@ -613,7 +638,12 @@ html_exact = f"""<!DOCTYPE html>
             flex-shrink: 0;
         }}
 
+        /* Print Specific Strict Single Page Rules (Requirement 4, 6, 8) */
         @media print {{
+            @page {{
+                size: A4;
+                margin: 0;
+            }}
             html, body {{
                 background-color: transparent !important;
                 margin: 0 !important;
@@ -622,6 +652,7 @@ html_exact = f"""<!DOCTYPE html>
                 height: 297mm !important;
                 max-height: 297mm !important;
                 overflow: hidden !important;
+                box-sizing: border-box !important;
             }}
             .web-toolbar {{
                 display: none !important;
@@ -633,8 +664,25 @@ html_exact = f"""<!DOCTYPE html>
                 max-height: 297mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                page-break-after: avoid !important;
                 page-break-inside: avoid !important;
+                page-break-after: avoid !important;
+                page-break-before: avoid !important;
+                break-inside: avoid !important;
+                break-after: avoid !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+            }}
+            .sidebar, .main-column {{
+                height: 297mm !important;
+                max-height: 297mm !important;
+                overflow: hidden !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                box-sizing: border-box !important;
+            }}
+            .sidebar-section, .section-block, .education-card, .project-item, .strength-card, .competencies-card {{
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }}
         }}
     </style>
@@ -888,6 +936,12 @@ if browser_exe:
     
     if os.path.exists(abs_pdf):
         shutil.copy(abs_pdf, abs_root_pdf)
+        
+        # Mirror to all named PDF variants
+        shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Gold_White.pdf')
+        shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Gold_Black.pdf')
+        shutil.copy(abs_pdf, 'resume/Raj_Kumar_Resume_Gold_White.pdf')
+        shutil.copy(abs_pdf, 'resume/Raj_Kumar_Resume_Gold_Black.pdf')
         
         # Verify page count
         with open(abs_pdf, 'rb') as f_pdf:
