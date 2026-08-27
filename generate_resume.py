@@ -377,7 +377,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
             <button onclick="window.print()" class="toolbar-btn">
                 <span>Print</span>
             </button>
-            <a href="Raj_Kumar_Resume.pdf" download="Raj_Kumar_Resume.pdf" class="toolbar-btn toolbar-btn-primary">
+            <a href="../assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf" class="toolbar-btn toolbar-btn-primary">
                 <span>Download PDF (Vector)</span>
             </a>
         </div>

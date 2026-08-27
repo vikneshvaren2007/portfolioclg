@@ -1,0 +1,7 @@
+# Preserve binary files and prevent line-ending conversion issues
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
