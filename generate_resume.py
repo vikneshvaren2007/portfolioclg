@@ -7,6 +7,7 @@ import pypdf
 
 os.makedirs('resume', exist_ok=True)
 os.makedirs('images', exist_ok=True)
+os.makedirs('assets', exist_ok=True)
 
 # Load embedded vector fonts CSS
 with open('resume/embedded_fonts.css', 'r', encoding='utf-8') as f:
@@ -22,6 +23,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
         sub_heading_color = "#111115"
         border_box = "#E2DFD6"
         footer_bg = "#F8F6F0"
+        link_color = "#926700"
     else:
         # Exact monochrome classic white & black
         gold_accent = "#111115"
@@ -30,6 +32,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
         sub_heading_color = "#1A1A20"
         border_box = "#E5E5EB"
         footer_bg = "#F7F7FA"
+        link_color = "#0A58CA"
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -59,6 +62,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
             --border-line: #E0DFE6;
             --box-border: {border_box};
             --box-bg: {footer_bg};
+            --link-color: {link_color};
         }}
 
         * {{
@@ -79,7 +83,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
             background-color: #FFFFFF;
             font-family: var(--font-sans);
             color: var(--text-main);
-            line-height: 1.38;
+            line-height: 1.36;
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
         }}
@@ -155,11 +159,11 @@ def build_clean_vector_resume_html(variant='classic_clean'):
             max-height: 297mm;
             min-height: 297mm;
             background-color: #FFFFFF;
-            padding: 16mm 18mm 14mm 18mm;
+            padding: 14mm 18mm 12mm 18mm;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 9px;
             position: relative;
             overflow: hidden;
             page-break-inside: avoid !important;
@@ -170,16 +174,25 @@ def build_clean_vector_resume_html(variant='classic_clean'):
 
         /* ==================== HEADER SECTION ==================== */
         .header-section {{
-            text-align: center;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.5px;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            border-bottom: 1.5px solid var(--border-line);
+            padding-bottom: 6px;
             margin-bottom: 2px;
         }}
 
+        .header-left {{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            gap: 1.5px;
+        }}
+
         .candidate-name {{
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: var(--text-heading);
             letter-spacing: 0.8px;
@@ -188,8 +201,8 @@ def build_clean_vector_resume_html(variant='classic_clean'):
         }}
 
         .candidate-role {{
-            font-size: 12.5px;
-            font-weight: 600;
+            font-size: 11.5px;
+            font-weight: 700;
             letter-spacing: 1.5px;
             color: var(--text-sub);
             text-transform: uppercase;
@@ -197,14 +210,13 @@ def build_clean_vector_resume_html(variant='classic_clean'):
         }}
 
         .contact-bar {{
-            font-size: 9.2px;
+            font-size: 9px;
             color: var(--text-muted);
             margin-top: 3px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             line-height: 1.3;
         }}
 
@@ -220,20 +232,67 @@ def build_clean_vector_resume_html(variant='classic_clean'):
 
         .divider-dot {{
             color: #9999A5;
-            font-size: 10px;
+            font-size: 9px;
+        }}
+
+        /* Top-Right Header Portfolio Link */
+        .header-right {{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 2.5px;
+            padding-top: 2px;
+            flex-shrink: 0;
+        }}
+
+        .portfolio-label-badge {{
+            font-size: 8.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-heading);
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            padding: 2px 7px;
+            border-radius: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }}
+
+        .portfolio-label-badge:hover {{
+            border-color: var(--text-heading);
+        }}
+
+        .portfolio-hyperlink {{
+            font-family: var(--font-mono);
+            font-size: 8.4px;
+            font-weight: 600;
+            color: var(--link-color);
+            text-decoration: underline;
+            letter-spacing: -0.1px;
+            transition: color 0.15s ease;
+            display: inline-block;
+        }}
+
+        .portfolio-hyperlink:hover {{
+            color: #084298;
         }}
 
         /* ==================== SECTION BLOCKS ==================== */
         .section-block {{
             display: flex;
             flex-direction: column;
-            gap: 3.5px;
+            gap: 3px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }}
 
         .section-title {{
-            font-size: 11.8px;
+            font-size: 11.5px;
             font-weight: 800;
             letter-spacing: 0.6px;
             text-transform: uppercase;
@@ -244,9 +303,9 @@ def build_clean_vector_resume_html(variant='classic_clean'):
         }}
 
         .section-body {{
-            font-size: 9.4px;
+            font-size: 9.3px;
             color: var(--text-main);
-            line-height: 1.44;
+            line-height: 1.42;
             text-align: justify;
         }}
 
@@ -255,7 +314,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
             display: flex;
             flex-direction: column;
             gap: 1.5px;
-            margin-bottom: 3px;
+            margin-bottom: 2.5px;
         }}
 
         .item-title-row {{
@@ -265,30 +324,30 @@ def build_clean_vector_resume_html(variant='classic_clean'):
         }}
 
         .item-heading {{
-            font-size: 10.4px;
+            font-size: 10.2px;
             font-weight: 700;
             color: var(--text-heading);
         }}
 
         .item-subheading {{
-            font-size: 9.3px;
+            font-size: 9.1px;
             color: var(--text-muted);
             font-weight: 500;
         }}
 
         .item-desc {{
-            font-size: 9.3px;
+            font-size: 9.2px;
             color: var(--text-main);
-            line-height: 1.42;
+            line-height: 1.4;
         }}
 
         /* Technical Skills List */
         .skills-list {{
             display: flex;
             flex-direction: column;
-            gap: 2.2px;
-            font-size: 9.3px;
-            line-height: 1.38;
+            gap: 2px;
+            font-size: 9.2px;
+            line-height: 1.36;
         }}
 
         .skill-item {{
@@ -313,8 +372,8 @@ def build_clean_vector_resume_html(variant='classic_clean'):
             background: var(--box-bg);
             border: 1px solid var(--box-border);
             border-radius: 4px;
-            padding: 6.5px 12px;
-            font-size: 9px;
+            padding: 6px 12px;
+            font-size: 8.8px;
             font-weight: 600;
             color: var(--text-heading);
             display: flex;
@@ -353,7 +412,7 @@ def build_clean_vector_resume_html(variant='classic_clean'):
                 height: 297mm !important;
                 max-height: 297mm !important;
                 margin: 0 !important;
-                padding: 15mm 18mm 13mm 18mm !important;
+                padding: 14mm 18mm 12mm 18mm !important;
                 page-break-inside: avoid !important;
                 page-break-after: avoid !important;
                 break-inside: avoid !important;
@@ -387,16 +446,25 @@ def build_clean_vector_resume_html(variant='classic_clean'):
     <main class="resume-page">
         <!-- ==================== HEADER ==================== -->
         <header class="header-section">
-            <h1 class="candidate-name">RAJ KUMAR</h1>
-            <div class="candidate-role">WEB DEVELOPER</div>
-            <div class="contact-bar">
-                <span>Tirunelveli | Tamil Nadu</span>
-                <span class="divider-dot">,</span>
-                <a href="mailto:vikneshvaren2@gmail.com">vikneshvaren2@gmail</a>
-                <span class="divider-dot">,</span>
-                <a href="tel:+919445437069">+919445437069</a>
-                <span class="divider-dot">,</span>
-                <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank">https://vikneshvaren2007.github.io/portfolioclg/</a>
+            <div class="header-left">
+                <h1 class="candidate-name">RAJ KUMAR</h1>
+                <div class="candidate-role">WEB DEVELOPER</div>
+                <div class="contact-bar">
+                    <span>Tirunelveli | Tamil Nadu</span>
+                    <span class="divider-dot">&bull;</span>
+                    <a href="mailto:vikneshvaren2@gmail.com">vikneshvaren2@gmail.com</a>
+                    <span class="divider-dot">&bull;</span>
+                    <a href="tel:+919445437069">+91 9445437069</a>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank" rel="noopener noreferrer" class="portfolio-label-badge">
+                    <span>PORTFOLIO</span>
+                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg>
+                </a>
+                <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank" rel="noopener noreferrer" class="portfolio-hyperlink">
+                    https://vikneshvaren2007.github.io/portfolioclg/
+                </a>
             </div>
         </header>
 
@@ -547,6 +615,9 @@ if browser_exe:
     
     # Copy to workspace root and variants
     shutil.copy(abs_pdf, abs_root_pdf)
+    shutil.copy(abs_pdf, 'assets/Raj_Kumar_Resume_Full_Page.pdf')
+    shutil.copy(abs_pdf, 'resume/Raj_Kumar_Resume_Full_Page.pdf')
+    shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Full_Page.pdf')
     shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Gold_White.pdf')
     shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Gold_Black.pdf')
     shutil.copy(abs_pdf, 'resume/Raj_Kumar_Resume_Gold_White.pdf')
@@ -555,9 +626,21 @@ if browser_exe:
     # Verify with pypdf
     reader = pypdf.PdfReader(abs_pdf)
     print(f"[SUCCESS] Exported {abs_pdf} -> Total Pages: {len(reader.pages)}")
-    text_sample = reader.pages[0].extract_text()
-    print("=== Extracted Text Preview ===")
-    print(text_sample)
+    
+    page = reader.pages[0]
+    print("\n--- Hyperlink Annotations Audit ---")
+    if '/Annots' in page:
+        for a in page['/Annots']:
+            obj = a.get_object()
+            uri = obj.get('/A', {}).get('/URI', 'N/A')
+            rect = obj.get('/Rect', [])
+            print(f"  URI: {uri} | Rect: {rect}")
+    else:
+        print("  WARNING: No annotations found!")
+    
+    text_sample = page.extract_text()
+    print("\n=== Extracted Text Preview ===")
+    print(text_sample[:400])
     print("==============================")
 else:
     print("Error: Browser executable not found.")
