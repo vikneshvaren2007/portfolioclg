@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajkumar — Full-Stack Web Developer &bull; AI Systems &bull; Portfolio</title>
+    <title>Rajkumar — Web Developer &bull; AI Enthusiast &bull; Portfolio</title>
     <meta name="description"
-        content="Rajkumar — Full-Stack Web Developer, B.Sc. Computer Science student & AI enthusiast crafting modern, responsive and user-friendly digital experiences.">
+        content="Rajkumar — Web Developer, B.Sc. Computer Science student & AI enthusiast crafting modern, responsive, and high-performance digital experiences.">
     <meta name="keywords"
-        content="Rajkumar, Web Developer, Full-Stack, Python, Flask, JavaScript, SQLite, Pet Nexa, Royal Rose Milk, Tamil Nadu">
+        content="Rajkumar, Web Developer, Full-Stack, Python, Flask, JavaScript, HTML, CSS, Portfolio, Pet Nexa, Royal Rose Milk, Tamil Nadu">
     <meta name="author" content="Rajkumar">
 
-    <!-- Google Fonts: Cormorant Garamond (Luxury Serif), Plus Jakarta Sans & Inter (UI/Body), JetBrains Mono, Great Vibes (Signature) -->
+    <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Inter, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,7 +21,7 @@
     <!-- FontAwesome 6.5 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Stylesheets: Art-Directed Master Stylesheet & Cinematic Layers -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cinematic.css">
 </head>
@@ -31,24 +31,22 @@
     <!-- =====================================================
          0. CINEMATIC ATMOSPHERE & BACKGROUND CANVAS
     ===================================================== -->
-    <!-- Interactive Particle Constellation Canvas & Shooting Stars -->
     <canvas id="cinematicCanvas" class="cinematic-canvas"></canvas>
 
-    <!-- Subtle Film Grain & Warm Gold Ambient Glows -->
+    <!-- Subtle Film Grain & Ambient Atmosphere -->
     <div class="editorial-film-grain"></div>
     <div class="ambient-glow glow-top-right"></div>
     <div class="ambient-glow glow-center-left"></div>
     <div class="ambient-glow glow-bottom-right"></div>
 
-    <!-- Desktop Context Cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"><span class="cursor-label" id="cursorLabel"></span></div>
-
     <!-- Scroll Progress Indicator -->
     <div class="gold-progress-line" id="scrollProgress"></div>
 
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
     <!-- =====================================================
-         1. LUXURY MINIMALIST EDITORIAL LOADER (RECOMMENDED)
+         1. LUXURY MINIMALIST EDITORIAL LOADER
     ===================================================== -->
     <div id="intro" class="cinematic-loader" aria-hidden="true">
         <div class="loader-minimal-reveal">
@@ -63,40 +61,38 @@
     </div>
 
     <!-- =====================================================
-         2. LUXURY STICKY NAVIGATION BAR
+         2. TOP NAVIGATION BAR
     ===================================================== -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <!-- Monogram Badge (Matching Reference Image 1) -->
+            <!-- Brand Monogram -->
             <a href="#home" class="nav-brand" aria-label="Rajkumar Home">
                 <div class="brand-monogram-circle">R.</div>
                 <div class="brand-text-col">
-                    <span class="brand-title">RAJKUMAR</span>
-                    <span class="brand-sub">DEV // PORTFOLIO</span>
+                    <span class="brand-title">rajkumar<span class="gold-dot">•</span></span>
+                    <span class="brand-sub">WEB DEVELOPER</span>
                 </div>
             </a>
 
-            <!-- Nav Links -->
+            <!-- Top Navigation Links (Strict order: Home, About, Services, Contact) -->
             <nav class="nav-links" id="navLinks">
-                <a href="#home" class="nav-item active">HOME</a>
-                <a href="#about" class="nav-item">ABOUT</a>
-                <a href="#skills" class="nav-item">SKILLS</a>
-                <a href="#work" class="nav-item">PROJECTS</a>
-                <a href="#contact" class="nav-item">CONTACT</a>
+                <a href="#home" class="nav-item active"><span class="nav-point-circle"></span>HOME</a>
+                <a href="#about" class="nav-item"><span class="nav-point-circle"></span>ABOUT</a>
+                <a href="#services" class="nav-item"><span class="nav-point-circle"></span>SERVICES</a>
+                <a href="#contact" class="nav-item"><span class="nav-point-circle"></span>CONTACT</a>
             </nav>
 
             <!-- Nav Actions -->
             <div class="nav-actions">
+                <a href="projects.html" class="btn-nav-pill-projects">
+                    <span>PROJECTS ↗</span>
+                </a>
                 <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme"
                     title="Toggle Bright / Dark Mode" type="button">
                     <i class="fa-solid fa-sun icon-sun"></i>
                     <i class="fa-solid fa-moon icon-moon"></i>
-                    <span class="theme-toggle-text">BRIGHT</span>
+                    <span class="theme-toggle-text">LIGHT</span>
                 </button>
-                <a href="#contact" class="btn-nav-cta">
-                    <span>Hire Me</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
                 <button class="mobile-toggle" id="mobileToggleBtn" aria-label="Toggle Navigation Menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -107,9 +103,9 @@
 
     <main>
         <!-- =====================================================
-             3. HERO / HOME SECTION (EXACT MATCH TO REFERENCE IMAGE 1)
+             3. HERO / HOME SECTION (MATCHING SAMPLE SCREENSHOT 1)
         ===================================================== -->
-        <section id="home" class="hero-section">
+        <section id="home" class="hero-section hero-tech-grid-bg">
             <div class="hero-layout-master">
                 <!-- Left Vertical Social Rail -->
                 <aside class="hero-rail-col">
@@ -119,6 +115,10 @@
                         <a href="https://github.com/vikneshvaren2007" target="_blank" rel="noopener noreferrer"
                             class="rail-social-link" title="GitHub Profile">
                             <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/__.rxjkumar?stkn=MWF0NG9keWlrYjBkdw==" target="_blank" rel="noopener noreferrer"
+                            class="rail-social-link" title="Instagram Profile">
+                            <i class="fa-brands fa-instagram"></i>
                         </a>
                         <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer"
                             class="rail-social-link" title="WhatsApp Chat">
@@ -130,88 +130,163 @@
                     </div>
                 </aside>
 
-                <!-- Left Content Details -->
+                <!-- Center-Left Content -->
                 <div class="hero-content-col">
-                    <span class="hero-salutation">HELLO, I'M</span>
-                    <h1 class="hero-grand-name">RAJKUMAR</h1>
-                    <h2 class="hero-role-title">WEB DEVELOPER</h2>
+                    <!-- Status Badge Pill (Screenshot 1) -->
+                    <div class="badge-available-pill">
+                        <span class="pulse-indicator"></span>
+                        <span>AVAILABLE FOR HIRE</span>
+                    </div>
 
-                    <p class="hero-narrative-lead">
-                        I build modern, responsive and user-friendly websites that help businesses grow and brands stand
-                        out.
-                    </p>
+                    <!-- Hi, I'm & Name -->
+                    <div class="hero-hi-text">Hi, I'm</div>
+                    <h1 class="hero-name-highlight">Rajkumar</h1>
 
-                    <div class="hero-cta-group">
-                        <a href="#work" class="btn-gold-solid">
-                            <span>View My Work</span>
+                    <!-- Typewriter Terminal Role -->
+                    <div class="hero-terminal-role">
+                        <span class="prompt-chevron">&gt;</span>
+                        <span id="heroTypingTitle" class="hero-typing-title">Full Stack Web Developer</span>
+                        <span class="typing-cursor">|</span>
+                    </div>
+
+                    <div class="hero-narrative-box">
+                        I craft modern, responsive, and user-friendly websites that help businesses grow, empower users,
+                        and make brands stand out in the digital landscape.
+                    </div>
+
+                    <!-- Call to Action Group -->
+                    <div class="hero-btn-row">
+                        <a href="projects.html" class="btn-solid-glow">
+                            <span>VIEW PROJECTS</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
-                        <a href="assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf" target="_blank" class="btn-cv-outline">
-                            <span>Download CV</span>
+                        <a href="assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf" target="_blank" class="btn-outline-glow">
+                            <span>RESUME</span>
                             <i class="fa-solid fa-download"></i>
                         </a>
                     </div>
 
-                    <a href="#about" class="hero-scroll-cue">
-                        <div class="mouse-pill-icon">
-                            <span class="mouse-wheel-dot"></span>
-                        </div>
-                        <span>SCROLL DOWN</span>
-                    </a>
+                    <!-- Tech Stack Pills Row (Screenshot 1) -->
+                    <div class="hero-tech-pills-row">
+                        <span class="hero-tech-mini-pill">HTML5</span>
+                        <span class="hero-tech-mini-pill">CSS3</span>
+                        <span class="hero-tech-mini-pill">JavaScript</span>
+                        <span class="hero-tech-mini-pill">Python</span>
+                        <span class="hero-tech-mini-pill">Flask</span>
+                        <span class="hero-tech-mini-pill">SQLite</span>
+                    </div>
                 </div>
 
-                <!-- Right Column: Majestic Orbital Stage & Hero Circular Portrait -->
+                <!-- Right Column: Orbital Stage with Rajkumar's Face (Screenshot 1) -->
                 <div class="hero-portrait-col">
-                    <div class="hero-portrait-stage" id="portraitStage">
-                        <!-- Ambient Warm Golden Core Glow -->
-                        <div class="portrait-ambient-glow-core"></div>
+                    <div class="sample-orbit-avatar-container">
+                        <!-- Static outer circular ring track (Fixed & Centered) -->
+                        <div class="sample-orbit-ring" aria-hidden="true"></div>
 
-                        <!-- Dotted Matrix Grid Accent (Top Right) with Twinkle Stars -->
-                        <div class="dotted-matrix-accent">
-                            <span class="matrix-twinkle star-1"></span>
-                            <span class="matrix-twinkle star-2"></span>
-                            <span class="matrix-twinkle star-3"></span>
+                        <!-- 3 Navigation Dots Rotating Orbit System (120deg Spacing) -->
+                        <div class="orbit-motion-system" aria-label="Circular Navigation Controls">
+                            <!-- Shared SVG Filter & Gradient Definitions for Gold Trail -->
+                            <svg class="orbit-trail-defs" aria-hidden="true" width="0" height="0">
+                                <defs>
+                                    <linearGradient id="orbitTrailGrad" x1="100%" y1="0%" x2="0%" y2="60%">
+                                        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85" />
+                                        <stop offset="25%" stop-color="#FFDF73" stop-opacity="0.6" />
+                                        <stop offset="65%" stop-color="#D4AF37" stop-opacity="0.25" />
+                                        <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
+                                    </linearGradient>
+                                    <filter id="trailGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feGaussianBlur stdDeviation="1.2" result="blur" />
+                                        <feMerge>
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+                            </svg>
+
+                            <!-- Dot 1: ABOUT (0deg / 12 o'clock) -->
+                            <div class="orbit-slot slot-about">
+                                <!-- Subtle circular light trail -->
+                                <svg class="orbit-slot-trail" viewBox="0 0 100 100" aria-hidden="true">
+                                    <path d="M 50 0.5 A 49.5 49.5 0 0 0 25.25 7.13" fill="none" stroke="url(#orbitTrailGrad)"
+                                        stroke-width="2.5" stroke-linecap="round" filter="url(#trailGlow)" />
+                                </svg>
+                                <a href="#about" class="sample-satellite-dot" id="orbitDotAbout"
+                                    data-orbit-target="about" aria-label="Navigate to About Me section" title="About Me">
+                                    <!-- Spark Diamond Center Core -->
+                                    <span class="spark-diamond" aria-hidden="true"></span>
+                                    <!-- Surrounding Micro-Particle Stardust -->
+                                    <span class="spark-particles" aria-hidden="true">
+                                        <span class="spark-dust dust-1"></span>
+                                        <span class="spark-dust dust-2"></span>
+                                        <span class="spark-dust dust-3"></span>
+                                        <span class="spark-dust dust-4"></span>
+                                    </span>
+                                    <span class="orbit-dot-tooltip">ABOUT</span>
+                                </a>
+                            </div>
+
+                            <!-- Dot 2: PROJECTS (120deg / 4 o'clock) -> Project Gallery -->
+                            <div class="orbit-slot slot-projects">
+                                <!-- Subtle circular light trail -->
+                                <svg class="orbit-slot-trail" viewBox="0 0 100 100" aria-hidden="true">
+                                    <path d="M 50 0.5 A 49.5 49.5 0 0 0 25.25 7.13" fill="none" stroke="url(#orbitTrailGrad)"
+                                        stroke-width="2.5" stroke-linecap="round" filter="url(#trailGlow)" />
+                                </svg>
+                                <a href="projects.html" class="sample-satellite-dot" id="orbitDotProjects"
+                                    data-orbit-target="projects-gallery" aria-label="Navigate to Project Gallery"
+                                    title="Project Gallery">
+                                    <!-- Spark Diamond Center Core -->
+                                    <span class="spark-diamond" aria-hidden="true"></span>
+                                    <!-- Surrounding Micro-Particle Stardust -->
+                                    <span class="spark-particles" aria-hidden="true">
+                                        <span class="spark-dust dust-1"></span>
+                                        <span class="spark-dust dust-2"></span>
+                                        <span class="spark-dust dust-3"></span>
+                                        <span class="spark-dust dust-4"></span>
+                                    </span>
+                                    <span class="orbit-dot-tooltip">PROJECTS</span>
+                                </a>
+                            </div>
+
+                            <!-- Dot 3: CONTACT (240deg / 8 o'clock) -->
+                            <div class="orbit-slot slot-contact">
+                                <!-- Subtle circular light trail -->
+                                <svg class="orbit-slot-trail" viewBox="0 0 100 100" aria-hidden="true">
+                                    <path d="M 50 0.5 A 49.5 49.5 0 0 0 25.25 7.13" fill="none" stroke="url(#orbitTrailGrad)"
+                                        stroke-width="2.5" stroke-linecap="round" filter="url(#trailGlow)" />
+                                </svg>
+                                <a href="#contact" class="sample-satellite-dot" id="orbitDotContact"
+                                    data-orbit-target="contact" aria-label="Navigate to Contact section" title="Get in Touch">
+                                    <!-- Spark Diamond Center Core -->
+                                    <span class="spark-diamond" aria-hidden="true"></span>
+                                    <!-- Surrounding Micro-Particle Stardust -->
+                                    <span class="spark-particles" aria-hidden="true">
+                                        <span class="spark-dust dust-1"></span>
+                                        <span class="spark-dust dust-2"></span>
+                                        <span class="spark-dust dust-3"></span>
+                                        <span class="spark-dust dust-4"></span>
+                                    </span>
+                                    <span class="orbit-dot-tooltip">CONTACT</span>
+                                </a>
+                            </div>
                         </div>
 
-                        <!-- Multi-Layered Celestial Golden Orbit System -->
-                        <div class="portrait-orbit-ring orbit-ring-outer">
-                            <div class="orbit-pulse-dot dot-1"></div>
-                            <div class="orbit-pulse-dot dot-2"></div>
-                            <div class="orbit-pulse-dot dot-3"></div>
-                            <div class="orbit-pulse-dot dot-4"></div>
+                        <!-- Circular avatar with Rajkumar's actual photo -->
+                        <div class="sample-avatar-circle">
+                            <img src="images/raj-hero-new.jpg" alt="Rajkumar — Web Developer" class="sample-avatar-img">
                         </div>
 
-                        <div class="portrait-orbit-ring orbit-ring-middle">
-                            <div class="orbit-satellite-bead"></div>
+                        <!-- Stat Badge Top Right: 3 Major Projects -->
+                        <div class="sample-stat-badge badge-top-right">
+                            <div class="sample-stat-val">3</div>
+                            <div class="sample-stat-lbl">Major Projects</div>
                         </div>
 
-                        <div class="portrait-inner-ring"></div>
-                        <div class="portrait-radar-sweep"></div>
-                        <div class="portrait-golden-halo"></div>
-                        <div class="portrait-halo-outer"></div>
-
-                        <!-- Floating Glassmorphic Telemetry Chips -->
-                        <div class="hero-floating-chip chip-top-left">
-                            <span class="chip-dot"></span>
-                            <i class="fa-solid fa-code"></i>
-                            <span>FULL-STACK</span>
-                        </div>
-
-                        <div class="hero-floating-chip chip-bottom-right">
-                            <i class="fa-solid fa-brain"></i>
-                            <span>AI SYSTEMS</span>
-                            <span class="chip-pulse-glow"></span>
-                        </div>
-
-                        <div class="hero-floating-chip chip-top-right">
-                            <i class="fa-solid fa-bolt"></i>
-                            <span>OPEN FOR ROLES</span>
-                        </div>
-
-                        <!-- Perfect Circular Developer Profile Portrait -->
-                        <div class="portrait-image-wrapper">
-                            <img src="images/profile.jpg" alt="Rajkumar — Web Developer" class="portrait-hero-img"
-                                onerror="this.src='images/profile-front-dark.jpg'">
+                        <!-- Stat Badge Bottom Left: 10+ Web Builds -->
+                        <div class="sample-stat-badge badge-bottom-left">
+                            <div class="sample-stat-val">10+</div>
+                            <div class="sample-stat-lbl">Web Builds</div>
                         </div>
                     </div>
                 </div>
@@ -219,495 +294,337 @@
         </section>
 
         <!-- =====================================================
-             4. SECTION 01 — ABOUT ME (EXACT MATCH TO REFERENCE IMAGE)
+             4. SECTION 01 — ABOUT ME (MATCHING SAMPLE SCREENSHOT 2)
         ===================================================== -->
-        <section id="about" class="editorial-section about-cinematic-section">
+        <section id="about" class="sample-about-section">
             <div class="editorial-container">
-                <!-- Top Split: Left Content + Right Full Night Walk Portrait -->
-                <div class="about-hero-split">
-                    <!-- Left: Spine + Narrative + Quick Details + Download CV -->
-                    <div class="about-left-editorial">
-                        <div class="about-tag-spine-wrap">
-                            <span class="sec-pill-tag">01. ABOUT ME</span>
-                        </div>
+                <h2 class="sample-about-title">About Me</h2>
 
-                        <h2 class="about-headline-cinematic">
-                            I Build Digital Experiences<br>That Make an Impact
-                        </h2>
+                <div class="sample-about-grid">
+                    <!-- Left: Photo Frame with Strong Professional Developer (Face Obscured) -->
+                    <div class="sample-about-photo-frame">
+                        <img src="images/strong-developer.jpg" alt="Professional Software Engineer & Developer" class="sample-about-photo">
+                    </div>
 
-                        <div class="about-gold-hairline"></div>
-
-                        <p class="about-bio-text">
-                            I'm a passionate Web Developer who loves turning ideas into clean, elegant &amp;
-                            high-performing websites. I focus on creating solutions that are not only functional but
-                            also visually engaging. Always learning, always building.
+                    <!-- Right: Bio + Education + Experience + Small Core Skills -->
+                    <div class="sample-about-content">
+                        <div class="about-role-tag">WEB DEVELOPER &bull; AI ENTHUSIAST</div>
+                        <p class="about-bio-text" style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 24px; color: var(--text-muted);">
+                            I am a dedicated Web Developer, B.Sc. Computer Science student, and AI enthusiast who loves
+                            transforming ideas into clean, elegant, and high-performing websites. My focus is on
+                            building digital solutions that are structurally sound, accessible, and
+                            visually engaging. Always learning, building, and refining.
                         </p>
 
-                        <!-- 2-Column Info Grid with Gold Icons -->
-                        <div class="about-meta-grid-2col">
-                            <!-- Cell 1: Name -->
-                            <div class="meta-item-cell">
-                                <div class="meta-icon-gold"><i class="fa-regular fa-calendar"></i></div>
-                                <div class="meta-data-group">
-                                    <span class="meta-label">Name</span>
-                                    <span class="meta-val">Rajkumar</span>
+                        <!-- Education & Experience Highlights -->
+                        <div class="about-credentials-grid">
+                            <div class="about-credential-card">
+                                <div class="credential-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <div class="credential-info">
+                                    <div class="credential-title">Education</div>
+                                    <div class="credential-desc">B.Sc. Computer Science — Computing & Web Technologies</div>
                                 </div>
                             </div>
-
-                            <!-- Cell 2: Role -->
-                            <div class="meta-item-cell">
-                                <div class="meta-icon-gold"><i class="fa-solid fa-code"></i></div>
-                                <div class="meta-data-group">
-                                    <span class="meta-label">Role</span>
-                                    <span class="meta-val">Web Developer</span>
-                                </div>
-                            </div>
-
-                            <!-- Cell 3: Email -->
-                            <div class="meta-item-cell">
-                                <div class="meta-icon-gold"><i class="fa-regular fa-envelope"></i></div>
-                                <div class="meta-data-group">
-                                    <span class="meta-label">Email</span>
-                                    <span class="meta-val">vikneshvaren2@gmail.com</span>
-                                </div>
-                            </div>
-
-                            <!-- Cell 4: Phone -->
-                            <div class="meta-item-cell">
-                                <div class="meta-icon-gold"><i class="fa-solid fa-phone"></i></div>
-                                <div class="meta-data-group">
-                                    <span class="meta-label">Phone</span>
-                                    <span class="meta-val">9445437069</span>
-                                </div>
-                            </div>
-
-                            <!-- Cell 5: Location -->
-                            <div class="meta-item-cell">
-                                <div class="meta-icon-gold"><i class="fa-solid fa-location-dot"></i></div>
-                                <div class="meta-data-group">
-                                    <span class="meta-label">Location</span>
-                                    <span class="meta-val">Tamil Nadu, India</span>
-                                </div>
-                            </div>
-
-                            <!-- Cell 6: Freelance -->
-                            <div class="meta-item-cell">
-                                <div class="meta-icon-gold"><i class="fa-solid fa-globe"></i></div>
-                                <div class="meta-data-group">
-                                    <span class="meta-label">Freelance</span>
-                                    <span class="meta-val">Available</span>
+                            <div class="about-credential-card">
+                                <div class="credential-icon"><i class="fa-solid fa-code"></i></div>
+                                <div class="credential-info">
+                                    <div class="credential-title">Experience</div>
+                                    <div class="credential-desc">Full Stack Web Development & Bespoke UI Architecture</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Action Button: Download CV -->
-                        <div class="about-cv-action-row">
-                            <a href="assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf" class="btn-download-cv-gold"
-                                target="_blank">
+                        <!-- Small Core Skills (HTML, CSS, JavaScript, Python, Flask) -->
+                        <div class="sample-skill-bars-stack">
+                            <div class="sample-skill-row">
+                                <div class="sample-skill-meta">
+                                    <span class="skill-name">html / css</span>
+                                    <span class="pct-val">95%</span>
+                                </div>
+                                <div class="sample-skill-track">
+                                    <div class="sample-skill-fill" style="width: 95%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="sample-skill-row">
+                                <div class="sample-skill-meta">
+                                    <span class="skill-name">javascript</span>
+                                    <span class="pct-val">88%</span>
+                                </div>
+                                <div class="sample-skill-track">
+                                    <div class="sample-skill-fill" style="width: 88%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="sample-skill-row">
+                                <div class="sample-skill-meta">
+                                    <span class="skill-name">python</span>
+                                    <span class="pct-val">90%</span>
+                                </div>
+                                <div class="sample-skill-track">
+                                    <div class="sample-skill-fill" style="width: 90%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="sample-skill-row">
+                                <div class="sample-skill-meta">
+                                    <span class="skill-name">flask</span>
+                                    <span class="pct-val">85%</span>
+                                </div>
+                                <div class="sample-skill-track">
+                                    <div class="sample-skill-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Button & Social Row (CV + GitHub + Instagram + Contact) -->
+                        <div class="about-cv-action-row" style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap;">
+                            <a href="assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf"
+                                class="btn-download-cv-gold" target="_blank">
                                 <span>DOWNLOAD CV</span>
                                 <i class="fa-solid fa-download"></i>
                             </a>
-                        </div>
-                    </div>
-
-                    <!-- Right: Full Night Walk Portrait -->
-                    <div class="about-right-portrait-stage">
-                        <div class="about-portrait-cinematic-frame">
-                            <img src="images/raj-night-walk.jpg" alt="Rajkumar — Web Developer"
-                                class="about-full-photo">
-                            <div class="about-portrait-edge-gradient"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bottom Full-Width Strip: 4 Stat Metrics + "WHAT I DO" Column -->
-                <div class="about-bottom-bar-card">
-                    <!-- Stat 1: Experience -->
-                    <div class="bottom-stat-unit">
-                        <div class="stat-unit-icon"><i class="fa-regular fa-user"></i></div>
-                        <span class="stat-unit-num counter-number" data-target="2" data-suffix="+">2+</span>
-                        <span class="stat-unit-label">Years Experience</span>
-                    </div>
-
-                    <!-- Stat 2: Projects Completed -->
-                    <div class="bottom-stat-unit">
-                        <div class="stat-unit-icon"><i class="fa-solid fa-code"></i></div>
-                        <span class="stat-unit-num counter-number" data-target="2" data-suffix="+">2+</span>
-                        <span class="stat-unit-label">Projects Completed</span>
-                    </div>
-
-                    <!-- Stat 3: Technologies -->
-                    <div class="bottom-stat-unit">
-                        <div class="stat-unit-icon"><i class="fa-solid fa-trophy"></i></div>
-                        <span class="stat-unit-num counter-number" data-target="5" data-suffix="+">5+</span>
-                        <span class="stat-unit-label">Technologies</span>
-                    </div>
-
-                    <!-- Stat 4: Satisfaction -->
-                    <div class="bottom-stat-unit">
-                        <div class="stat-unit-icon"><i class="fa-regular fa-face-smile"></i></div>
-                        <span class="stat-unit-num counter-number" data-target="100" data-suffix="%">100%</span>
-                        <span class="stat-unit-label">Client Satisfaction</span>
-                    </div>
-
-                    <!-- Segment 5: WHAT I DO Narrative Column -->
-                    <div class="bottom-what-i-do-unit">
-                        <span class="what-i-do-tag">WHAT I DO</span>
-                        <h3 class="what-i-do-title">I turn ideas into digital solutions.</h3>
-                        <p class="what-i-do-desc">
-                            From concept to deployment, I build modern, responsive websites that help businesses grow
-                            and stand out in the digital world.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             5. SECTION 02 — MY SKILLS
-        ===================================================== -->
-        <section id="skills" class="editorial-section">
-            <div class="editorial-container">
-                <div style="text-align: center;">
-                    <div class="sec-pill-tag">02. MY SKILLS</div>
-                    <h2 class="sec-title-centered">Core Technical Competencies</h2>
-                    <p class="sec-subtitle-centered">
-                        Modern technologies, programming languages, backend frameworks, and engineering tools.
-                    </p>
-                </div>
-
-                <div class="skills-cards-grid">
-                    <!-- HTML5 -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-brands fa-html5 skill-icon-gold"></i>
-                        <span class="skill-label-gold">HTML</span>
-                    </div>
-
-                    <!-- CSS3 -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-brands fa-css3-alt skill-icon-gold"></i>
-                        <span class="skill-label-gold">CSS</span>
-                    </div>
-
-                    <!-- JavaScript -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-brands fa-js skill-icon-gold"></i>
-                        <span class="skill-label-gold">JavaScript</span>
-                    </div>
-
-                    <!-- Python -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-brands fa-python skill-icon-gold"></i>
-                        <span class="skill-label-gold">Python</span>
-                    </div>
-
-                    <!-- Flask -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-solid fa-server skill-icon-gold"></i>
-                        <span class="skill-label-gold">Flask</span>
-                    </div>
-
-                    <!-- SQLite -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-solid fa-database skill-icon-gold"></i>
-                        <span class="skill-label-gold">SQLite</span>
-                    </div>
-
-                    <!-- Git & GitHub -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-brands fa-git-alt skill-icon-gold"></i>
-                        <span class="skill-label-gold">Git &amp; GitHub</span>
-                    </div>
-
-                    <!-- Gemini AI -->
-                    <div class="gold-skill-badge">
-                        <i class="fa-solid fa-brain skill-icon-gold"></i>
-                        <span class="skill-label-gold">Gemini Flash AI</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             6. SECTION 03 — SELECTED WORKS (2 FLAGSHIP PROJECTS)
-        ===================================================== -->
-        <section id="work" class="editorial-section selected-works-section">
-            <div class="editorial-container">
-                <div class="selected-works-layout">
-                    <!-- Left: Editorial Title Column -->
-                    <div class="works-sticky-header">
-                        <div class="sec-pill-tag">PROJECTS</div>
-                        <h2 class="works-giant-title">
-                            SELECTED<br>
-                            <span class="serif-sub">WORKS</span>
-                        </h2>
-                        <p class="works-narrative-lead">
-                            A collection of digital products &amp; experiences crafted with precision and purpose.
-                        </p>
-                        <a href="#contact" class="btn-works-link">
-                            <span>VIEW ALL PROJECTS</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-
-                    <!-- Right: Stacked Horizontal Luxury Project Poster Cards -->
-                    <div class="works-cards-stack">
-                        <!-- Project 01: ROYAL ROSE MILK -->
-                        <article class="luxury-work-banner-card" onclick="openProjectModal('royalRose')">
-                            <div class="work-banner-info">
-                                <div class="work-number-row">
-                                    <span class="work-num-big">01</span>
-                                    <span class="work-num-total">/ 02</span>
-                                </div>
-                                <h3 class="work-banner-title">ROYAL<br>ROSE MILK</h3>
-                                <div class="work-banner-meta">
-                                    <span class="work-type">Brand Website</span>
-                                    <span class="work-tech">HTML5, CSS3, JavaScript</span>
-                                </div>
-                                <div class="work-arrow-action">
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                            <div class="work-banner-image-box">
-                                <img src="images/royal-rose-milk.jpg" alt="Royal Rose Milk Project Poster"
-                                    class="work-banner-img">
-                                <div class="work-banner-glare"></div>
-                            </div>
-                        </article>
-
-                        <!-- Project 02: PET NEXA -->
-                        <article class="luxury-work-banner-card" onclick="openProjectModal('petNexa')">
-                            <div class="work-banner-info">
-                                <div class="work-number-row">
-                                    <span class="work-num-big">02</span>
-                                    <span class="work-num-total">/ 02</span>
-                                </div>
-                                <h3 class="work-banner-title">PET NEXA</h3>
-                                <div class="work-banner-meta">
-                                    <span class="work-type">AI Pet Care &amp; E-Commerce</span>
-                                    <span class="work-tech">Python, Flask, SQLite, JavaScript</span>
-                                </div>
-                                <div class="work-arrow-action">
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                            <div class="work-banner-image-box">
-                                <img src="images/pet-nexa-dark-crest.jpg" alt="Pet Nexa Platform Poster"
-                                    class="work-banner-img" onerror="this.src='images/pet-nexa-dog-poster.jpg'">
-                                <div class="work-banner-glare"></div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             7. SECTION 04 — DEVELOPER JOURNEY (CINEMATIC TIMELINE)
-        ===================================================== -->
-        <section id="journey" class="editorial-section">
-            <div class="editorial-container">
-                <div style="text-align: center;">
-                    <div class="sec-pill-tag">04. JOURNEY</div>
-                    <h2 class="sec-title-centered">Developer Journey &amp; Milestones</h2>
-                    <p class="sec-subtitle-centered">
-                        Chronological progression in computer science education, full-stack systems, and applied AI.
-                    </p>
-                </div>
-
-                <div class="timeline-cinematic-wrapper">
-                    <div class="timeline-gold-spine"></div>
-
-                    <!-- Milestone 1 -->
-                    <div class="timeline-row">
-                        <div class="timeline-year-col">
-                            <span class="year-serif">2024</span>
-                            <span class="gold-node"></span>
-                        </div>
-                        <div class="timeline-card">
-                            <span class="t-tag">ACADEMIC FOUNDATION</span>
-                            <h3 class="t-title">Started B.Sc. Computer Science</h3>
-                            <p class="t-desc">
-                                Established strong academic grounding in Data Structures, Object-Oriented Programming,
-                                Relational Databases, and Core Algorithms.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Milestone 2 -->
-                    <div class="timeline-row">
-                        <div class="timeline-year-col">
-                            <span class="year-serif">2025</span>
-                            <span class="gold-node"></span>
-                        </div>
-                        <div class="timeline-card">
-                            <span class="t-tag">FULL-STACK EXPANSION</span>
-                            <h3 class="t-title">Web Development &amp; Python Mastery</h3>
-                            <p class="t-desc">
-                                Built responsive UI architectures with JavaScript ES6+, HTML5, CSS3, and server-side
-                                backend APIs with Python, Flask, and SQLite.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Milestone 3 -->
-                    <div class="timeline-row">
-                        <div class="timeline-year-col">
-                            <span class="year-serif">2026</span>
-                            <span class="gold-node active-node"></span>
-                        </div>
-                        <div class="timeline-card">
-                            <span class="t-tag">FLAGSHIP PLATFORMS</span>
-                            <h3 class="t-title">Pet Nexa &amp; Royal Rose Milk</h3>
-                            <p class="t-desc">
-                                Architected Pet Nexa (with booking workflows &amp; Gemini Flash AI) and Royal Rose Milk
-                                (interactive sensory brand customizer).
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Milestone 4 -->
-                    <div class="timeline-row">
-                        <div class="timeline-year-col">
-                            <span class="year-serif">NOW</span>
-                            <span class="gold-node"></span>
-                        </div>
-                        <div class="timeline-card">
-                            <span class="t-tag">CURRENT HORIZON</span>
-                            <h3 class="t-title">Continuous Learning &amp; Open for Roles</h3>
-                            <p class="t-desc">
-                                Pursuing 3rd Year B.Sc. Computer Science. Available for web developer positions,
-                                full-stack internships, and freelance projects.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             8. SECTION 05 — CONTACT (EXACT MATCH TO REFERENCE DESIGN)
-        ===================================================== -->
-        <section id="contact" class="editorial-section contact-cinematic-section">
-            <!-- Atmospheric Architectural Glow & Backdrop -->
-            <div class="contact-backdrop-stage">
-                <img src="images/contact-architectural-bg.jpg" alt="Architectural Mood" class="contact-bg-photo">
-                <div class="contact-backdrop-vignette"></div>
-            </div>
-
-            <div class="editorial-container contact-master-container">
-                <!-- Far Left Vertical Spine -->
-                <aside class="contact-left-spine">
-                    <div class="spine-num-tag">
-                        <span class="spine-num-top">04</span>
-                        <span class="spine-num-sub">/04</span>
-                    </div>
-                    <div class="spine-gold-rail">
-                        <span class="spine-amber-dot"></span>
-                    </div>
-                    <div class="spine-vertical-text">LET'S CONNECT</div>
-                </aside>
-
-                <!-- Center-Left: Main Form & Channels -->
-                <div class="contact-main-flow">
-                    <span class="contact-sec-tag">GET IN TOUCH</span>
-
-                    <div class="contact-headline-wrap">
-                        <span class="contact-watermark-text">Together</span>
-                        <h2 class="contact-grand-title">
-                            LET'S WORK<br>
-                            <span class="gold-gradient-title">TOGETHER</span>
-                        </h2>
-                    </div>
-
-                    <div class="contact-gold-hairline"></div>
-
-                    <p class="contact-invitation-sub">
-                        Have a project in mind or just want to say hello?<br>
-                        I'd love to hear from you.
-                    </p>
-
-                    <!-- Interactive Channels List -->
-                    <div class="contact-interactive-stack">
-                        <!-- Channel 1: Email -->
-                        <a href="mailto:vikneshvaren2@gmail.com" class="contact-row-card">
-                            <div class="contact-row-icon">
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
-                            <div class="contact-row-info">
-                                <span class="row-tag">EMAIL</span>
-                                <span class="row-val">vikneshvaren2@gmail.com</span>
-                            </div>
-                            <span class="contact-row-arrow">&rarr;</span>
-                        </a>
-
-                        <!-- Channel 2: Phone -->
-                        <a href="tel:+919445437069" class="contact-row-card">
-                            <div class="contact-row-icon">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div class="contact-row-info">
-                                <span class="row-tag">PHONE</span>
-                                <span class="row-val">9445437069</span>
-                            </div>
-                            <span class="contact-row-arrow">&rarr;</span>
-                        </a>
-
-                        <!-- Channel 3: Location -->
-                        <div class="contact-row-card static-row">
-                            <div class="contact-row-icon">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div class="contact-row-info">
-                                <span class="row-tag">LOCATION</span>
-                                <span class="row-val">Tamil Nadu, India</span>
-                            </div>
-                            <span class="contact-row-arrow">&rarr;</span>
-                        </div>
-
-                        <!-- Channel 4: Freelance -->
-                        <div class="contact-row-card static-row">
-                            <div class="contact-row-icon">
-                                <i class="fa-regular fa-paper-plane"></i>
-                            </div>
-                            <div class="contact-row-info">
-                                <span class="row-tag">FREELANCE</span>
-                                <span class="row-val">Available for Work</span>
-                            </div>
-                            <span class="contact-row-arrow">&rarr;</span>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Social Icons Row -->
-                    <div class="contact-social-footer-strip">
-                        <span class="social-label-text">SOCIAL</span>
-                        <div class="contact-social-pills">
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                                class="social-outline-box" title="LinkedIn">
-                                <span class="social-custom-in">in</span>
-                            </a>
                             <a href="https://github.com/vikneshvaren2007" target="_blank" rel="noopener noreferrer"
-                                class="social-outline-box" title="GitHub">
+                                class="btn-about-contact" title="GitHub">
+                                <span>GITHUB</span>
                                 <i class="fa-brands fa-github"></i>
                             </a>
-                            <a href="mailto:vikneshvaren2@gmail.com" class="social-outline-box" title="Email">
-                                <i class="fa-regular fa-envelope"></i>
+                            <a href="https://www.instagram.com/__.rxjkumar?stkn=MWF0NG9keWlrYjBkdw==" target="_blank" rel="noopener noreferrer"
+                                class="btn-about-contact" title="Instagram">
+                                <span>INSTAGRAM</span>
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#contact" class="btn-about-contact">
+                                <span>CONTACT ME</span>
+                                <i class="fa-solid fa-arrow-down"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Right Side: Luxury Quote & Signature Box -->
-                <div class="contact-right-quote-col">
-                    <div class="contact-quote-card">
-                        <span class="quote-mark-gold">&ldquo;</span>
-                        <p class="quote-statement-text">
-                            Great ideas start with<br>a simple conversation.
-                        </p>
-                        <div class="quote-signature-wrap">
-                            <span class="quote-signature-name">Rajkumar</span>
-                            <span class="quote-signature-role">WEB DEVELOPER</span>
+        <!-- =====================================================
+             5. SECTION 02 — SERVICES PACKAGES
+        ===================================================== -->
+        <section id="services" class="editorial-section services-cinematic-section">
+            <div class="editorial-container">
+                <div class="services-header-area">
+                    <span class="sec-pill-tag">02. SERVICES</span>
+                    <h2 class="sec-title-centered">Bespoke Web Solutions</h2>
+                    <p class="sec-subtitle-centered">
+                        Transparent, high-performance web development packages tailored for businesses, startups, and
+                        personal brands.
+                    </p>
+                </div>
+
+                <div class="services-cards-grid">
+                    <!-- Service 01: Starter Web Presence -->
+                    <article class="service-card">
+                        <div class="service-card-top">
+                            <span class="service-index-number">01</span>
+                            <h3 class="service-title">ESSENTIAL WEB PRESENCE</h3>
+                            <div class="service-pricing-row">
+                                <span class="pricing-label">Starting from</span>
+                                <span class="pricing-amount">₹2,500<span class="pricing-plus">+</span></span>
+                            </div>
+                            <p class="service-description">
+                                A polished, fast, and responsive website designed to establish an authoritative online
+                                footprint for your business or venture.
+                            </p>
                         </div>
+
+                        <div class="service-card-divider"></div>
+
+                        <ul class="service-features-list">
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>100% Mobile &amp; Tablet
+                                    Responsive Layout</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Multi-Section Modern UI
+                                    Structure</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Direct Contact Form &amp;
+                                    WhatsApp Integration</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Fast Performance &amp; Basic
+                                    SEO Setup</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Modern Micro-Interactions &amp;
+                                    Transitions</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Live Deployment &amp; Domain
+                                    Assistance</span></li>
+                        </ul>
+
+                        <div class="service-meta-footer">
+                            <div class="service-meta-pill">
+                                <i class="fa-regular fa-clock"></i>
+                                <span>Delivery: 4–6 Days</span>
+                            </div>
+                            <div class="service-meta-pill">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>2 Iterations</span>
+                            </div>
+                            <div class="service-meta-pill">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>14-Day Support</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-service-cta" onclick="selectServiceForContact('Essential Web Presence')">
+                            <span>START A PROJECT</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </article>
+
+                    <!-- Service 02: Full-Stack Web Application (Signature Service / Most Requested) -->
+                    <article class="service-card service-card-signature">
+                        <div class="signature-ribbon-badge">
+                            <i class="fa-solid fa-crown"></i>
+                            <span>SIGNATURE SERVICE // MOST REQUESTED</span>
+                        </div>
+
+                        <div class="service-card-top">
+                            <span class="service-index-number">02</span>
+                            <h3 class="service-title">FULL-STACK APPLICATION</h3>
+                            <div class="service-pricing-row">
+                                <span class="pricing-label">Starting from</span>
+                                <span class="pricing-amount">₹7,500<span class="pricing-plus">+</span></span>
+                            </div>
+                            <p class="service-description">
+                                Complete end-to-end dynamic web application with Python &amp; Flask backend
+                                architecture, relational database design, and interactive frontend workflows.
+                            </p>
+                        </div>
+
+                        <div class="service-card-divider"></div>
+
+                        <ul class="service-features-list">
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Python &amp; Flask RESTful API
+                                    Architecture</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Relational Database Modeling
+                                    (SQLite)</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Dynamic Client-Side State
+                                    Engine</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Interactive User Dashboard &amp;
+                                    Workflows</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Form Validation &amp; Security
+                                    Best Practices</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Render / Cloud VPS Production
+                                    Deployment</span></li>
+                        </ul>
+
+                        <div class="service-meta-footer">
+                            <div class="service-meta-pill">
+                                <i class="fa-regular fa-clock"></i>
+                                <span>Delivery: 10–14 Days</span>
+                            </div>
+                            <div class="service-meta-pill">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>Iterative Revisions</span>
+                            </div>
+                            <div class="service-meta-pill">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>30-Day Dedicated Support</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-service-cta btn-signature-cta"
+                            onclick="selectServiceForContact('Full-Stack Application')">
+                            <span>LET'S BUILD</span>
+                            <i class="fa-solid fa-bolt"></i>
+                        </button>
+                    </article>
+
+                    <!-- Service 03: Personal Brand & Portfolio -->
+                    <article class="service-card">
+                        <div class="service-card-top">
+                            <span class="service-index-number">03</span>
+                            <h3 class="service-title">PERSONAL BRAND &amp; PORTFOLIO</h3>
+                            <div class="service-pricing-row">
+                                <span class="pricing-label">Starting from</span>
+                                <span class="pricing-amount">₹1,500<span class="pricing-plus">+</span></span>
+                            </div>
+                            <p class="service-description">
+                                An art-directed, cinematic personal portfolio crafted for developers, creators,
+                                founders, and students looking to showcase their identity with impact.
+                            </p>
+                        </div>
+
+                        <div class="service-card-divider"></div>
+
+                        <ul class="service-features-list">
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Bespoke Obsidian &amp; Gold
+                                    Aesthetics</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Interactive Project Showcase
+                                    Gallery</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Integrated Resume Download &amp;
+                                    Social Dock</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Smooth Typographic &amp; Entrance
+                                    Motion</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Zero Bloatware, Pure Lightweight
+                                    Code</span></li>
+                            <li><i class="fa-solid fa-check feature-check-icon"></i><span>Zero-Config GitHub / Vercel
+                                    Hosting</span></li>
+                        </ul>
+
+                        <div class="service-meta-footer">
+                            <div class="service-meta-pill">
+                                <i class="fa-regular fa-clock"></i>
+                                <span>Delivery: 3–5 Days</span>
+                            </div>
+                            <div class="service-meta-pill">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>2 Iterations</span>
+                            </div>
+                            <div class="service-meta-pill">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>10-Day Support</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-service-cta"
+                            onclick="selectServiceForContact('Personal Brand &amp; Portfolio')">
+                            <span>BOOK A DISCOVERY</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             6. SECTION 03 — CONTACT (MATCHING SAMPLE SCREENSHOT 3)
+        ===================================================== -->
+        <section id="contact" class="editorial-section contact-cinematic-section" style="padding-top: 80px; padding-bottom: 90px;">
+            <div class="editorial-container" style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <span class="sec-pill-tag" style="margin-bottom: 16px;">GET IN TOUCH</span>
+                <h2 class="sample-contact-title">Something<br>Great</h2>
+                <p class="sec-subtitle-centered" style="max-width: 580px; margin: 0 auto 30px; font-size: 1rem; line-height: 1.7;">
+                    Have a project in mind, a freelance inquiry, or want to collaborate? Reach out directly via email or WhatsApp and let's bring your vision to life.
+                </p>
+
+                <!-- Dual Touch Cards (Screenshot 3) -->
+                <div class="sample-contact-dual-cards">
+                    <!-- Email Card -->
+                    <a href="mailto:vikneshvaren2@gmail.com" class="sample-contact-touch-card">
+                        <div class="sample-contact-icon-circle">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <span class="row-tag" style="margin-bottom: 6px; font-weight: 700;">EMAIL ME</span>
+                        <span class="row-val" style="font-size: 0.92rem; word-break: break-all; color: var(--gold-bright);">vikneshvaren2@gmail.com</span>
+                    </a>
+
+                    <!-- WhatsApp Card -->
+                    <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="sample-contact-touch-card">
+                        <div class="sample-contact-icon-circle" style="color: #25D366; border-color: rgba(37, 211, 102, 0.35); background: rgba(37, 211, 102, 0.1);">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <span class="row-tag" style="margin-bottom: 6px; font-weight: 700;">WHATSAPP</span>
+                        <span class="row-val" style="font-size: 0.92rem; color: #25D366;">+91 94454 37069</span>
+                    </a>
+                </div>
+
+                <!-- Available Pill Centered (Screenshot 3) -->
+                <div style="text-align: center; margin-bottom: 45px;">
+                    <div class="sample-avail-pill-center">
+                        <span class="pulse-indicator"></span>
+                        <span>Currently available for new projects</span>
                     </div>
                 </div>
             </div>
@@ -715,34 +632,33 @@
     </main>
 
     <!-- =====================================================
-         9. LUXURY MINIMAL FOOTER
+         7. MINIMAL SINGLE-LINE FOOTER (MATCHING REFERENCE SCREENSHOT 1)
     ===================================================== -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div>
-                <span class="footer-monogram">RAJKUMAR<span class="gold-dot">.</span></span>
-                <p class="footer-credentials">
-                    Full-Stack Web Developer &bull; B.Sc. Computer Science &bull; AI Systems
-                </p>
+    <footer class="sundar-style-footer">
+        <div class="sundar-footer-container">
+            <div class="sundar-footer-brand">
+                <span class="footer-monogram">rajkumar<span class="gold-dot">•</span></span>
             </div>
-
-            <div class="footer-center">
-                <p>&copy; 2026 Rajkumar. Crafted with precision obsidian &amp; gold design architecture.</p>
+            <div class="sundar-footer-copy">
+                &copy; 2026 Rajkumar. All rights reserved.
             </div>
-
-            <div>
-                <a href="#home" class="btn-top-link">BACK TO TOP ↑</a>
+            <div class="sundar-footer-socials">
+                <a href="https://github.com/vikneshvaren2007" target="_blank" rel="noopener noreferrer"
+                    class="sundar-social-link">GitHub</a>
+                <a href="https://www.instagram.com/__.rxjkumar?stkn=MWF0NG9keWlrYjBkdw==" target="_blank" rel="noopener noreferrer"
+                    class="sundar-social-link">Instagram</a>
+                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer"
+                    class="sundar-social-link">WhatsApp</a>
             </div>
         </div>
     </footer>
 
     <!-- =====================================================
-         10. INTERACTIVE PROJECT MODAL & LIVE SIMULATOR
+         9. INTERACTIVE PROJECT MODAL & LIVE SIMULATOR
     ===================================================== -->
     <div class="cinematic-modal-backdrop" id="projectModalBackdrop" onclick="closeProjectModal(event)"
         aria-hidden="true">
         <div class="cinematic-modal-window" onclick="event.stopPropagation()">
-            <!-- Modal Header -->
             <div class="modal-header">
                 <div>
                     <span class="modal-badge-tag" id="modalBadge">PROJECT SHOWCASE</span>
@@ -860,8 +776,8 @@
 
     <!-- Mobile Floating Action Command Dock -->
     <div class="mobile-action-dock" id="mobileActionDock">
-        <a href="assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf" target="_blank" class="dock-btn-primary"
-            title="Download Resume">
+        <a href="assets/Raj_Kumar_Resume_Full_Page.pdf" download="Raj_Kumar_Resume_Full_Page.pdf" target="_blank"
+            class="dock-btn-primary" title="Download Resume">
             <i class="fa-solid fa-file-arrow-down"></i>
             <span>RESUME</span>
         </a>

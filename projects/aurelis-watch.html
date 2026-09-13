@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>AURELIS-WATCH — Haute Horlogerie Case Study | Rajkumar Portfolio</title>
+    <meta name="description"
+        content="In-depth project case study for AURELIS-WATCH — a luxury haute horlogerie digital showcase featuring intricate gold dragon chronograph timepieces, bespoke tactile specs, and high-precision aesthetics.">
+    <meta name="theme-color" content="#0A0A0D">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../cinematic.css">
+</head>
+
+<body class="editorial-body">
+    <canvas id="cinematicCanvas" class="cinematic-canvas"></canvas>
+    <div class="scroll-progress-line" id="scrollProgress"></div>
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Persistent Header Navigation -->
+    <header class="navbar-wrapper" id="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="nav-brand" aria-label="Rajkumar Home">
+                <span class="brand-monogram">RAJKUMAR<span class="gold-dot">.</span></span>
+                <span class="brand-sub">WEB DEVELOPER</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="../index.html#home" class="nav-item">HOME</a>
+                <a href="../index.html#about" class="nav-item">ABOUT</a>
+                <a href="../index.html#services" class="nav-item">SERVICES</a>
+                <a href="../index.html#contact" class="nav-item">CONTACT</a>
+                <a href="../projects.html" class="nav-item active">PROJECTS</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Theme" type="button">
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                    <span class="theme-toggle-text">BRIGHT</span>
+                </button>
+                <a href="../projects.html" class="btn-nav-cta">
+                    <span>&larr; Gallery</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggleBtn" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="case-study-page">
+        <div class="editorial-container">
+            <!-- Back to Projects Bar (Returns to Project Gallery, NOT home) -->
+            <div class="back-to-projects-bar">
+                <a href="../projects.html" class="btn-back-projects">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>&larr; Back to Projects</span>
+                </a>
+            </div>
+
+            <!-- Case Study Hero Banner -->
+            <div class="case-study-hero">
+                <img src="../images/projects/aurelis-watch.jpg" alt="AURELIS-WATCH Gold Chronograph Timepiece" class="case-study-hero-img">
+                <div class="case-study-hero-overlay">
+                    <div class="case-study-meta-strip">
+                        <span class="case-study-tag">E-COMMERCE &bull; LUXURY SHOWCASE</span>
+                        <span class="case-study-status"><i class="fa-solid fa-circle-check"></i> PRODUCTION READY</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold-light);">EST. 2026</span>
+                    </div>
+                    <h1 class="case-study-title">AURELIS-WATCH</h1>
+                    <p class="case-study-tagline">
+                        An ultra-luxury digital atelier and chronograph presentation engineered for bespoke Swiss-grade dragon timepieces, tactile caliber specifications, and private concierge ordering.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Two-Column Case Study Body -->
+            <div class="case-study-grid">
+                <!-- Left: Deep Technical Narrative -->
+                <div class="case-study-main">
+                    <!-- Section 1: Introduction -->
+                    <section class="case-study-block">
+                        <h3><i class="fa-solid fa-clock" style="color:var(--gold-main);"></i> Project Overview</h3>
+                        <p>
+                            <strong>AURELIS-WATCH</strong> is a bespoke haute horlogerie digital showcase engineered for luxury mechanical chronograph timepieces. Designed with deep obsidian surfaces, satin gold metallic finishes, and razor-sharp typographic hierarchy, the site bridges fine watchmaking with high-performance web engineering.
+                        </p>
+                        <p>
+                            Featuring the signature <strong>Dragon Chronograph Collection</strong>, the experience provides collectors with macro-resolution dial inspection, caliber movement telemetry, water resistance certification breakdowns, and direct VIP concierge inquiry workflows.
+                        </p>
+                    </section>
+
+                    <!-- Section 2: Problem & Strategic Purpose -->
+                    <section class="case-study-block">
+                        <h3><i class="fa-solid fa-bullseye" style="color:var(--gold-main);"></i> Problem &amp; Strategic Purpose</h3>
+                        <p>
+                            High-end horological manufactures face the challenge of translating physical mechanical luxury into the digital realm without feeling like a generic e-commerce template. Collectors expect prestige, micro-mechanical precision, and immediate concierge access.
+                        </p>
+                        <p>
+                            <strong>AURELIS-WATCH solves this by:</strong>
+                        </p>
+                        <div class="features-list-grid">
+                            <div class="feature-mini-card">
+                                <h5><i class="fa-solid fa-eye" style="color:var(--gold-main);"></i> Macro Horology Inspection</h5>
+                                <p>Razor-sharp visual showcase highlighting the sculpted dragon dial, multi-layer chronograph sub-dials, and fluted bezel.</p>
+                            </div>
+                            <div class="feature-mini-card">
+                                <h5><i class="fa-solid fa-gears" style="color:var(--gold-main);"></i> Caliber Telemetry</h5>
+                                <p>Interactive mechanical movement breakdown detailing beat frequency, power reserve, and jewels.</p>
+                            </div>
+                            <div class="feature-mini-card">
+                                <h5><i class="fa-solid fa-crown" style="color:var(--gold-main);"></i> Concierge VIP Inquiries</h5>
+                                <p>Frictionless WhatsApp and direct concierge reservations pre-configured with the client's selected timepiece.</p>
+                            </div>
+                            <div class="feature-mini-card">
+                                <h5><i class="fa-solid fa-shield-halved" style="color:var(--gold-main);"></i> Certificate &amp; Provenance</h5>
+                                <p>Authentication verification workflow highlighting serial registration and chronometer precision standards.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Core Features Breakdown -->
+                    <section class="case-study-block">
+                        <h3><i class="fa-solid fa-cubes" style="color:var(--gold-main);"></i> Main Features &amp; Engineering Details</h3>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; margin: 0;">
+                            <li style="display:flex; gap:12px; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
+                                <i class="fa-solid fa-circle-check" style="color:var(--gold-main); margin-top:4px;"></i>
+                                <span><strong>High-Resolution Dial Visualizer:</strong> Precision framing of the 18K gold-plated dragon relief, chronograph subdials, and luminous hands.</span>
+                            </li>
+                            <li style="display:flex; gap:12px; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
+                                <i class="fa-solid fa-circle-check" style="color:var(--gold-main); margin-top:4px;"></i>
+                                <span><strong>Tactile Caliber Specifications:</strong> Clean tabular breakdown of case diameter (48mm), sapphire crystal coating, 200M water resistance, and triple-link solid bracelet.</span>
+                            </li>
+                            <li style="display:flex; gap:12px; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
+                                <i class="fa-solid fa-circle-check" style="color:var(--gold-main); margin-top:4px;"></i>
+                                <span><strong>Bespoke Obsidian &amp; Gold Design System:</strong> Dark aesthetic with subtle metallic gold gradients, zero eye strain, and ultra-high contrast for horological photography.</span>
+                            </li>
+                            <li style="display:flex; gap:12px; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
+                                <i class="fa-solid fa-circle-check" style="color:var(--gold-main); margin-top:4px;"></i>
+                                <span><strong>Instant Concierge WhatsApp Workflow:</strong> Automated direct WhatsApp routing passing the exact watch model and collector inquiry parameters.</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- Section 4: Visual Showcase & Screenshots -->
+                    <section class="case-study-block">
+                        <h3><i class="fa-solid fa-images" style="color:var(--gold-main);"></i> Horological Photography Showcase</h3>
+                        <p>Studio photography captures of the AURELIS-WATCH flagship piece:</p>
+                        <div class="case-study-gallery-grid">
+                            <img src="../images/projects/aurelis-watch.jpg" alt="AURELIS Gold Dragon Chronograph" class="case-study-screenshot-img">
+                            <img src="../images/aurelis-watch-gold.jpg" alt="High-Precision Timepiece Details" class="case-study-screenshot-img">
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Technologies Used -->
+                    <section class="case-study-block">
+                        <h3><i class="fa-solid fa-microchip" style="color:var(--gold-main);"></i> Technologies Used</h3>
+                        <div class="tech-pills-wrap">
+                            <span class="tech-pill-lg"><i class="fa-brands fa-html5" style="color:#e34f26; margin-right:6px;"></i> Semantic HTML5</span>
+                            <span class="tech-pill-lg"><i class="fa-brands fa-css3-alt" style="color:#1572b6; margin-right:6px;"></i> Vanilla CSS3 (Custom Design Tokens)</span>
+                            <span class="tech-pill-lg"><i class="fa-brands fa-js" style="color:#f7df1e; margin-right:6px;"></i> JavaScript (State &amp; WhatsApp Automation)</span>
+                            <span class="tech-pill-lg"><i class="fa-solid fa-gem" style="color:var(--gold-main); margin-right:6px;"></i> Luxury Horology UI System</span>
+                            <span class="tech-pill-lg"><i class="fa-solid fa-mobile-screen" style="color:#25D366; margin-right:6px;"></i> Adaptive Viewport Engine</span>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right: Sticky Metadata & WhatsApp Enquiry Card -->
+                <aside class="case-study-sidebar">
+                    <div class="case-study-sidebar-card">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: #FFFFFF; margin: 0 0 16px;">Timepiece Telemetry</h4>
+
+                        <div class="sidebar-metric-row">
+                            <div class="metric-label">Collection</div>
+                            <div class="metric-val">Imperial Dragon Chronograph</div>
+                        </div>
+
+                        <div class="sidebar-metric-row">
+                            <div class="metric-label">Movement</div>
+                            <div class="metric-val">Quartz Caliber VD53 / Mechanical</div>
+                        </div>
+
+                        <div class="sidebar-metric-row">
+                            <div class="metric-label">Case &amp; Dial</div>
+                            <div class="metric-val">48mm &bull; 18K Gold Plated Sculpted Relief</div>
+                        </div>
+
+                        <div class="sidebar-metric-row">
+                            <div class="metric-label">Water Resistance</div>
+                            <div class="metric-val">200 Meters / 20 ATM</div>
+                        </div>
+
+                        <!-- WhatsApp Enquiry Button (Prefilled with exact requested text) -->
+                        <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 12px;">
+                            <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20AURELIS-WATCH.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F"
+                                target="_blank" rel="noopener noreferrer" class="btn-whatsapp"
+                                style="padding: 14px 20px; font-size: 0.85rem; width: 100%; text-align: center;"
+                                data-whatsapp-project="AURELIS-WATCH">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i>
+                                <span>Inquire about AURELIS-WATCH</span>
+                            </a>
+
+                            <a href="../projects.html" class="btn-back-projects" style="justify-content: center; width: 100%; margin-top: 6px;">
+                                <span>&larr; Back to Projects</span>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Minimal Luxury Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-col">
+                <span class="footer-monogram">RAJKUMAR<span class="gold-dot">.</span></span>
+                <p class="footer-credentials">
+                    Web Developer &bull; B.Sc. Computer Science &bull; AI Enthusiast
+                </p>
+            </div>
+
+            <nav class="footer-nav" aria-label="Footer Navigation">
+                <a href="../index.html#home">HOME</a>
+                <a href="../index.html#about">ABOUT</a>
+                <a href="../index.html#services">SERVICES</a>
+                <a href="../index.html#contact">CONTACT</a>
+                <a href="../projects.html">PROJECTS</a>
+            </nav>
+
+            <div class="footer-social-col">
+                <a href="https://github.com/vikneshvaren2007" target="_blank" rel="noopener noreferrer"
+                    class="footer-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/__.rxjkumar?stkn=MWF0NG9keWlrYjBkdw==" target="_blank" rel="noopener noreferrer"
+                    class="footer-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer"
+                    class="footer-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="mailto:vikneshvaren2@gmail.com" class="footer-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
+            </div>
+
+            <div class="footer-bottom-strip">
+                <p>&copy; 2026 Rajkumar. Crafted with modern, clean, and high-performance engineering.</p>
+                <a href="../projects.html" class="btn-top-link">&larr; BACK TO GALLERY</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="../cinematic.js"></script>
+</body>
+
+</html>

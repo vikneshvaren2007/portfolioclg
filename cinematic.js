@@ -1,5 +1,6 @@
 /* ==========================================================================
    RAJKUMAR — HYPER-CINEMATIC & MOBILE INTERACTIVITY CONTROLLER
+   Clean, performant editorial reveal and responsive dock
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -14,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initCinematicLoaderEngine();
     initMobileActionDock();
     initMobileTouchCanvas();
-    initTouchCardTilt();
 });
 
 /* --------------------------------------------------------------------------
@@ -44,12 +44,8 @@ function initCinematicLoaderEngine() {
         document.body.classList.add("loaded");
         document.body.style.overflow = "";
 
-        const heroStage = document.getElementById("portraitStage");
-        if (heroStage) {
-            heroStage.style.transform = "scale(1)";
-        }
         setTimeout(() => {
-            try { loader.remove(); } catch(e) {}
+            try { loader.remove(); } catch (e) { }
         }, 500);
     }
 
@@ -115,31 +111,4 @@ function initMobileTouchCanvas() {
         const event = new MouseEvent("mouseleave");
         window.dispatchEvent(event);
     }, { passive: true });
-}
-
-/* --------------------------------------------------------------------------
-   4. TOUCH CARD 3D TILT EFFECT
-   -------------------------------------------------------------------------- */
-function initTouchCardTilt() {
-    const cards = document.querySelectorAll(".luxury-work-banner-card, .stat-box-card, .gold-skill-badge");
-    
-    cards.forEach(card => {
-        card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -4;
-            const rotateY = ((x - centerX) / centerX) * 4;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-        });
-
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-        });
-    });
 }

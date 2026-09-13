@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Gallery — Rajkumar | Web Developer Portfolio</title>
+    <meta name="description"
+        content="Explore the complete project gallery of Rajkumar — Full Stack Web Developer. Featuring flagship production builds: PetNexa, Royal Rose, Aurelis-Watch, and curated web design experiences.">
+    <meta name="keywords"
+        content="Rajkumar, Web Developer, Projects Gallery, PetNexa, Royal Rose, Aurelis-Watch, Full Stack, Python, Flask, JavaScript, Luxury Web Design">
+    <meta name="author" content="Rajkumar">
+    <meta name="theme-color" content="#0A0A0D">
+
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome 6 Pro CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cinematic.css">
+</head>
+
+<body class="editorial-body" id="top">
+    <!-- Cinematic Canvas for Celestial Starfield & Shooting Stars -->
+    <canvas id="cinematicCanvas" class="cinematic-canvas"></canvas>
+
+    <!-- Reading Progress Bar -->
+    <div class="scroll-progress-line" id="scrollProgress"></div>
+
+    <!-- Mobile Navigation Drawer Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <main style="padding-top: 30px; padding-bottom: 60px;">
+        <!-- =====================================================
+             PROJECT GALLERY SHOWCASE (SINGLE SLEEK TOP BAR)
+        ===================================================== -->
+        <section class="editorial-section projects-gallery-section" style="padding-top: 10px;">
+            <div class="editorial-container">
+                <!-- Gallery Top Bar (Screenshot 4) -->
+                <div class="gallery-top-nav-bar">
+                    <a href="index.html" class="btn-gallery-back" id="btnGalleryBack">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>BACK</span>
+                    </a>
+                    <span class="gallery-count-badge" id="galleryCountBadge">TOTAL PROJECT COUNT : 12</span>
+                    <button class="theme-toggle-btn" id="galleryThemeBtn" aria-label="Toggle Theme"
+                        title="Toggle Bright / Dark Mode" type="button">
+                        <i class="fa-solid fa-sun icon-sun"></i>
+                        <i class="fa-solid fa-moon icon-moon"></i>
+                        <span class="theme-toggle-text">LIGHT</span>
+                    </button>
+                </div>
+
+                <!-- Filter & Search Row (Screenshot 4) -->
+                <div class="gallery-filter-search-row">
+                    <div class="gallery-filters-bar" id="galleryFiltersBar">
+                        <button class="gallery-filter-pill active" data-filter="all">All</button>
+                        <button class="gallery-filter-pill" data-filter="fullstack">Full Stack</button>
+                        <button class="gallery-filter-pill" data-filter="landing">Landing Page</button>
+                        <button class="gallery-filter-pill" data-filter="concept">UI Concept</button>
+                    </div>
+
+                    <div class="gallery-search-input-wrap">
+                        <i class="fa-solid fa-magnifying-glass gallery-search-icon"></i>
+                        <input type="text" id="projectSearchInput" class="gallery-search-input"
+                            placeholder="Search by title...">
+                    </div>
+                </div>
+
+                <!-- Project Cards Grid (Consistent Heights & Premium Metallic Hardware Dots) -->
+                <div class="projects-gallery-grid" id="projectsGalleryGrid">
+
+                    <!-- ==============================================
+                         01. PETNEXA (MAJOR PROJECT 1)
+                         ============================================== -->
+                    <article class="gallery-card browser-card-frame" data-category="fullstack">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/pet-nexa-hero.jpg" alt="PETNEXA — AI Pet Care Platform"
+                                class="browser-card-poster" onerror="this.src='images/pet-nexa-dog-poster.jpg'">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">PETNEXA</h3>
+                            <p class="browser-card-desc">
+                                AI-powered full-stack pet care ecosystem with veterinary consultation reservations, groomer scheduling, e-commerce catalog, and automated pet health diagnostics.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">Python</span>
+                                <span class="browser-card-tech-tag">Flask</span>
+                                <span class="browser-card-tech-tag">Gemini AI</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="https://pet-nexa.onrender.com" target="_blank" rel="noopener noreferrer"
+                                    class="btn-card-demo-solid">
+                                    <span>VIEW LIVE DEMO</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20PETNEXA.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F"
+                                    target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="PETNEXA">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         02. ROYAL ROSE (MAJOR PROJECT 2)
+                         ============================================== -->
+                    <article class="gallery-card browser-card-frame" data-category="landing">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/royal-rose-milk.jpg" alt="ROYAL ROSE — Luxury Beverage Experience"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">ROYAL ROSE</h3>
+                            <p class="browser-card-desc">
+                                Luxury artisanal rose milk brand experience featuring interactive essence ratio formulation, dynamic pricing logic, and sensory editorial storytelling.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">Python</span>
+                                <span class="browser-card-tech-tag">Flask</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="https://royal-rosegunicorn-app-ap.onrender.com" target="_blank" rel="noopener noreferrer"
+                                    class="btn-card-demo-solid">
+                                    <span>VIEW LIVE DEMO</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20ROYAL%20ROSE.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F"
+                                    target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="ROYAL ROSE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         03. AURELIS-WATCH (MAJOR PROJECT 3)
+                         ============================================== -->
+                    <article class="gallery-card browser-card-frame" data-category="fullstack">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/aurelis-watch.jpg" alt="AURELIS-WATCH — Haute Horlogerie Luxury Experience"
+                                class="browser-card-poster watch-poster-fit">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">AURELIS-WATCH</h3>
+                            <p class="browser-card-desc">
+                                Haute horlogerie digital showcase for luxury gold dragon chronographs, engineered with bespoke satin aesthetics, tactile specs, and high-precision horological detail.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">Python</span>
+                                <span class="browser-card-tech-tag">Flask</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <button class="btn-card-coming-soon" disabled>
+                                    <span>COMING SOON</span>
+                                    <i class="fa-solid fa-clock"></i>
+                                </button>
+                                <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20AURELIS-WATCH.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F"
+                                    target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="AURELIS-WATCH">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 04: AURA COUTURE (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/luxury-fashion.svg" alt="AURA COUTURE — Luxury Fashion Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">AURA COUTURE</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Editorial haute couture atelier design showcase featuring runway archive, bespoke appointment booking flow, and high-contrast editorial typography.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="AURA COUTURE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 05: VERDANT TABLE (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/restaurant-experience.svg"
+                                alt="VERDANT TABLE — Dining Concept" class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">VERDANT TABLE</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Artisanal farm-to-table dining website experience with seasonal tasting menu displays, winery pairings, and table reservation UI components.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="VERDANT TABLE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 06: ODYSSEY EXPEDITIONS (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/travel-landing.svg" alt="ODYSSEY EXPEDITIONS — Travel Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">ODYSSEY EXPEDITIONS</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Ultra-luxury bespoke expedition landing page design featuring wilderness itineraries, private aviation charter booking, and sensory visuals.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="ODYSSEY EXPEDITIONS">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 07: NEXUS TELEMETRY (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/saas-dashboard.svg" alt="NEXUS TELEMETRY — SaaS Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">NEXUS TELEMETRY</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Enterprise server telemetry dashboard prototype with live metric streaming UI, latency heatmaps, error tracing cards, and cluster health views.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="NEXUS TELEMETRY">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 08: APEX CONDITIONING (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/fitness-website.svg" alt="APEX CONDITIONING — Fitness Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">APEX CONDITIONING</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Athletic performance training portal prototype featuring interactive biometric calculator cards, coach booking UI, and training schedule layout.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="APEX CONDITIONING">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 09: VORTEX CREATIVE (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/creative-agency.svg" alt="VORTEX CREATIVE — Agency Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">VORTEX CREATIVE</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Creative agency showcase mockup with bold typographic layout, case study presentation cards, and modern design system elements.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="VORTEX CREATIVE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 10: LUMEN ACOUSTICS (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/ecommerce-store.svg" alt="LUMEN ACOUSTICS — E-Commerce Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">LUMEN ACOUSTICS</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Precision audiophile hardware storefront concept with frequency visualizer cards, catalog views, and shopping cart interface design.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="LUMEN ACOUSTICS">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 11: MONOCHROME ARCHIVE (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/photography-portfolio.svg"
+                                alt="MONOCHROME ARCHIVE — Photography Concept" class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">MONOCHROME ARCHIVE</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Fine art architectural photography portfolio mockup with minimalist gallery layout, exhibition chronology, and print inquiry flow.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="MONOCHROME ARCHIVE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 12: NEURAL INFRASTRUCTURE (PRACTICE UI CONCEPT) -->
+                    <article class="gallery-card browser-card-frame" data-category="concept">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/tech-landing.svg" alt="NEURAL INFRASTRUCTURE — Tech Landing Concept"
+                                class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">NEURAL INFRASTRUCTURE</h3>
+                            <p class="browser-card-desc">
+                                [UI Concept] Developer infrastructure landing page concept showcasing low-latency inference metrics, cluster orchestration cards, and dark terminal UI design.
+                            </p>
+                            <div class="browser-card-tech-row">
+                                <span class="browser-card-tech-tag">HTML5</span>
+                                <span class="browser-card-tech-tag">CSS3</span>
+                                <span class="browser-card-tech-tag">JavaScript</span>
+                                <span class="browser-card-tech-tag">UI Design</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="javascript:void(0)" class="btn-card-demo-solid" style="opacity:0.85; cursor:default;"
+                                    onclick="showToast('Practice UI Concept — Built with HTML, CSS & JavaScript')">
+                                    <span>UI CONCEPT</span>
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline"
+                                    data-whatsapp-project="NEURAL INFRASTRUCTURE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Bottom WhatsApp Direct Enquiry Banner -->
+                <div class="whatsapp-enquiry-banner" style="margin-top: 60px;">
+                    <div class="whatsapp-banner-info">
+                        <h4><i class="fa-brands fa-whatsapp" style="color:#25D366; margin-right:8px;"></i>HAVE A BESPOKE PROJECT IDEA?</h4>
+                        <p>Let's discuss features, requirements, and custom architecture directly on WhatsApp.</p>
+                    </div>
+                    <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20discussing%20a%20new%20web%20project.%20Could%20we%20connect%3F"
+                        target="_blank" rel="noopener noreferrer" class="btn-whatsapp" data-whatsapp-general="true">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>WhatsApp Enquiry</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =====================================================
+         MINIMAL SINGLE-LINE FOOTER (MATCHING REFERENCE SCREENSHOT 1)
+    ===================================================== -->
+    <footer class="sundar-style-footer">
+        <div class="sundar-footer-container">
+            <div class="sundar-footer-brand">
+                <span class="footer-monogram">rajkumar<span class="gold-dot">•</span></span>
+            </div>
+            <div class="sundar-footer-copy">
+                &copy; 2026 Rajkumar. All rights reserved.
+            </div>
+            <div class="sundar-footer-socials">
+                <a href="https://github.com/vikneshvaren2007" target="_blank" rel="noopener noreferrer"
+                    class="sundar-social-link">GitHub</a>
+                <a href="https://www.instagram.com/__.rxjkumar?stkn=MWF0NG9keWlrYjBkdw==" target="_blank" rel="noopener noreferrer"
+                    class="sundar-social-link">Instagram</a>
+                <a href="https://wa.me/919445437069" target="_blank" rel="noopener noreferrer"
+                    class="sundar-social-link">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Popup -->
+    <div id="toastNotification" class="copper-toast-popup" aria-live="polite">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMessage">Notification</span>
+    </div>
+
+    <!-- Script Engines -->
+    <script src="script.js"></script>
+    <script src="cinematic.js"></script>
+</body>
+
+</html>

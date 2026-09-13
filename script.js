@@ -1,71 +1,121 @@
 /* ==========================================================================
-   RAJKUMAR — ULTRA-LUXURY OBSIDIAN & ROYAL GOLD PORTFOLIO ENGINE
-   Interactivity, Canvas Particles & Meteors, 3D Hero Parallax, Counters & Modals
+   RAJKUMAR — PRODUCTION PORTFOLIO ENGINE (2026)
+   Navbar Underline, Hero Typing, Services Pre-selection,
+   Gallery Filtering, Flagship Modals, Theme Switcher & Particle Canvas
    ========================================================================== */
 
 // ==========================================================================
-// CONFIGURABLE PROJECT DEPLOYMENT URLS
+// CENTRALIZED CONFIGURATION (EASY TO CUSTOMIZE)
 // ==========================================================================
-const PET_NEXA_URL = "https://pet-nexa.onrender.com";
-const PET_NOVA_URL = PET_NEXA_URL;
-const ROYAL_ROSE_MILK_URL = "https://royal-rosegunicorn-app-ap.onrender.com";
+const PORTFOLIO_CONFIG = {
+    whatsappNumber: "919445437069",
+    instagramUrl: "https://www.instagram.com/__.rxjkumar?stkn=MWF0NG9keWlrYjBkdw==",
+    githubUrl: "https://github.com/vikneshvaren2007",
+    email: "vikneshvaren2@gmail.com",
+    phoneDisplay: "+91 94454 37069",
+    petNexaUrl: "https://pet-nexa.onrender.com",
+    royalRoseUrl: "https://royal-rosegunicorn-app-ap.onrender.com",
+    
+    // Exact requested WhatsApp message format:
+    // "Hello rajkumar! I'm interested in your project: [SELECTED PROJECT NAME]. Could you provide more details about the features and pricing?"
+    getWhatsAppUrl(projectName) {
+        if (!projectName) {
+            const general = "Hello rajkumar! I'm interested in discussing a web project. Could we connect?";
+            return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(general)}`;
+        }
+        const message = `Hello rajkumar! I'm interested in your project: ${projectName}. Could you provide more details about the features and pricing?`;
+        return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    }
+};
 
+// Aliases for backwards compatibility
+const GITHUB_URL = PORTFOLIO_CONFIG.githubUrl;
+const INSTAGRAM_URL = PORTFOLIO_CONFIG.instagramUrl;
+const EMAIL_ADDRESS = PORTFOLIO_CONFIG.email;
+const PHONE_NUMBER = PORTFOLIO_CONFIG.phoneDisplay;
+const PET_NEXA_URL = PORTFOLIO_CONFIG.petNexaUrl;
+const ROYAL_ROSE_MILK_URL = PORTFOLIO_CONFIG.royalRoseUrl;
+
+// ==========================================================================
+// DOM READY INITIALIZATION
+// ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     initThemeToggle();
     initCinematicCanvas();
     initNavbar();
     initScrollProgress();
-    initCustomCursor();
-    initScrollObserver();
-    initHeroParallaxTilt();
-    initCard3DTiltAndSpotlight();
+    initHeroTyping();
+    initWhatsAppEnquiryButtons();
+    initGalleryFilters();
     initStatCounterAnimations();
-    applyProjectUrls();
-    initLaptopDefaults();
+    initScrollObserver();
+    initCircularOrbitNav();
 });
+
+/* --------------------------------------------------------------------------
+   WHATSAPP ENQUIRY AUTOMATION
+   -------------------------------------------------------------------------- */
+function initWhatsAppEnquiryButtons() {
+    // Project-specific WhatsApp links
+    document.querySelectorAll("[data-whatsapp-project]").forEach(btn => {
+        const projectName = btn.getAttribute("data-whatsapp-project");
+        if (projectName) {
+            btn.setAttribute("href", PORTFOLIO_CONFIG.getWhatsAppUrl(projectName));
+            btn.setAttribute("target", "_blank");
+            btn.setAttribute("rel", "noopener noreferrer");
+        }
+    });
+
+    // General WhatsApp links
+    document.querySelectorAll("[data-whatsapp-general]").forEach(btn => {
+        btn.setAttribute("href", PORTFOLIO_CONFIG.getWhatsAppUrl());
+        btn.setAttribute("target", "_blank");
+        btn.setAttribute("rel", "noopener noreferrer");
+    });
+}
 
 /* --------------------------------------------------------------------------
    0. BRIGHT / DARK OBSIDIAN MODE THEME SWITCHER
    -------------------------------------------------------------------------- */
 function initThemeToggle() {
-    const themeBtn = document.getElementById("themeToggleBtn");
+    const themeBtns = document.querySelectorAll(".theme-toggle-btn");
     const savedTheme = localStorage.getItem("raj_portfolio_theme") || "dark";
 
     function applyTheme(theme) {
         if (theme === "light") {
             document.documentElement.setAttribute("data-theme", "light");
             document.body.classList.add("theme-light");
-            if (themeBtn) {
-                const label = themeBtn.querySelector(".theme-toggle-text");
+            themeBtns.forEach(btn => {
+                const label = btn.querySelector(".theme-toggle-text");
                 if (label) label.textContent = "DARK";
-                themeBtn.setAttribute("title", "Switch to Dark Obsidian Mode");
-            }
+                btn.setAttribute("title", "Switch to Dark Obsidian Mode");
+            });
         } else {
             document.documentElement.removeAttribute("data-theme");
             document.body.classList.remove("theme-light");
-            if (themeBtn) {
-                const label = themeBtn.querySelector(".theme-toggle-text");
-                if (label) label.textContent = "BRIGHT";
-                themeBtn.setAttribute("title", "Switch to Bright Mode");
-            }
+            themeBtns.forEach(btn => {
+                const label = btn.querySelector(".theme-toggle-text");
+                if (label) label.textContent = "LIGHT";
+                btn.setAttribute("title", "Switch to Bright Mode");
+            });
         }
     }
 
     applyTheme(savedTheme);
 
-    if (themeBtn) {
-        themeBtn.addEventListener("click", () => {
+    themeBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
             const currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
             const newTheme = currentTheme === "light" ? "dark" : "light";
             applyTheme(newTheme);
             localStorage.setItem("raj_portfolio_theme", newTheme);
-            showToast(newTheme === "light" ? "Switched to Bright Alabaster Gold ☀️" : "Switched to Dark Obsidian Gold 🌙");
+            showToast(newTheme === "light" ? "Switched to Bright Mode ☀️" : "Switched to Dark Obsidian Mode 🌙");
         });
-    }
+    });
 }
 
 /* --------------------------------------------------------------------------
-   1. CINEMATIC GOLD PARTICLES & METEOR SHOOTING STAR CANVAS
+   1. CINEMATIC PARTICLES & METEOR CANVAS
    -------------------------------------------------------------------------- */
 function initCinematicCanvas() {
     const canvas = document.getElementById("cinematicCanvas");
@@ -76,7 +126,6 @@ function initCinematicCanvas() {
     let particles = [];
     let shootingStars = [];
     let animationFrameId;
-    let mouse = { x: null, y: null, radius: 160 };
 
     function resize() {
         width = canvas.width = window.innerWidth;
@@ -85,28 +134,16 @@ function initCinematicCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    window.addEventListener("mousemove", (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-
-    window.addEventListener("mouseleave", () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    const particleCount = Math.min(Math.floor(window.innerWidth / 20), 75);
+    const particleCount = Math.min(Math.floor(window.innerWidth / 22), 65);
 
     class Particle {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.size = Math.random() * 2.2 + 0.8;
-            this.baseX = this.x;
-            this.baseY = this.y;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.color = Math.random() > 0.35 ? "rgba(212, 175, 55, 0.5)" : "rgba(243, 229, 171, 0.35)";
+            this.size = Math.random() * 2.0 + 0.8;
+            this.vx = (Math.random() - 0.5) * 0.45;
+            this.vy = (Math.random() - 0.5) * 0.45;
+            this.color = Math.random() > 0.35 ? "rgba(212, 175, 55, 0.45)" : "rgba(243, 229, 171, 0.3)";
         }
 
         update() {
@@ -117,26 +154,13 @@ function initCinematicCanvas() {
             if (this.x > width) this.x = 0;
             if (this.y < 0) this.y = height;
             if (this.y > height) this.y = 0;
-
-            if (mouse.x !== null && mouse.y !== null) {
-                const dx = mouse.x - this.x;
-                const dy = mouse.y - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < mouse.radius) {
-                    const force = (mouse.radius - dist) / mouse.radius;
-                    const fx = (dx / dist) * force * 1.8;
-                    const fy = (dy / dist) * force * 1.8;
-                    this.x -= fx;
-                    this.y -= fy;
-                }
-            }
         }
 
         draw() {
             const isLight = document.documentElement.getAttribute("data-theme") === "light";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = isLight ? "rgba(184, 134, 11, 0.5)" : this.color;
+            ctx.fillStyle = isLight ? "rgba(184, 134, 11, 0.4)" : this.color;
             ctx.fill();
         }
     }
@@ -149,9 +173,9 @@ function initCinematicCanvas() {
         reset() {
             this.x = Math.random() * width;
             this.y = 0;
-            this.len = Math.random() * 90 + 50;
-            this.speed = Math.random() * 8 + 6;
-            this.size = Math.random() * 1.5 + 0.8;
+            this.len = Math.random() * 80 + 40;
+            this.speed = Math.random() * 7 + 5;
+            this.size = Math.random() * 1.4 + 0.8;
             this.angle = Math.PI / 4;
             this.opacity = 1;
             this.active = true;
@@ -160,7 +184,7 @@ function initCinematicCanvas() {
         update() {
             this.x += this.speed * Math.cos(this.angle);
             this.y += this.speed * Math.sin(this.angle);
-            this.opacity -= 0.012;
+            this.opacity -= 0.014;
             if (this.opacity <= 0 || this.x > width || this.y > height) {
                 this.active = false;
             }
@@ -194,24 +218,22 @@ function initCinematicCanvas() {
         ctx.clearRect(0, 0, width, height);
         const isLight = document.documentElement.getAttribute("data-theme") === "light";
 
-        // Spawn meteor shooting stars periodically
-        if (Date.now() - lastStarTime > 4000 && Math.random() > 0.4) {
+        if (Date.now() - lastStarTime > 5000 && Math.random() > 0.45) {
             shootingStars.push(new ShootingStar());
             lastStarTime = Date.now();
         }
 
-        // Draw connections
         for (let a = 0; a < particles.length; a++) {
             for (let b = a + 1; b < particles.length; b++) {
                 const dx = particles[a].x - particles[b].x;
                 const dy = particles[a].y - particles[b].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 135) {
-                    const opacity = (1 - dist / 135) * (isLight ? 0.25 : 0.18);
+                if (dist < 120) {
+                    const opacity = (1 - dist / 120) * (isLight ? 0.2 : 0.14);
                     ctx.beginPath();
                     ctx.strokeStyle = isLight ? `rgba(184, 134, 11, ${opacity})` : `rgba(212, 175, 55, ${opacity})`;
-                    ctx.lineWidth = 0.7;
+                    ctx.lineWidth = 0.6;
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(particles[b].x, particles[b].y);
                     ctx.stroke();
@@ -219,13 +241,11 @@ function initCinematicCanvas() {
             }
         }
 
-        // Update particles
         particles.forEach(p => {
             p.update();
             p.draw();
         });
 
-        // Update shooting stars
         shootingStars = shootingStars.filter(s => s.active);
         shootingStars.forEach(s => {
             s.update();
@@ -246,77 +266,306 @@ function initCinematicCanvas() {
 }
 
 /* --------------------------------------------------------------------------
-   2. HERO PORTRAIT 3D MAGNETIC PARALLAX & TILT PHYSICS
+   2. NAVBAR CONTROLLER & ACTIVE UNDERLINE (DESKTOP + MOBILE DRAWER)
    -------------------------------------------------------------------------- */
-function initHeroParallaxTilt() {
-    const stage = document.getElementById("portraitStage");
-    if (!stage) return;
+function initNavbar() {
+    const navbar = document.getElementById("navbar");
+    const mobileBtn = document.getElementById("mobileToggleBtn");
+    const navLinks = document.getElementById("navLinks");
+    const backdrop = document.getElementById("mobileNavBackdrop");
+    const navItems = document.querySelectorAll(".nav-item");
 
-    window.addEventListener("mousemove", (e) => {
-        if (window.innerWidth < 992) return;
-        const rect = stage.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+    // Sticky navbar glass blur on scroll
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 30) {
+            navbar?.classList.add("scrolled");
+        } else {
+            navbar?.classList.remove("scrolled");
+        }
+    }, { passive: true });
 
-        const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
-        const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
+    // Mobile Hamburger Toggle
+    function toggleMobileMenu(open) {
+        if (!navLinks) return;
+        const isOpen = open !== undefined ? open : !navLinks.classList.contains("mobile-open");
+        if (isOpen) {
+            navLinks.classList.add("mobile-open");
+            backdrop?.classList.add("active");
+            document.body.style.overflow = "hidden";
+        } else {
+            navLinks.classList.remove("mobile-open");
+            backdrop?.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+    }
 
-        const tiltX = deltaY * -12;
-        const tiltY = deltaX * 12;
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener("click", () => toggleMobileMenu());
+        backdrop?.addEventListener("click", () => toggleMobileMenu(false));
 
-        stage.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+        // Close on Escape key
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && navLinks.classList.contains("mobile-open")) {
+                toggleMobileMenu(false);
+            }
+        });
+    }
 
-        // Parallax inner photo and chips
-        const img = stage.querySelector(".portrait-hero-img");
-        if (img) img.style.transform = `translateX(${deltaX * -10}px) translateY(${deltaY * -10}px) scale(1.04)`;
-
-        const chips = stage.querySelectorAll(".hero-floating-chip");
-        chips.forEach((chip, i) => {
-            const factor = (i + 1) * 8;
-            chip.style.transform = `translateX(${deltaX * factor}px) translateY(${deltaY * factor}px)`;
+    // Smooth Accurate Scrolling on Nav Points & Section Anchors with Offset
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            if (!href || href === "#") return;
+            if (href === "#top" || href === "#home") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                toggleMobileMenu(false);
+                return;
+            }
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const navHeight = navbar ? navbar.offsetHeight : 70;
+                const targetY = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
+                window.scrollTo({
+                    top: Math.max(0, targetY),
+                    behavior: "smooth"
+                });
+                toggleMobileMenu(false);
+            }
         });
     });
 
-    stage.addEventListener("mouseleave", () => {
-        stage.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
-        const img = stage.querySelector(".portrait-hero-img");
-        if (img) img.style.transform = "translateX(0) translateY(0) scale(1)";
-        const chips = stage.querySelectorAll(".hero-floating-chip");
-        chips.forEach(chip => chip.style.transform = "");
-    });
+    // Precision Scroll Spy for Active Circular Navigation Points
+    const sections = [
+        document.getElementById("home"),
+        document.getElementById("about"),
+        document.getElementById("services"),
+        document.getElementById("contact")
+    ].filter(Boolean);
+
+    function updateActiveNav() {
+        if (sections.length === 0) return;
+        let currentSectionId = "home";
+        const scrollPosition = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const navOffset = (navbar ? navbar.offsetHeight : 70) + 30;
+
+        // If user is near the bottom of the page, highlight the final contact section
+        if (scrollPosition + windowHeight >= documentHeight - 75) {
+            currentSectionId = "contact";
+        } else {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - navOffset;
+                const sectionHeight = section.offsetHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSectionId = section.getAttribute("id");
+                }
+            });
+        }
+
+        navItems.forEach(item => {
+            const href = item.getAttribute("href");
+            if (href === `#${currentSectionId}`) {
+                item.classList.add("active");
+            } else {
+                item.classList.remove("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", updateActiveNav, { passive: true });
+    updateActiveNav();
 }
 
 /* --------------------------------------------------------------------------
-   3. 3D CARD TILT & SPOTLIGHT FOLLOWER PHYSICS
+   3. HERO AUTOMATIC TITLE TYPING / ROTATION ENGINE
    -------------------------------------------------------------------------- */
-function initCard3DTiltAndSpotlight() {
-    const cards = document.querySelectorAll(".stat-box-card, .gold-skill-badge, .luxury-work-banner-card");
+function initHeroTyping() {
+    const titleEl = document.getElementById("heroTypingTitle");
+    if (!titleEl) return;
 
-    cards.forEach(card => {
-        card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    const titles = [
+        "FULL STACK WEB DEVELOPER",
+        "APP DEVELOPER",
+        "WEB APPLICATION DEVELOPER",
+        "AI ENTHUSIAST"
+    ];
 
-            // Calculate tilt angle
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -8;
-            const rotateY = ((x - centerX) / centerX) * 8;
+    let titleIndex = 0;
+    let charIndex = titles[0].length; // start with first title full
+    let isDeleting = false;
+    const typeSpeed = 65;
+    const eraseSpeed = 35;
+    const pauseEnd = 2000;
+    const pauseStart = 350;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(212, 175, 55, 0.12) 0%, rgba(18, 18, 24, 0.85) 60%)`;
-        });
+    // Set initial full text
+    titleEl.textContent = titles[0];
 
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "";
-            card.style.background = "";
-        });
-    });
+    function step() {
+        const currentTitle = titles[titleIndex];
+
+        if (isDeleting) {
+            charIndex--;
+            titleEl.textContent = currentTitle.substring(0, charIndex);
+        } else {
+            charIndex++;
+            titleEl.textContent = currentTitle.substring(0, charIndex);
+        }
+
+        let delay = isDeleting ? eraseSpeed : typeSpeed;
+
+        if (!isDeleting && charIndex === currentTitle.length) {
+            delay = pauseEnd;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            titleIndex = (titleIndex + 1) % titles.length;
+            delay = pauseStart;
+        }
+
+        setTimeout(step, delay);
+    }
+
+    // Wait initial delay before first erase
+    setTimeout(() => {
+        isDeleting = true;
+        step();
+    }, 2200);
 }
 
 /* --------------------------------------------------------------------------
-   4. ANIMATED STAT NUMBER COUNTERS (TRIGGERED ON SCROLL)
+   4. SCROLL PROGRESS INDICATOR
+   -------------------------------------------------------------------------- */
+function initScrollProgress() {
+    const progressLine = document.getElementById("scrollProgress");
+    if (!progressLine) return;
+
+    window.addEventListener("scroll", () => {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressLine.style.width = `${scrolled}%`;
+    }, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   5. SERVICES CTA PRE-SELECTION & SMOOTH SCROLL
+   -------------------------------------------------------------------------- */
+function selectServiceForContact(serviceName) {
+    const serviceSelect = document.getElementById("contactService");
+    const contactSection = document.getElementById("contact");
+
+    if (serviceSelect) {
+        // Find matching option
+        for (let i = 0; i < serviceSelect.options.length; i++) {
+            if (serviceSelect.options[i].value.includes(serviceName) || serviceName.includes(serviceSelect.options[i].value)) {
+                serviceSelect.selectedIndex = i;
+                break;
+            }
+        }
+    }
+
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    showToast(`Selected Package: ${serviceName}`);
+}
+
+/* --------------------------------------------------------------------------
+   6. PROJECTS GALLERY CATEGORY FILTER & REAL-TIME SEARCH ENGINE
+   -------------------------------------------------------------------------- */
+function initGalleryFilters() {
+    const filterPills = document.querySelectorAll(".gallery-filter-pill");
+    const cards = document.querySelectorAll(".gallery-card");
+    const searchInput = document.getElementById("projectSearchInput");
+    const countBadge = document.getElementById("galleryCountBadge");
+
+    if (!cards.length) return;
+
+    let activeFilter = "all";
+    let searchQuery = "";
+
+    function applyFilterAndSearch() {
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const category = card.getAttribute("data-category") || "";
+            const titleEl = card.querySelector(".browser-card-title, .gallery-card-title, h3");
+            const descEl = card.querySelector(".browser-card-desc, .gallery-card-desc, p");
+            const cardText = ((titleEl ? titleEl.textContent : "") + " " + (descEl ? descEl.textContent : "")).toLowerCase();
+
+            const matchesCategory = (activeFilter === "all" || category === activeFilter);
+            const matchesSearch = (!searchQuery || cardText.includes(searchQuery));
+
+            if (matchesCategory && matchesSearch) {
+                card.style.display = "flex";
+                setTimeout(() => {
+                    card.style.opacity = "1";
+                    card.style.transform = "scale(1)";
+                }, 10);
+                visibleCount++;
+            } else {
+                card.style.opacity = "0";
+                card.style.transform = "scale(0.96)";
+                setTimeout(() => {
+                    card.style.display = "none";
+                }, 200);
+            }
+        });
+
+        if (countBadge) {
+            countBadge.textContent = `TOTAL PROJECT COUNT : ${visibleCount}`;
+        }
+    }
+
+    if (filterPills.length) {
+        filterPills.forEach(pill => {
+            pill.addEventListener("click", () => {
+                activeFilter = pill.getAttribute("data-filter") || "all";
+                filterPills.forEach(p => p.classList.remove("active"));
+                pill.classList.add("active");
+                applyFilterAndSearch();
+            });
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value.trim().toLowerCase();
+            applyFilterAndSearch();
+        });
+    }
+}
+
+/* --------------------------------------------------------------------------
+   7. CONTACT FORM SUBMISSION HANDLER
+   -------------------------------------------------------------------------- */
+function handleContactSubmit(e) {
+    e.preventDefault();
+
+    const nameInput = document.getElementById("contactName");
+    const emailInput = document.getElementById("contactEmail");
+    const serviceInput = document.getElementById("contactService");
+    const messageInput = document.getElementById("contactMessage");
+
+    const name = nameInput?.value.trim() || "Friend";
+    const service = serviceInput?.value || "General Inquiry";
+
+    showToast(`Thank you, ${name}! Your request for "${service}" has been received.`);
+
+    // Reset form
+    if (nameInput) nameInput.value = "";
+    if (emailInput) emailInput.value = "";
+    if (messageInput) messageInput.value = "";
+    if (serviceInput) serviceInput.selectedIndex = 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. STAT NUMBER COUNTERS (TRIGGERED ON SCROLL)
    -------------------------------------------------------------------------- */
 function initStatCounterAnimations() {
     const counters = document.querySelectorAll(".counter-number");
@@ -330,9 +579,9 @@ function initStatCounterAnimations() {
                     const target = parseInt(counter.getAttribute("data-target"), 10);
                     const suffix = counter.getAttribute("data-suffix") || "";
                     let current = 0;
-                    const increment = Math.max(Math.floor(target / 40), 1);
-                    const duration = 1200;
-                    const stepTime = Math.max(Math.floor(duration / (target / increment || 1)), 20);
+                    const increment = Math.max(Math.floor(target / 30), 1);
+                    const duration = 1000;
+                    const stepTime = Math.max(Math.floor(duration / (target / increment || 1)), 25);
 
                     const timer = setInterval(() => {
                         current += increment;
@@ -347,124 +596,16 @@ function initStatCounterAnimations() {
         });
     }, { threshold: 0.2 });
 
-    const statsGrid = document.querySelector(".about-bottom-bar-card, .about-stats-2x2");
+    const statsGrid = document.querySelector(".about-bottom-bar-card");
     if (statsGrid) observer.observe(statsGrid);
 }
 
 /* --------------------------------------------------------------------------
-   5. STICKY NAVBAR & MOBILE DRAWER
-   -------------------------------------------------------------------------- */
-function initNavbar() {
-    const navbar = document.getElementById("navbar");
-    const mobileBtn = document.getElementById("mobileToggleBtn");
-    const navLinks = document.getElementById("navLinks");
-    const navItems = document.querySelectorAll(".nav-item");
-
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 40) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-    });
-
-    if (mobileBtn && navLinks) {
-        mobileBtn.addEventListener("click", () => {
-            navLinks.classList.toggle("mobile-open");
-        });
-
-        navItems.forEach(link => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("mobile-open");
-            });
-        });
-    }
-
-    const sections = document.querySelectorAll("section[id]");
-    window.addEventListener("scroll", () => {
-        let current = "";
-        const scrollPos = window.pageYOffset + 240;
-
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            if (scrollPos >= top && scrollPos < top + height) {
-                current = section.getAttribute("id");
-            }
-        });
-
-        navItems.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${current}`) {
-                link.classList.add("active");
-            }
-        });
-    });
-}
-
-/* --------------------------------------------------------------------------
-   6. SCROLL PROGRESS INDICATOR
-   -------------------------------------------------------------------------- */
-function initScrollProgress() {
-    const progressLine = document.getElementById("scrollProgress");
-    if (!progressLine) return;
-
-    window.addEventListener("scroll", () => {
-        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        progressLine.style.width = `${scrolled}%`;
-    });
-}
-
-/* --------------------------------------------------------------------------
-   7. DESKTOP CONTEXT CURSOR
-   -------------------------------------------------------------------------- */
-function initCustomCursor() {
-    const cursorDot = document.getElementById("cursorDot");
-    const cursorRing = document.getElementById("cursorRing");
-
-    if (!cursorDot || !cursorRing) return;
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-    window.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        cursorDot.style.left = `${mouseX}px`;
-        cursorDot.style.top = `${mouseY}px`;
-    });
-
-    function renderRing() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-
-        cursorRing.style.left = `${ringX}px`;
-        cursorRing.style.top = `${ringY}px`;
-
-        requestAnimationFrame(renderRing);
-    }
-    renderRing();
-
-    const interactives = document.querySelectorAll(
-        "a, button, input, select, .gold-skill-badge, .stat-box-card, .channel-card-row, .timeline-card, .luxury-work-banner-card, .hero-floating-chip"
-    );
-    interactives.forEach(el => {
-        el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
-        el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-    });
-}
-
-/* --------------------------------------------------------------------------
-   8. SCROLL REVEAL OBSERVER
+   9. SCROLL REVEAL OBSERVER
    -------------------------------------------------------------------------- */
 function initScrollObserver() {
     const targets = document.querySelectorAll(
-        ".about-split-layout, .skills-cards-grid, .selected-works-layout, .timeline-row, .contact-dramatic-layout"
+        ".about-hero-split, .about-bottom-bar-card, .about-skills-subdivision, .services-cards-grid, .projects-gallery-grid, .contact-main-flow"
     );
 
     const observer = new IntersectionObserver((entries) => {
@@ -479,118 +620,21 @@ function initScrollObserver() {
 
     targets.forEach((el, idx) => {
         el.style.opacity = "0";
-        el.style.transform = "translateY(22px)";
-        el.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${Math.min((idx % 4) * 0.08, 0.25)}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${Math.min((idx % 4) * 0.08, 0.25)}s`;
+        el.style.transform = "translateY(20px)";
+        el.style.transition = `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${Math.min(idx * 0.06, 0.2)}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${Math.min(idx * 0.06, 0.2)}s`;
         observer.observe(el);
     });
 }
 
 /* --------------------------------------------------------------------------
-   9. INTERACTIVE LAPTOP SHOWCASE CONTROLLER ("and the laptop.....")
-   -------------------------------------------------------------------------- */
-const LAPTOP_PROJECTS = {
-    petNexa: {
-        name: "PET NEXA",
-        url: PET_NEXA_URL,
-        img: "images/pet-nexa-dark-crest.jpg",
-        fallback: "images/pet-nexa-showcase.jpg",
-        badge: "GEMINI FLASH AI PLATFORM"
-    },
-    royalRose: {
-        name: "ROYAL ROSE MILK",
-        url: ROYAL_ROSE_MILK_URL,
-        img: "images/royal-rose-milk.jpg",
-        fallback: "images/royal-rose-milk.jpg",
-        badge: "INTERACTIVE BRAND WEBSITE"
-    },
-    portfolio: {
-        name: "PORTFOLIO WEBSITE",
-        url: "#home",
-        img: "portfolio_desktop.png",
-        fallback: "images/pet-nexa-ui.jpg",
-        badge: "LUXURY OBSIDIAN PORTFOLIO"
-    }
-};
-
-function initLaptopDefaults() {
-    switchLaptopProject('petNexa');
-}
-
-function switchLaptopProject(projectId) {
-    const project = LAPTOP_PROJECTS[projectId];
-    if (!project) return;
-
-    document.querySelectorAll('.laptop-tab-pill').forEach(btn => btn.classList.remove('active'));
-    if (projectId === 'petNexa') document.getElementById('laptopTabPetNexa')?.classList.add('active');
-    if (projectId === 'royalRose') document.getElementById('laptopTabRoyalRose')?.classList.add('active');
-    if (projectId === 'portfolio') document.getElementById('laptopTabPortfolio')?.classList.add('active');
-
-    const imgEl = document.getElementById('laptopScreenImg');
-    const nameEl = document.getElementById('laptopProjectName');
-    const urlEl = document.getElementById('laptopProjectUrl');
-    const liveBtn = document.getElementById('laptopLiveBtn');
-
-    if (imgEl) {
-        imgEl.style.opacity = '0';
-        imgEl.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-            imgEl.src = project.img;
-            imgEl.onerror = () => { imgEl.src = project.fallback; };
-            imgEl.style.opacity = '1';
-            imgEl.style.transform = 'scale(1)';
-        }, 200);
-    }
-
-    if (nameEl) nameEl.textContent = project.name;
-    if (urlEl) urlEl.textContent = project.url;
-    if (liveBtn) {
-        liveBtn.href = project.url;
-        if (project.url.startsWith('http')) {
-            liveBtn.target = '_blank';
-        } else {
-            liveBtn.removeAttribute('target');
-        }
-    }
-
-    showToast(`Laptop preview switched to ${project.name}`);
-}
-
-function setLaptopMode(mode) {
-    const chassis = document.getElementById('macbookChassis');
-    const btnLaptop = document.getElementById('modeBtnLaptop');
-    const btnMobile = document.getElementById('modeBtnMobile');
-
-    if (!chassis) return;
-
-    if (mode === 'mobile') {
-        chassis.classList.add('mobile-view');
-        btnMobile?.classList.add('active');
-        btnLaptop?.classList.remove('active');
-        showToast("Switched to Mobile Viewport Mode 📱");
-    } else {
-        chassis.classList.remove('mobile-view');
-        btnLaptop?.classList.add('active');
-        btnMobile?.classList.remove('active');
-        showToast("Switched to MacBook Pro 16\" Display View 💻");
-    }
-}
-
-/* --------------------------------------------------------------------------
-   10. APPLY CONFIGURABLE PROJECT URLS ACROSS DOM
-   -------------------------------------------------------------------------- */
-function applyProjectUrls() {
-    // Project URLs directly synchronized
-}
-
-/* --------------------------------------------------------------------------
-   11. PROJECT SHOWCASE DATA & INTERACTIVE MODAL CONTROLLER
+   10. FLAGSHIP PROJECT SHOWCASE DATA & INTERACTIVE MODALS
    -------------------------------------------------------------------------- */
 const PET_NEXA_DATA = {
     title: "PET NEXA",
     badge: "FLAGSHIP // AI PET CARE PLATFORM",
     heroImg: "images/pet-nexa-dark-crest.jpg",
-    heading: "PET NEXA — AI-Powered Multi-Service Platform",
-    description: "PET NEXA is a full-stack pet care ecosystem combining pet grooming appointment scheduling, veterinary specialist bookings, e-commerce shop, order tracking, and an intelligent Gemini Flash AI Pet Health Advisor.",
+    heading: "PET NEXA — AI-Powered Pet Ecosystem",
+    description: "PET NEXA is a full-stack pet care platform featuring grooming appointment scheduling, veterinary bookings, an e-commerce storefront, order tracking, and an integrated Gemini Flash AI Pet Health Advisor.",
     liveUrl: PET_NEXA_URL,
     specs: [
         { label: "LIVE SERVER", value: PET_NEXA_URL },
@@ -635,14 +679,14 @@ const ROYAL_ROSE_DATA = {
     badge: "INTERACTIVE SENSORY BRAND EXPERIENCE",
     heroImg: "images/royal-rose-milk.jpg",
     heading: "ROYAL ROSE MILK — Sensory Brand Website",
-    description: "An artisanal, interactive sensory product brand experience designed for Royal Rose Milk, featuring real-time bottle formulation engine, dynamic price calculations, and smooth 60fps micro-animations.",
+    description: "An artisanal, interactive sensory product brand experience designed for Royal Rose Milk, featuring a real-time bottle formulation engine, dynamic price calculations, and smooth micro-animations.",
     liveUrl: ROYAL_ROSE_MILK_URL,
     specs: [
         { label: "LIVE SERVER", value: ROYAL_ROSE_MILK_URL },
-        { label: "FRONTEND CORE", value: "HTML5 & Tailwind CSS" },
-        { label: "CLIENT LOGIC", value: "JavaScript (ES6+ State Engine)" },
-        { label: "EXPERIENCE", value: "Sensory Interactive Design" },
-        { label: "PERFORMANCE", value: "60 FPS Hardware-Accelerated" }
+        { label: "FRONTEND CORE", value: "HTML5, Vanilla CSS3, JavaScript ES6+" },
+        { label: "CLIENT LOGIC", value: "Real-time State Formulation Engine" },
+        { label: "EXPERIENCE", value: "Sensory Interactive Brand UI" },
+        { label: "PERFORMANCE", value: "Hardware-Accelerated 60 FPS" }
     ],
     features: [
         { title: "Cinematic Visuals", desc: "Atmospheric dark palette with obsidian and rose gold accents." },
@@ -660,36 +704,6 @@ function calculateCustomRoseBlend(essenceRatio, sweetnessType, baseMilk) {
     const blendGrade = essenceRatio >= 80 ? "Royal Damask Reserve" : "Artisanal Classic";
     
     return { finalPrice, blendGrade, ratio: essenceRatio };
-}`
-};
-
-const PORTFOLIO_DATA = {
-    title: "PORTFOLIO WEBSITE",
-    badge: "ENGINEERING SHOWCASE // OBSIDIAN & GOLD",
-    heroImg: "portfolio_desktop.png",
-    heading: "Rajkumar — Developer Portfolio Architecture",
-    description: "Personal portfolio website engineered with an ultra-luxury obsidian and royal gold design system, 3D interactive MacBook device workbench, quantum loader, and responsive client-side engines.",
-    liveUrl: "#home",
-    specs: [
-        { label: "DESIGN PALETTE", value: "Velvet Obsidian (#08080A) & Royal Gold (#D4AF37)" },
-        { label: "CORE STACK", value: "HTML5, Vanilla CSS3, JavaScript (ES6+)" },
-        { label: "ANIMATIONS", value: "Canvas Constellation Particles & 3D Tilt" },
-        { label: "RESPONSIVENESS", value: "Mobile, Tablet, Laptop, 4K Display" }
-    ],
-    features: [
-        { title: "Golden Halo Hero", desc: "Art-directed portrait with glowing orbital rings and dotted grid accent." },
-        { title: "MacBook Pro Workbench", desc: "Realistic 3D laptop chassis with live project switching and viewport toggles." },
-        { title: "2x2 Stat Cards", desc: "Glassmorphic metric indicators highlighting experience and skills." },
-        { title: "Quantum Loader", desc: "Startup telemetry sequence with laser progress bar and monogram glow." }
-    ],
-    codeSnippet: `/* Ultra-Luxury Obsidian & Royal Gold Design Token Architecture */
-:root {
-    --bg-obsidian: #08080A;
-    --gold-main: #D4AF37;
-    --gold-light: #F3E5AB;
-    --gold-glow: rgba(212, 175, 55, 0.38);
-    --font-serif: 'Cormorant Garamond', serif;
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
 }`
 };
 
@@ -713,13 +727,11 @@ function openProjectModal(projectId) {
 
     let data = PET_NEXA_DATA;
     if (projectId === "royalRose") data = ROYAL_ROSE_DATA;
-    if (projectId === "portfolio") data = PORTFOLIO_DATA;
 
     if (titleEl) titleEl.textContent = data.title;
     if (badgeEl) badgeEl.textContent = data.badge;
     if (heroImgEl) {
         heroImgEl.src = data.heroImg;
-        heroImgEl.onerror = () => { heroImgEl.src = "images/pet-nexa-dark-crest.jpg"; };
     }
     if (headingEl) headingEl.textContent = data.heading;
     if (descEl) descEl.textContent = data.description;
@@ -805,7 +817,7 @@ function renderModalSimulator(projectId) {
                             <option value="lethargy">Reduced Energy & Lethargy</option>
                             <option value="loss_of_appetite">Appetite Suppression</option>
                             <option value="dental_plaque">Dental Plaque & Breath Odor</option>
-                            <option value="skin_itching">Dermatological Irritation & Scratching</option>
+                            <option value="skin_itching">Dermatological Irritation</option>
                         </select>
                     </div>
                 </div>
@@ -912,44 +924,8 @@ function updateRoseCustomizerSim() {
 }
 
 /* --------------------------------------------------------------------------
-   12. COPY TO CLIPBOARD & TOAST NOTIFICATIONS
+   11. UTILITIES: TOAST NOTIFICATIONS & CLIPBOARD
    -------------------------------------------------------------------------- */
-function copyContactInfo(text, message) {
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-            showToast(message || "Copied to clipboard!");
-        }).catch(() => {
-            fallbackCopy(text, message);
-        });
-    } else {
-        fallbackCopy(text, message);
-    }
-}
-
-function fallbackCopy(text, message) {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.position = "fixed";
-    textArea.style.opacity = "0";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-        document.execCommand('copy');
-        showToast(message || "Copied to clipboard!");
-    } catch (err) {
-        showToast("Press Ctrl+C to copy: " + text);
-    }
-    document.body.removeChild(textArea);
-}
-
-function copySnippet() {
-    const code = document.getElementById("modalCodeSnippet");
-    if (code) {
-        copyContactInfo(code.textContent, "Architecture code copied to clipboard!");
-    }
-}
-
 function showToast(message) {
     const toast = document.getElementById("toastNotification");
     const toastMsg = document.getElementById("toastMessage");
@@ -964,9 +940,102 @@ function showToast(message) {
     }, 2800);
 }
 
+function copySnippet() {
+    const code = document.getElementById("modalCodeSnippet");
+    if (code && navigator.clipboard) {
+        navigator.clipboard.writeText(code.textContent).then(() => {
+            showToast("Architecture code copied to clipboard!");
+        });
+    }
+}
+
 /* --------------------------------------------------------------------------
-   13. RESUME DOWNLOAD HANDLER
+   12. HERO ORBITAL CIRCULAR NAVIGATION CONTROLS
+   Dot 1 -> #about (About Me)
+   Dot 2 -> projects.html (Project Gallery)
+   Dot 3 -> #contact (Contact)
    -------------------------------------------------------------------------- */
-function handleResumeDownload(event) {
-    showToast("Downloading Rajkumar's Resume (PDF)...");
+function initCircularOrbitNav() {
+    const orbitDots = document.querySelectorAll(".sample-satellite-dot");
+    if (!orbitDots.length) return;
+
+    const navbar = document.getElementById("navbar");
+
+    // Click handler for all 3 dots with smooth scroll and offset
+    orbitDots.forEach(dot => {
+        dot.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            // If it's a page link (e.g. projects.html), allow normal navigation to Project Gallery
+            if (href && (href.endsWith(".html") || !href.startsWith("#"))) {
+                return;
+            }
+
+            e.preventDefault();
+            const targetId = this.getAttribute("data-orbit-target");
+            if (!targetId) return;
+
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const navHeight = navbar ? navbar.offsetHeight : 70;
+                const targetY = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight - 15;
+
+                window.scrollTo({
+                    top: Math.max(0, targetY),
+                    behavior: "smooth"
+                });
+
+                // Immediate active visual feedback
+                orbitDots.forEach(d => d.classList.remove("active"));
+                this.classList.add("active");
+
+                // Update URL hash without jumping
+                if (history.pushState) {
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            }
+        });
+    });
+
+    // Scroll spy for automatic active dot detection on Home page
+    const sectionTargets = [
+        { id: "about", dotId: "orbitDotAbout" },
+        { id: "contact", dotId: "orbitDotContact" }
+    ];
+
+    function updateActiveOrbitDots() {
+        const scrollPosition = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const navOffset = (navbar ? navbar.offsetHeight : 70) + 40;
+
+        let activeTargetId = null;
+
+        // If user is near the bottom of the page, contact is active
+        if (scrollPosition + windowHeight >= documentHeight - 80) {
+            activeTargetId = "contact";
+        } else {
+            sectionTargets.forEach(({ id }) => {
+                const sec = document.getElementById(id);
+                if (sec) {
+                    const top = sec.offsetTop - navOffset;
+                    const height = sec.offsetHeight;
+                    if (scrollPosition >= top && scrollPosition < top + height) {
+                        activeTargetId = id;
+                    }
+                }
+            });
+        }
+
+        orbitDots.forEach(dot => {
+            const target = dot.getAttribute("data-orbit-target");
+            if (target === activeTargetId) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", updateActiveOrbitDots, { passive: true });
+    updateActiveOrbitDots();
 }

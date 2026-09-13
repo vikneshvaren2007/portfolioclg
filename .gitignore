@@ -1,1 +1,26 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python & Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
 .vscode/
+.idea/
+
+# Scratch & Temporary
+scratch/
+*.tmp
+*.log
