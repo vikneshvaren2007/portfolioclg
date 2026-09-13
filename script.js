@@ -1,7 +1,7 @@
 /* ==========================================================================
    RAJKUMAR — PRODUCTION PORTFOLIO ENGINE (2026)
    Navbar Underline, Hero Typing, Services Pre-selection,
-   Gallery Filtering, Flagship Modals, Theme Switcher & Particle Canvas
+   Gallery Filtering, Flagship Modals & Particle Canvas
    ========================================================================== */
 
 // ==========================================================================
@@ -40,7 +40,11 @@ const ROYAL_ROSE_MILK_URL = PORTFOLIO_CONFIG.royalRoseUrl;
 // DOM READY INITIALIZATION
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-    initThemeToggle();
+    try {
+        localStorage.removeItem("raj_portfolio_theme");
+        document.documentElement.removeAttribute("data-theme");
+        document.body.classList.remove("theme-light");
+    } catch (e) {}
     initCinematicCanvas();
     initNavbar();
     initScrollProgress();
@@ -71,46 +75,6 @@ function initWhatsAppEnquiryButtons() {
         btn.setAttribute("href", PORTFOLIO_CONFIG.getWhatsAppUrl());
         btn.setAttribute("target", "_blank");
         btn.setAttribute("rel", "noopener noreferrer");
-    });
-}
-
-/* --------------------------------------------------------------------------
-   0. BRIGHT / DARK OBSIDIAN MODE THEME SWITCHER
-   -------------------------------------------------------------------------- */
-function initThemeToggle() {
-    const themeBtns = document.querySelectorAll(".theme-toggle-btn");
-    const savedTheme = localStorage.getItem("raj_portfolio_theme") || "dark";
-
-    function applyTheme(theme) {
-        if (theme === "light") {
-            document.documentElement.setAttribute("data-theme", "light");
-            document.body.classList.add("theme-light");
-            themeBtns.forEach(btn => {
-                const label = btn.querySelector(".theme-toggle-text");
-                if (label) label.textContent = "DARK";
-                btn.setAttribute("title", "Switch to Dark Obsidian Mode");
-            });
-        } else {
-            document.documentElement.removeAttribute("data-theme");
-            document.body.classList.remove("theme-light");
-            themeBtns.forEach(btn => {
-                const label = btn.querySelector(".theme-toggle-text");
-                if (label) label.textContent = "LIGHT";
-                btn.setAttribute("title", "Switch to Bright Mode");
-            });
-        }
-    }
-
-    applyTheme(savedTheme);
-
-    themeBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-            const newTheme = currentTheme === "light" ? "dark" : "light";
-            applyTheme(newTheme);
-            localStorage.setItem("raj_portfolio_theme", newTheme);
-            showToast(newTheme === "light" ? "Switched to Bright Mode ☀️" : "Switched to Dark Obsidian Mode 🌙");
-        });
     });
 }
 
@@ -157,10 +121,9 @@ function initCinematicCanvas() {
         }
 
         draw() {
-            const isLight = document.documentElement.getAttribute("data-theme") === "light";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = isLight ? "rgba(184, 134, 11, 0.4)" : this.color;
+            ctx.fillStyle = this.color;
             ctx.fill();
         }
     }
@@ -216,7 +179,6 @@ function initCinematicCanvas() {
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
-        const isLight = document.documentElement.getAttribute("data-theme") === "light";
 
         if (Date.now() - lastStarTime > 5000 && Math.random() > 0.45) {
             shootingStars.push(new ShootingStar());
@@ -230,9 +192,9 @@ function initCinematicCanvas() {
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
                 if (dist < 120) {
-                    const opacity = (1 - dist / 120) * (isLight ? 0.2 : 0.14);
+                    const opacity = (1 - dist / 120) * 0.14;
                     ctx.beginPath();
-                    ctx.strokeStyle = isLight ? `rgba(184, 134, 11, ${opacity})` : `rgba(212, 175, 55, ${opacity})`;
+                    ctx.strokeStyle = `rgba(212, 175, 55, ${opacity})`;
                     ctx.lineWidth = 0.6;
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(particles[b].x, particles[b].y);
