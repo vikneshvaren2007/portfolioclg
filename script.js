@@ -291,10 +291,14 @@ function initNavbar() {
         if (isOpen) {
             navLinks.classList.add("mobile-open");
             backdrop?.classList.add("active");
+            mobileBtn?.classList.add("active");
+            mobileBtn?.setAttribute("aria-expanded", "true");
             document.body.style.overflow = "hidden";
         } else {
             navLinks.classList.remove("mobile-open");
             backdrop?.classList.remove("active");
+            mobileBtn?.classList.remove("active");
+            mobileBtn?.setAttribute("aria-expanded", "false");
             document.body.style.overflow = "";
         }
     }
@@ -334,6 +338,11 @@ function initNavbar() {
                 toggleMobileMenu(false);
             }
         });
+    });
+
+    // Also close mobile menu when tapping page links (like PROJECTS -> projects.html)
+    navLinks?.querySelectorAll('a:not([href^="#"])').forEach(link => {
+        link.addEventListener("click", () => toggleMobileMenu(false));
     });
 
     // Precision Scroll Spy for Active Circular Navigation Points
