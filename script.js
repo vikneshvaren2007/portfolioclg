@@ -15,6 +15,7 @@ const PORTFOLIO_CONFIG = {
     phoneDisplay: "+91 94454 37069",
     petNexaUrl: "https://pet-nexa.onrender.com",
     royalRoseUrl: "https://royal-rosegunicorn-app-ap.onrender.com",
+    aurelisUrl: "https://aurelis-watch.onrender.com",
     
     // Exact requested WhatsApp message format:
     // "Hello rajkumar! I'm interested in your project: [SELECTED PROJECT NAME]. Could you provide more details about the features and pricing?"
@@ -35,6 +36,7 @@ const EMAIL_ADDRESS = PORTFOLIO_CONFIG.email;
 const PHONE_NUMBER = PORTFOLIO_CONFIG.phoneDisplay;
 const PET_NEXA_URL = PORTFOLIO_CONFIG.petNexaUrl;
 const ROYAL_ROSE_MILK_URL = PORTFOLIO_CONFIG.royalRoseUrl;
+const AURELIS_URL = PORTFOLIO_CONFIG.aurelisUrl;
 
 // ==========================================================================
 // DOM READY INITIALIZATION
@@ -277,18 +279,66 @@ function initNavbar() {
         });
     }
 
+    // Precision Scroll Spy for Active Navigation Links (Desktop + Mobile)
+    const sectionIds = ["home", "about", "skills", "projects", "services", "contact"];
+
+    function setActiveSection(sectionId) {
+        navItems.forEach(item => {
+            const href = item.getAttribute("href");
+            if (href === `#${sectionId}` || href?.endsWith(`#${sectionId}`)) {
+                item.classList.add("active");
+            } else {
+                item.classList.remove("active");
+            }
+        });
+    }
+
+    function updateActiveNav() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const navHeight = navbar ? navbar.offsetHeight : 75;
+
+        // At or near top of the page
+        if (scrollY < 80) {
+            setActiveSection("home");
+            return;
+        }
+
+        // At or near bottom of the page
+        if (scrollY + windowHeight >= docHeight - 75) {
+            setActiveSection("contact");
+            return;
+        }
+
+        // Detect active section in viewport
+        let currentSectionId = "home";
+        for (const id of sectionIds) {
+            const section = document.getElementById(id);
+            if (!section) continue;
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= windowHeight * 0.42 && rect.bottom > navHeight + 20) {
+                currentSectionId = id;
+            }
+        }
+
+        setActiveSection(currentSectionId);
+    }
+
     // Smooth Accurate Scrolling on Nav Points & Section Anchors with Offset
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener("click", function(e) {
             const href = this.getAttribute("href");
             if (!href || href === "#") return;
-            if (href === "#top" || href === "#home") {
+            const targetId = href.replace(/^#/, "");
+            if (targetId === "top" || targetId === "home") {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: "smooth" });
+                setActiveSection("home");
                 toggleMobileMenu(false);
                 return;
             }
-            const target = document.querySelector(href);
+            const target = document.getElementById(targetId);
             if (target) {
                 e.preventDefault();
                 const navHeight = navbar ? navbar.offsetHeight : 70;
@@ -297,56 +347,19 @@ function initNavbar() {
                     top: Math.max(0, targetY),
                     behavior: "smooth"
                 });
+                setActiveSection(targetId);
                 toggleMobileMenu(false);
             }
         });
     });
 
-    // Also close mobile menu when tapping page links (like PROJECTS -> projects.html)
+    // Also close mobile menu when tapping non-anchor links
     navLinks?.querySelectorAll('a:not([href^="#"])').forEach(link => {
         link.addEventListener("click", () => toggleMobileMenu(false));
     });
 
-    // Precision Scroll Spy for Active Circular Navigation Points
-    const sections = [
-        document.getElementById("home"),
-        document.getElementById("about"),
-        document.getElementById("services"),
-        document.getElementById("contact")
-    ].filter(Boolean);
-
-    function updateActiveNav() {
-        if (sections.length === 0) return;
-        let currentSectionId = "home";
-        const scrollPosition = window.pageYOffset;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        const navOffset = (navbar ? navbar.offsetHeight : 70) + 30;
-
-        // If user is near the bottom of the page, highlight the final contact section
-        if (scrollPosition + windowHeight >= documentHeight - 75) {
-            currentSectionId = "contact";
-        } else {
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - navOffset;
-                const sectionHeight = section.offsetHeight;
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    currentSectionId = section.getAttribute("id");
-                }
-            });
-        }
-
-        navItems.forEach(item => {
-            const href = item.getAttribute("href");
-            if (href === `#${currentSectionId}`) {
-                item.classList.add("active");
-            } else {
-                item.classList.remove("active");
-            }
-        });
-    }
-
     window.addEventListener("scroll", updateActiveNav, { passive: true });
+    window.addEventListener("resize", updateActiveNav, { passive: true });
     updateActiveNav();
 }
 
@@ -466,8 +479,9 @@ function initGalleryFilters() {
         cards.forEach(card => {
             const category = card.getAttribute("data-category") || "";
             const titleEl = card.querySelector(".browser-card-title, .gallery-card-title, h3");
+            const stackEl = card.querySelector(".built-with-stack, .browser-card-tech-row");
             const descEl = card.querySelector(".browser-card-desc, .gallery-card-desc, p");
-            const cardText = ((titleEl ? titleEl.textContent : "") + " " + (descEl ? descEl.textContent : "")).toLowerCase();
+            const cardText = ((titleEl ? titleEl.textContent : "") + " " + (stackEl ? stackEl.textContent : "") + " " + (descEl ? descEl.textContent : "")).toLowerCase();
 
             const matchesCategory = (activeFilter === "all" || category === activeFilter);
             const matchesSearch = (!searchQuery || cardText.includes(searchQuery));
@@ -673,9 +687,57 @@ function calculateCustomRoseBlend(essenceRatio, sweetnessType, baseMilk) {
     
     const finalPrice = basePrice + (sweetnessMultiplier[sweetnessType] || 0) + (milkMultiplier[baseMilk] || 0);
     const blendGrade = essenceRatio >= 80 ? "Royal Damask Reserve" : "Artisanal Classic";
-    
     return { finalPrice, blendGrade, ratio: essenceRatio };
 }`
+};
+
+const AURELIS_DATA = {
+    title: "AURELIS",
+    badge: "FLAGSHIP // LUXURY WATCH E-COMMERCE",
+    heroImg: "images/projects/aurelis-watch.jpg",
+    heading: "AURELIS — Luxury Watch E-Commerce Platform",
+    description: "AURELIS is a premium full-stack watch e-commerce platform built with a luxury-focused interface, customer accounts, shopping workflows, checkout, order management and an administrative dashboard.",
+    liveUrl: AURELIS_URL,
+    specs: [
+        { label: "LIVE SERVER", value: AURELIS_URL },
+        { label: "BACKEND STACK", value: "Python / Flask REST Server" },
+        { label: "FRONTEND UI", value: "HTML5, CSS3, JavaScript (ES6+)" },
+        { label: "DATABASE", value: "SQLite Relational Store" },
+        { label: "HOSTING", value: "Render Production Cloud" },
+        { label: "ARCHITECTURE", value: "Modular Full-Stack E-Commerce" }
+    ],
+    features: [
+        { title: "10 Luxury Watch Products", desc: "Curated collection of high-precision horological timepieces with detailed specifications and macro photography." },
+        { title: "Product Details & Caliber Specs", desc: "Interactive caliber telemetry, case dimensions, water resistance ratings, and dial visualizer." },
+        { title: "Shopping Cart & Checkout", desc: "Persistent shopping cart workflow with dynamic price calculation and secure payment flow." },
+        { title: "Customer Accounts & Auth", desc: "User registration, session-based customer authentication, and profile management." },
+        { title: "Order Management & Tracking", desc: "End-to-end customer order history and real-time shipment status tracking." },
+        { title: "Admin Management Panel", desc: "Dedicated administrative dashboard for product inventory management and order processing." },
+        { title: "SQLite Database Store", desc: "Relational database modeling for products, user accounts, orders, and cart sessions." },
+        { title: "Responsive Luxury UI", desc: "Bespoke dark obsidian and satin gold aesthetic optimized for desktop, tablet, and mobile devices." }
+    ],
+    codeSnippet: `@app.route('/api/orders/checkout', methods=['POST'])
+def process_watch_checkout():
+    user_id = session.get('user_id')
+    cart_items = get_cart_by_user(user_id)
+    
+    total_amount = sum(item['price'] * item['quantity'] for item in cart_items)
+    order_id = generate_order_number()
+    
+    # Persist order transaction to SQLite database
+    db.execute("""
+        INSERT INTO orders (order_id, user_id, total, status, created_at)
+        VALUES (?, ?, ?, 'Confirmed', CURRENT_TIMESTAMP)
+    """, (order_id, user_id, total_amount))
+    db.commit()
+    
+    clear_user_cart(user_id)
+    return jsonify({
+        "status": "success",
+        "order_id": order_id,
+        "total": total_amount,
+        "message": "AURELIS Order Placed Successfully"
+    })`
 };
 
 let currentModalProject = "petNexa";
@@ -698,6 +760,7 @@ function openProjectModal(projectId) {
 
     let data = PET_NEXA_DATA;
     if (projectId === "royalRose") data = ROYAL_ROSE_DATA;
+    if (projectId === "aurelis" || projectId === "aurelisWatch") data = AURELIS_DATA;
 
     if (titleEl) titleEl.textContent = data.title;
     if (badgeEl) badgeEl.textContent = data.badge;

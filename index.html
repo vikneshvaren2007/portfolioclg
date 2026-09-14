@@ -8,7 +8,7 @@
     <meta name="description"
         content="Rajkumar — Web Developer, B.Sc. Computer Science student & AI enthusiast crafting modern, responsive, and high-performance digital experiences.">
     <meta name="keywords"
-        content="Rajkumar, Web Developer, Full-Stack, Python, Flask, JavaScript, HTML, CSS, Portfolio, Pet Nexa, Royal Rose Milk, Tamil Nadu">
+        content="Rajkumar, Web Developer, Full-Stack, Python, Flask, JavaScript, HTML, CSS, Portfolio, Pet Nexa, Royal Rose Milk, Aurelis, Tamil Nadu">
     <meta name="author" content="Rajkumar">
 
     <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Inter, JetBrains Mono -->
@@ -74,11 +74,12 @@
                 </div>
             </a>
 
-            <!-- Top Navigation Links (Strict order: Home, About, Services, Contact) -->
+            <!-- Top Navigation Links (Home, About, Skills, Projects, Services, Contact) -->
             <nav class="nav-links" id="navLinks">
                 <a href="#home" class="nav-item active"><span class="nav-point-circle"></span>HOME</a>
                 <a href="#about" class="nav-item"><span class="nav-point-circle"></span>ABOUT</a>
-                <a href="projects.html" class="nav-item mobile-only-nav-item"><span class="nav-point-circle"></span>PROJECTS</a>
+                <a href="#skills" class="nav-item"><span class="nav-point-circle"></span>SKILLS</a>
+                <a href="#projects" class="nav-item"><span class="nav-point-circle"></span>PROJECTS</a>
                 <a href="#services" class="nav-item"><span class="nav-point-circle"></span>SERVICES</a>
                 <a href="#contact" class="nav-item"><span class="nav-point-circle"></span>CONTACT</a>
             </nav>
@@ -86,9 +87,10 @@
             <!-- Nav Actions -->
             <div class="nav-actions">
                 <a href="projects.html" class="btn-nav-pill-projects">
-                    <span>PROJECTS ↗</span>
+                    <span>ALL PROJECTS ↗</span>
                 </a>
                 <button class="mobile-toggle" id="mobileToggleBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                    <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
@@ -272,9 +274,9 @@
                             <img src="images/raj-hero-new.jpg" alt="Rajkumar — Web Developer" class="sample-avatar-img">
                         </div>
 
-                        <!-- Stat Badge Top Right: 3 Major Projects -->
+                        <!-- Stat Badge Top Right: 4 Major Projects -->
                         <div class="sample-stat-badge badge-top-right">
-                            <div class="sample-stat-val">3</div>
+                            <div class="sample-stat-val">4</div>
                             <div class="sample-stat-lbl">Major Projects</div>
                         </div>
 
@@ -377,7 +379,183 @@
         </section>
 
         <!-- =====================================================
-             5. SECTION 02 — SERVICES PACKAGES
+             4. SECTION — MY SKILLS
+        ===================================================== -->
+        <section id="skills" class="editorial-section">
+            <div class="editorial-container">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <div class="sec-pill-tag">TECHNICAL SKILLS</div>
+                    <h2 class="sec-title-centered">Core Technical Competencies</h2>
+                    <p class="sec-subtitle-centered">
+                        Modern technologies, programming languages, backend frameworks, and engineering tools.
+                    </p>
+                </div>
+
+                <div class="skills-cards-grid">
+                    <!-- HTML5 -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-brands fa-html5 skill-icon-gold"></i>
+                        <span class="skill-label-gold">HTML5</span>
+                    </div>
+
+                    <!-- CSS3 -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-brands fa-css3-alt skill-icon-gold"></i>
+                        <span class="skill-label-gold">CSS3</span>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-brands fa-js skill-icon-gold"></i>
+                        <span class="skill-label-gold">JavaScript</span>
+                    </div>
+
+                    <!-- Python -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-brands fa-python skill-icon-gold"></i>
+                        <span class="skill-label-gold">Python</span>
+                    </div>
+
+                    <!-- Flask -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-solid fa-server skill-icon-gold"></i>
+                        <span class="skill-label-gold">Flask</span>
+                    </div>
+
+                    <!-- SQLite -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-solid fa-database skill-icon-gold"></i>
+                        <span class="skill-label-gold">SQLite</span>
+                    </div>
+
+                    <!-- Git & GitHub -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-brands fa-git-alt skill-icon-gold"></i>
+                        <span class="skill-label-gold">Git &amp; GitHub</span>
+                    </div>
+
+                    <!-- Gemini AI -->
+                    <div class="gold-skill-badge">
+                        <i class="fa-solid fa-brain skill-icon-gold"></i>
+                        <span class="skill-label-gold">Gemini Flash AI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             5. SECTION — FEATURED PROJECTS
+        ===================================================== -->
+        <section id="projects" class="editorial-section projects-gallery-section" style="padding-top: 30px;">
+            <div class="editorial-container">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <div class="sec-pill-tag">PROJECT PORTFOLIO</div>
+                    <h2 class="sec-title-centered">Featured Projects</h2>
+                    <p class="sec-subtitle-centered">
+                        Full-stack applications, interactive brand platforms, and high-performance digital builds.
+                    </p>
+                </div>
+
+                <div class="projects-gallery-grid">
+                    <!-- 01. PETNEXA -->
+                    <article class="gallery-card browser-card-frame" data-category="fullstack">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/pet-nexa-hero.jpg" alt="PETNEXA — AI Pet Care Platform" class="browser-card-poster" onerror="this.src='images/pet-nexa-dog-poster.jpg'">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">PETNEXA</h3>
+                            <div class="browser-card-built-with">
+                                <span class="built-with-label">Built With:</span>
+                                <span class="built-with-stack">HTML • CSS • JavaScript • Python • Flask • Gemini AI</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="https://pet-nexa.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-card-demo-solid">
+                                    <span>VIEW LIVE DEMO</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20PETNEXA.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline" data-whatsapp-project="PETNEXA">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 02. ROYAL ROSE -->
+                    <article class="gallery-card browser-card-frame" data-category="landing">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/royal-rose-milk.jpg" alt="ROYAL ROSE — Luxury Beverage Experience" class="browser-card-poster">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">ROYAL ROSE</h3>
+                            <div class="browser-card-built-with">
+                                <span class="built-with-label">Built With:</span>
+                                <span class="built-with-stack">HTML • CSS • JavaScript • Python • Flask</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="https://royal-rosegunicorn-app-ap.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-card-demo-solid">
+                                    <span>VIEW LIVE DEMO</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20ROYAL%20ROSE.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline" data-whatsapp-project="ROYAL ROSE">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 03. AURELIS WATCH -->
+                    <article class="gallery-card browser-card-frame" data-category="fullstack">
+                        <div class="browser-top-notch">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-card-poster-box">
+                            <img src="images/projects/aurelis-watch.jpg" alt="AURELIS WATCH — Luxury Watch E-Commerce" class="browser-card-poster watch-poster-fit">
+                        </div>
+                        <div class="browser-card-body">
+                            <h3 class="browser-card-title">AURELIS WATCH</h3>
+                            <div class="browser-card-built-with">
+                                <span class="built-with-label">Built With:</span>
+                                <span class="built-with-stack">HTML • CSS • JavaScript • Python • Flask • SQLite • Render</span>
+                            </div>
+                            <div class="browser-card-double-btns">
+                                <a href="https://aurelis-watch.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-card-demo-solid" id="aurelisLiveBtn">
+                                    <span>VIEW LIVE DEMO</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://wa.me/919445437069?text=Hello%20rajkumar!%20I'm%20interested%20in%20your%20project:%20AURELIS%20WATCH.%20Could%20you%20provide%20more%20details%20about%20the%20features%20and%20pricing%3F" target="_blank" rel="noopener noreferrer" class="btn-card-wa-outline" data-whatsapp-project="AURELIS WATCH">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>INQUIRE VIA WHATSAPP</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Explore All Projects Button -->
+                <div style="text-align: center; margin-top: 45px;">
+                    <a href="projects.html" class="btn-nav-pill-projects" style="display: inline-flex; padding: 14px 32px; font-size: 0.88rem;">
+                        <span>EXPLORE FULL GALLERY (12 PROJECTS) ↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             6. SECTION — SERVICES PACKAGES
         ===================================================== -->
         <section id="services" class="editorial-section services-cinematic-section">
             <div class="editorial-container">
