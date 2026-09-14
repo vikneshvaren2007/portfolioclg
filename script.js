@@ -279,13 +279,44 @@ function initNavbar() {
         });
     }
 
-    // Precision Scroll Spy for Active Navigation Links (Desktop + Mobile)
-    const sectionIds = ["home", "about", "skills", "projects", "services", "contact"];
+    // Smooth Accurate Scrolling on Nav Points & Section Anchors with Offset
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            if (!href || href === "#") return;
+            if (href === "#top" || href === "#home") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                toggleMobileMenu(false);
+                return;
+            }
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const navHeight = navbar ? navbar.offsetHeight : 70;
+                const targetY = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
+                window.scrollTo({
+                    top: Math.max(0, targetY),
+                    behavior: "smooth"
+                });
+                setActiveNav(href.replace(/^#/, ""));
+                toggleMobileMenu(false);
+            }
+        });
+    });
 
-    function setActiveSection(sectionId) {
+    // Also close mobile menu when tapping page links (like PROJECTS -> projects.html)
+    navLinks?.querySelectorAll('a:not([href^="#"])').forEach(link => {
+        link.addEventListener("click", () => toggleMobileMenu(false));
+    });
+
+    // Precision Scroll Spy for Active Navigation Links (Desktop + Mobile)
+    const trackedSectionIds = ["home", "about", "services", "contact"];
+
+    function setActiveNav(activeId) {
         navItems.forEach(item => {
             const href = item.getAttribute("href");
-            if (href === `#${sectionId}` || href?.endsWith(`#${sectionId}`)) {
+            if (href === `#${activeId}`) {
                 item.classList.add("active");
             } else {
                 item.classList.remove("active");
@@ -297,66 +328,42 @@ function initNavbar() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const windowHeight = window.innerHeight;
         const docHeight = document.documentElement.scrollHeight;
-        const navHeight = navbar ? navbar.offsetHeight : 75;
+        const navHeight = navbar ? navbar.offsetHeight : 70;
 
-        // At or near top of the page
+        // 1. At or near top of the page -> Home is active
         if (scrollY < 80) {
-            setActiveSection("home");
+            setActiveNav("home");
             return;
         }
 
-        // At or near bottom of the page
-        if (scrollY + windowHeight >= docHeight - 75) {
-            setActiveSection("contact");
-            return;
-        }
-
-        // Detect active section in viewport
-        let currentSectionId = "home";
-        for (const id of sectionIds) {
-            const section = document.getElementById(id);
-            if (!section) continue;
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= windowHeight * 0.42 && rect.bottom > navHeight + 20) {
-                currentSectionId = id;
-            }
-        }
-
-        setActiveSection(currentSectionId);
-    }
-
-    // Smooth Accurate Scrolling on Nav Points & Section Anchors with Offset
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener("click", function(e) {
-            const href = this.getAttribute("href");
-            if (!href || href === "#") return;
-            const targetId = href.replace(/^#/, "");
-            if (targetId === "top" || targetId === "home") {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                setActiveSection("home");
-                toggleMobileMenu(false);
+        // 2. Contact section is visible or near bottom of page -> Contact is active
+        const contactEl = document.getElementById("contact");
+        if (contactEl) {
+            const contactRect = contactEl.getBoundingClientRect();
+            if (contactRect.top <= windowHeight * 0.6 || scrollY + windowHeight >= docHeight - 120) {
+                setActiveNav("contact");
                 return;
             }
-            const target = document.getElementById(targetId);
-            if (target) {
-                e.preventDefault();
-                const navHeight = navbar ? navbar.offsetHeight : 70;
-                const targetY = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
-                window.scrollTo({
-                    top: Math.max(0, targetY),
-                    behavior: "smooth"
-                });
-                setActiveSection(targetId);
-                toggleMobileMenu(false);
-            }
-        });
-    });
+        }
 
-    // Also close mobile menu when tapping non-anchor links
-    navLinks?.querySelectorAll('a:not([href^="#"])').forEach(link => {
-        link.addEventListener("click", () => toggleMobileMenu(false));
-    });
+        // 3. Single focal point: 32% down the viewport (guarantees exactly one active section)
+        const focalY = Math.max(navHeight + 60, windowHeight * 0.32);
+        let activeId = null;
+
+        for (const id of trackedSectionIds) {
+            const el = document.getElementById(id);
+            if (!el) continue;
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= focalY && rect.bottom > focalY) {
+                activeId = id;
+                break;
+            }
+        }
+
+        if (activeId) {
+            setActiveNav(activeId);
+        }
+    }
 
     window.addEventListener("scroll", updateActiveNav, { passive: true });
     window.addEventListener("resize", updateActiveNav, { passive: true });
@@ -479,9 +486,8 @@ function initGalleryFilters() {
         cards.forEach(card => {
             const category = card.getAttribute("data-category") || "";
             const titleEl = card.querySelector(".browser-card-title, .gallery-card-title, h3");
-            const stackEl = card.querySelector(".built-with-stack, .browser-card-tech-row");
             const descEl = card.querySelector(".browser-card-desc, .gallery-card-desc, p");
-            const cardText = ((titleEl ? titleEl.textContent : "") + " " + (stackEl ? stackEl.textContent : "") + " " + (descEl ? descEl.textContent : "")).toLowerCase();
+            const cardText = ((titleEl ? titleEl.textContent : "") + " " + (descEl ? descEl.textContent : "")).toLowerCase();
 
             const matchesCategory = (activeFilter === "all" || category === activeFilter);
             const matchesSearch = (!searchQuery || cardText.includes(searchQuery));
