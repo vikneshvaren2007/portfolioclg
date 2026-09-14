@@ -428,18 +428,13 @@ function initHeroTyping() {
 }
 
 /* --------------------------------------------------------------------------
-   4. SCROLL PROGRESS INDICATOR
+   4. SCROLL PROGRESS INDICATOR (DISABLED PER USER REQUEST)
    -------------------------------------------------------------------------- */
 function initScrollProgress() {
     const progressLine = document.getElementById("scrollProgress");
-    if (!progressLine) return;
-
-    window.addEventListener("scroll", () => {
-        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        progressLine.style.width = `${scrolled}%`;
-    }, { passive: true });
+    if (progressLine) {
+        progressLine.remove();
+    }
 }
 
 /* --------------------------------------------------------------------------
