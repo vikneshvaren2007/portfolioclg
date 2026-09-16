@@ -591,7 +591,7 @@ function initStatCounterAnimations() {
    -------------------------------------------------------------------------- */
 function initScrollObserver() {
     const targets = document.querySelectorAll(
-        ".about-hero-split, .about-bottom-bar-card, .about-skills-subdivision, .services-cards-grid, .projects-gallery-grid, .contact-main-flow"
+        ".about-hero-split, .about-bottom-bar-card, .about-skills-subdivision, .services-cards-grid, .contact-main-flow"
     );
 
     const observer = new IntersectionObserver((entries) => {
