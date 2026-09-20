@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAJ KUMAR — WEB DEVELOPER RESUME</title>
-    <meta name="description" content="Raj Kumar - Web Developer Resume. Skills: HTML5, CSS3, JavaScript, Python, Flask, Git, GitHub, VS Code.">
+    <title>B.K RAJ KUMAR — RESUME</title>
+    <meta name="description" content="B.K Raj Kumar - Web Developer | AI Enthusiast | Fresher Resume. Skills: HTML5, CSS3, JavaScript, Python, Flask, SQLite, Git, GitHub, VS Code.">
 
     <style>
         /* ==================== EMBEDDED TRUE VECTOR FONTS ==================== */
@@ -234,16 +234,12 @@
 
         :root {
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --text-main: #1D1D24;
             --text-heading: #000000;
-            --text-sub: #1A1A20;
-            --text-muted: #555562;
-            --accent: #111115;
-            --border-line: #E0DFE6;
-            --box-border: #E5E5EB;
-            --box-bg: #F7F7FA;
+            --text-sub: #111111;
+            --text-body: #1E1E24;
+            --border-rule: #B0B0BA;
             --link-color: #0A58CA;
+            --footer-text: #767682;
         }
 
         * {
@@ -257,14 +253,9 @@
         html, body {
             margin: 0;
             padding: 0;
-            width: 210mm;
-            height: 297mm;
-            max-height: 297mm;
-            overflow: hidden;
-            background-color: #FFFFFF;
+            background-color: #EFEFF3;
             font-family: var(--font-sans);
-            color: var(--text-main);
-            line-height: 1.36;
+            color: var(--text-body);
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
         }
@@ -274,6 +265,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
+            padding: 12px 0 24px 0;
+            min-height: 100vh;
         }
 
         /* Web Interactive Action Toolbar (Hidden in Print/PDF) */
@@ -282,17 +275,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 8px 0 6px 0;
-            background: #0D0D12;
-            padding: 8px 18px;
+            margin-bottom: 12px;
+            background: #0E0E14;
+            padding: 9px 18px;
             border-radius: 6px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 18px rgba(0,0,0,0.25);
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .toolbar-title {
             color: #FFFFFF;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 600;
             letter-spacing: 0.5px;
             display: flex;
@@ -309,9 +302,9 @@
             background: #1C1C24;
             color: #FFFFFF;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 4px;
-            font-size: 10.5px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
@@ -333,239 +326,179 @@
             border: none;
         }
 
-        /* Master Single-Page Vector Canvas */
+        /* Master Single-Page A4 Canvas */
         .resume-page {
             width: 210mm;
             height: 297mm;
             max-height: 297mm;
             min-height: 297mm;
             background-color: #FFFFFF;
-            padding: 14mm 18mm 12mm 18mm;
+            padding: 17mm 22mm 14mm 22mm;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            gap: 9px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
             page-break-inside: avoid !important;
             page-break-after: avoid !important;
             break-inside: avoid !important;
             break-after: avoid !important;
         }
 
-        /* ==================== HEADER SECTION ==================== */
+        /* ==================== HEADER ==================== */
         .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            text-align: center;
             width: 100%;
-            border-bottom: 1.5px solid var(--border-line);
-            padding-bottom: 6px;
-            margin-bottom: 2px;
-        }
-
-        .header-left {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            gap: 1.5px;
+            margin-bottom: 18px;
         }
 
         .candidate-name {
             font-size: 26px;
             font-weight: 800;
             color: var(--text-heading);
-            letter-spacing: 0.8px;
-            line-height: 1.1;
+            letter-spacing: 0.6px;
+            line-height: 1.15;
             text-transform: uppercase;
         }
 
         .candidate-role {
-            font-size: 11.5px;
+            font-size: 13.5px;
             font-weight: 700;
-            letter-spacing: 1.5px;
             color: var(--text-sub);
-            text-transform: uppercase;
-            margin-top: 1px;
+            letter-spacing: 0.3px;
+            margin-top: 5px;
+            line-height: 1.2;
         }
 
         .contact-bar {
-            font-size: 9px;
-            color: var(--text-muted);
-            margin-top: 3px;
+            font-size: 10.5px;
+            color: var(--text-body);
+            margin-top: 6px;
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             align-items: center;
-            gap: 5px;
-            line-height: 1.3;
+            gap: 7px;
+            line-height: 1.35;
         }
 
         .contact-bar a {
-            color: var(--text-main);
+            color: var(--text-body);
             text-decoration: none;
             transition: color 0.15s ease;
+        }
+
+        .contact-bar a.contact-link-portfolio {
+            color: var(--link-color);
+            text-decoration: underline;
         }
 
         .contact-bar a:hover {
             text-decoration: underline;
         }
 
-        .divider-dot {
-            color: #9999A5;
-            font-size: 9px;
-        }
-
-        /* Top-Right Header Portfolio Link */
-        .header-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            text-align: right;
-            gap: 2.5px;
-            padding-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .portfolio-label-badge {
-            font-size: 8.5px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-heading);
-            background: var(--box-bg);
-            border: 1px solid var(--box-border);
-            padding: 2px 7px;
-            border-radius: 3px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            text-decoration: none;
-            transition: all 0.15s ease;
-        }
-
-        .portfolio-label-badge:hover {
-            border-color: var(--text-heading);
-        }
-
-        .portfolio-hyperlink {
-            font-family: var(--font-mono);
-            font-size: 8.4px;
-            font-weight: 600;
-            color: var(--link-color);
-            text-decoration: underline;
-            letter-spacing: -0.1px;
-            transition: color 0.15s ease;
-            display: inline-block;
-        }
-
-        .portfolio-hyperlink:hover {
-            color: #084298;
+        .divider-bar {
+            color: #888888;
+            font-weight: 400;
         }
 
         /* ==================== SECTION BLOCKS ==================== */
         .section-block {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
+            margin-bottom: 18px;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }
 
         .section-title {
-            font-size: 11.5px;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 700;
             color: var(--text-heading);
-            border-bottom: 1.2px solid var(--text-heading);
-            padding-bottom: 1.5px;
-            margin-bottom: 1.5px;
+            border-bottom: 1.2px solid var(--border-rule);
+            padding-bottom: 3.5px;
+            margin-bottom: 9px;
+            letter-spacing: 0.1px;
         }
 
-        .section-body {
-            font-size: 9.3px;
-            color: var(--text-main);
-            line-height: 1.42;
-            text-align: justify;
+        .section-paragraph {
+            font-size: 10.4px;
+            color: var(--text-body);
+            line-height: 1.54;
+            text-align: left;
         }
 
-        /* Sub-Item Heading & Content */
-        .item-block {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5px;
-            margin-bottom: 2.5px;
+        /* Projects */
+        .project-item {
+            margin-bottom: 12px;
         }
 
-        .item-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
+        .project-item:last-child {
+            margin-bottom: 0;
         }
 
-        .item-heading {
+        .project-title {
+            font-size: 11.2px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 4px;
+            line-height: 1.32;
+        }
+
+        /* Project Bullets (Indented) */
+        ul.project-bullets {
+            margin: 0 0 0 20px;
+            padding: 0;
+            list-style-type: disc;
+        }
+
+        ul.project-bullets li {
             font-size: 10.2px;
+            line-height: 1.48;
+            color: var(--text-body);
+            margin-bottom: 3.5px;
+        }
+
+        ul.project-bullets li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Standard Section Bullets (Skills, Soft Skills) */
+        ul.standard-bullets {
+            margin: 0 0 0 18px;
+            padding: 0;
+            list-style-type: disc;
+        }
+
+        ul.standard-bullets li {
+            font-size: 10.2px;
+            line-height: 1.48;
+            color: var(--text-body);
+            margin-bottom: 3.5px;
+        }
+
+        ul.standard-bullets li:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-label {
             font-weight: 700;
             color: var(--text-heading);
         }
 
-        .item-subheading {
-            font-size: 9.1px;
-            color: var(--text-muted);
-            font-weight: 500;
+        /* Soft Skills items with clean spacing */
+        .soft-skills-list li {
+            margin-bottom: 3px;
         }
 
-        .item-desc {
-            font-size: 9.2px;
-            color: var(--text-main);
-            line-height: 1.4;
-        }
-
-        /* Technical Skills List */
-        .skills-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            font-size: 9.2px;
-            line-height: 1.36;
-        }
-
-        .skill-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 4px;
-        }
-
-        .skill-label {
-            font-weight: 700;
-            color: var(--text-heading);
-            flex-shrink: 0;
-        }
-
-        .skill-val {
-            color: var(--text-main);
-        }
-
-        /* Footer Banner Callout */
-        .footer-banner {
+        /* Footer */
+        .resume-footer {
             margin-top: auto;
-            background: var(--box-bg);
-            border: 1px solid var(--box-border);
-            border-radius: 4px;
-            padding: 6px 12px;
-            font-size: 8.8px;
-            font-weight: 600;
-            color: var(--text-heading);
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .footer-banner a {
-            color: var(--text-heading);
-            text-decoration: none;
-            font-weight: 700;
+            font-size: 9.5px;
+            color: var(--footer-text);
+            padding-top: 6px;
         }
 
         /* Print Strict Settings */
@@ -576,6 +509,7 @@
             }
             html, body {
                 background-color: transparent !important;
+                background: transparent !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 width: 210mm !important;
@@ -592,8 +526,9 @@
                 width: 210mm !important;
                 height: 297mm !important;
                 max-height: 297mm !important;
+                min-height: 297mm !important;
                 margin: 0 !important;
-                padding: 14mm 18mm 12mm 18mm !important;
+                padding: 17mm 22mm 14mm 22mm !important;
                 page-break-inside: avoid !important;
                 page-break-after: avoid !important;
                 break-inside: avoid !important;
@@ -605,10 +540,10 @@
 </head>
 <body>
 
-    <!-- Web Action Toolbar -->
+    <!-- Web Action Toolbar (Screen Only) -->
     <div class="web-toolbar">
         <div class="toolbar-title">
-            <strong>RAJ KUMAR</strong> &bull; True Vector Resume
+            <strong>B.K RAJ KUMAR</strong> &bull; True Vector Resume
         </div>
         <div class="toolbar-actions">
             <a href="../index.html" class="toolbar-btn">
@@ -627,121 +562,90 @@
     <main class="resume-page">
         <!-- ==================== HEADER ==================== -->
         <header class="header-section">
-            <div class="header-left">
-                <h1 class="candidate-name">RAJ KUMAR</h1>
-                <div class="candidate-role">WEB DEVELOPER</div>
-                <div class="contact-bar">
-                    <span>Tirunelveli | Tamil Nadu</span>
-                    <span class="divider-dot">&bull;</span>
-                    <a href="mailto:vikneshvaren2@gmail.com">vikneshvaren2@gmail.com</a>
-                    <span class="divider-dot">&bull;</span>
-                    <a href="tel:+919445437069">+91 9445437069</a>
-                </div>
-            </div>
-            <div class="header-right">
-                <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank" rel="noopener noreferrer" class="portfolio-label-badge">
-                    <span>PORTFOLIO</span>
-                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg>
-                </a>
-                <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank" rel="noopener noreferrer" class="portfolio-hyperlink">
-                    https://vikneshvaren2007.github.io/portfolioclg/
-                </a>
+            <h1 class="candidate-name">B.K RAJ KUMAR</h1>
+            <div class="candidate-role">Web Developer | AI Enthusiast | Fresher</div>
+            <div class="contact-bar">
+                <span>Tamil Nadu, India</span>
+                <span class="divider-bar">|</span>
+                <a href="mailto:vikneshvaren2@gmail.com">vikneshvaren2@gmail.com</a>
+                <span class="divider-bar">|</span>
+                <a href="tel:+919445437069">+91 9445437069</a>
+                <span class="divider-bar">|</span>
+                <a href="https://vikneshvaren2007.github.io/portfolioclg/" target="_blank" rel="noopener noreferrer" class="contact-link-portfolio">https://vikneshvaren2007.github.io/portfolioclg/</a>
             </div>
         </header>
 
-        <!-- ==================== PROFILE ==================== -->
+        <!-- ==================== PROFESSIONAL SUMMARY ==================== -->
         <section class="section-block">
-            <h2 class="section-title">PROFILE</h2>
-            <p class="section-body">
-                Creative and motivated Web Developer with hands-on experience building responsive, modern websites using HTML, CSS, JavaScript, Python and Flask. Interested in creating clean user interfaces, practical web solutions and visually engaging digital experiences.
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="section-paragraph">
+                I am a motivated Web Developer and AI Enthusiast with hands-on experience building responsive and user-friendly websites using HTML, CSS, JavaScript, Python, and Flask. I focus on creating clean interfaces, practical web solutions, backend functionality, and continuously improving my web development skills. As a fresher, I am eager to apply my technical skills to real-world software projects and learn modern web development practices.
             </p>
         </section>
 
-        <!-- ==================== EXPERIENCE ==================== -->
+        <!-- ==================== PROJECTS ==================== -->
         <section class="section-block">
-            <h2 class="section-title">EXPERIENCE</h2>
-            <div class="item-block">
-                <div class="item-heading">Web Development Experience &mdash; 2 Years</div>
-                <p class="item-desc">
-                    Worked on personal and academic web projects, focusing on responsive layouts, frontend interactions, Flask-based backend features, forms, booking flows, deployment and website improvements.
-                </p>
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="project-item">
+                <div class="project-title">1. PET NEXA — Pet Care Web Platform:</div>
+                <ul class="project-bullets">
+                    <li><span class="item-label">Full-Stack Platform:</span> Developed a pet-care website with services, specialist information, pet shopping, booking management, and order tracking.</li>
+                    <li><span class="item-label">AI Feature:</span> Added an AI pet-advisor concept for dog and cat related guidance and situational tips.</li>
+                    <li><span class="item-label">Web Experience:</span> Focused on responsive layouts, practical workflows, and user-friendly navigation across devices.</li>
+                </ul>
             </div>
-        </section>
 
-        <!-- ==================== EDUCATION ==================== -->
-        <section class="section-block">
-            <h2 class="section-title">EDUCATION</h2>
-            <div class="item-block">
-                <div class="item-heading">B.Sc. Computer Science &mdash; 3rd Year</div>
-                <p class="item-desc">
-                    Developing strong foundations in programming, web technologies, databases and software development.
-                </p>
+            <div class="project-item">
+                <div class="project-title">2. AURELIS-WATCH — Luxury E-commerce Website:</div>
+                <ul class="project-bullets">
+                    <li><span class="item-label">E-commerce Platform:</span> Built a luxury watch shopping website with product browsing, customer accounts, and order management.</li>
+                    <li><span class="item-label">Backend Features:</span> Implemented Flask-based backend functionality, SQLite database integration, and customer order history.</li>
+                    <li><span class="item-label">Order Flow:</span> Added checkout, order success flow, confirmation emails, and admin-side order details.</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">3. ROYAL Rose Milk — Brand &amp; Shopping Website:</div>
+                <ul class="project-bullets">
+                    <li><span class="item-label">Brand Website:</span> Built a premium rose-milk product website with a strong visual identity and product presentation.</li>
+                    <li><span class="item-label">Interactive Features:</span> Added product sections, shopping interactions, and animated website sections.</li>
+                    <li><span class="item-label">Responsive Design:</span> Designed the interface for smooth use across desktop and mobile devices.</li>
+                </ul>
             </div>
         </section>
 
         <!-- ==================== TECHNICAL SKILLS ==================== -->
         <section class="section-block">
-            <h2 class="section-title">TECHNICAL SKILLS</h2>
-            <div class="skills-list">
-                <div class="skill-item">
-                    <span class="skill-label">Frontend:</span>
-                    <span class="skill-val">HTML5, CSS3, JavaScript</span>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-label">Backend:</span>
-                    <span class="skill-val">Python, Flask</span>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-label">Tools:</span>
-                    <span class="skill-val">Git, GitHub, VS Code</span>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-label">Core:</span>
-                    <span class="skill-val">Responsive Web Design, UI Development, Forms, APIs, Deployment</span>
-                </div>
-            </div>
+            <h2 class="section-title">Technical Skills</h2>
+            <ul class="standard-bullets">
+                <li><span class="item-label">Frontend:</span> HTML5, CSS3, JavaScript (ES6+), Responsive Web Design</li>
+                <li><span class="item-label">Backend:</span> Python, Flask</li>
+                <li><span class="item-label">Database:</span> SQLite</li>
+                <li><span class="item-label">Version Control:</span> Git, GitHub</li>
+                <li><span class="item-label">Tools &amp; Technologies:</span> VS Code, Git, Antigravity, GitHub</li>
+                <li><span class="item-label">Other Skills:</span> Responsive Web Design, UI Development, Forms, API Integration, Deployment, Debugging</li>
+                <li><span class="item-label">Programming Languages:</span> Python (Intermediate), JavaScript (Intermediate)</li>
+            </ul>
         </section>
 
-        <!-- ==================== PROJECTS ==================== -->
+        <!-- ==================== SOFT SKILLS ==================== -->
         <section class="section-block">
-            <h2 class="section-title">PROJECTS</h2>
-            
-            <div class="item-block">
-                <div class="item-heading">PET NEXA &mdash; Pet Care Web Platform</div>
-                <p class="item-desc">
-                    A pet-care platform featuring services, specialist information, pet shopping, booking management, order tracking and an AI pet-advisor concept.
-                </p>
-            </div>
-
-            <div class="item-block">
-                <div class="item-heading">ROYAL Rose Milk &mdash; Brand Website</div>
-                <p class="item-desc">
-                    A visually rich product website designed around a premium rose-milk brand identity, with animated sections, product presentation and interactive shopping element.
-                </p>
-            </div>
+            <h2 class="section-title">Soft Skills</h2>
+            <ul class="standard-bullets soft-skills-list">
+                <li>Teamwork</li>
+                <li>Quick Learning</li>
+                <li>Communication</li>
+                <li>Time Management</li>
+                <li>Adaptability</li>
+                <li>Willingness to Learn</li>
+            </ul>
         </section>
 
-        <!-- ==================== STRENGTHS ==================== -->
-        <section class="section-block">
-            <h2 class="section-title">STRENGTHS</h2>
-            <p class="section-body">
-                Creative problem solving &bull; Quick learner &bull; Responsive design &bull; Clean UI thinking &bull; Project development &bull; Willingness to learn new technologies
-            </p>
-        </section>
-
-        <!-- ==================== CAREER OBJECTIVE ==================== -->
-        <section class="section-block">
-            <h2 class="section-title">CAREER OBJECTIVE</h2>
-            <p class="section-body">
-                To grow as a professional Web Developer by working on real-world projects, improving my technical skills and creating useful, modern and user-friendly websites.
-            </p>
-        </section>
-
-        <!-- ==================== FOOTER CALLOUT ==================== -->
-        <footer class="footer-banner">
-            <span>Portfolio: Web Development Projects</span>
-            <span>|</span>
-            <span>Availability: Open to Web Development Opportunities</span>
+        <!-- ==================== FOOTER ==================== -->
+        <footer class="resume-footer">
+            <span>Raj Kumar — Resume</span>
+            <span>Page 1 of 1</span>
         </footer>
     </main>
 </body>
