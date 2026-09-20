@@ -240,13 +240,16 @@ function initNavbar() {
     const navItems = document.querySelectorAll(".nav-item");
 
     // Sticky navbar glass blur on scroll
-    window.addEventListener("scroll", () => {
+    function updateNavbarScroll() {
         if (window.scrollY > 30) {
             navbar?.classList.add("scrolled");
         } else {
             navbar?.classList.remove("scrolled");
         }
-    }, { passive: true });
+    }
+    window.addEventListener("scroll", updateNavbarScroll, { passive: true });
+    window.addEventListener("resize", updateNavbarScroll, { passive: true });
+    updateNavbarScroll();
 
     // Mobile Hamburger Toggle
     function toggleMobileMenu(open) {
