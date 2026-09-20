@@ -509,8 +509,12 @@ if browser_exe:
     
     # Copy to workspace root and variants
     shutil.copy(abs_pdf, abs_root_pdf)
+    shutil.copy(abs_pdf, 'B_K_Raj_Kumar_Resume.pdf')
     shutil.copy(abs_pdf, 'assets/Raj_Kumar_Resume_Full_Page.pdf')
+    shutil.copy(abs_pdf, 'assets/Raj_Kumar_Resume.pdf')
+    shutil.copy(abs_pdf, 'assets/B_K_Raj_Kumar_Resume.pdf')
     shutil.copy(abs_pdf, 'resume/Raj_Kumar_Resume_Full_Page.pdf')
+    shutil.copy(abs_pdf, 'resume/B_K_Raj_Kumar_Resume.pdf')
     shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Full_Page.pdf')
     shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Gold_White.pdf')
     shutil.copy(abs_pdf, 'Raj_Kumar_Resume_Gold_Black.pdf')
